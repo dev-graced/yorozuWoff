@@ -9,7 +9,7 @@ const SCRIPT_ID = "1b4ljgunjX9B-Yql8C5fiACUziGNrIe3tGwSD77PUMdDoCdZyc9sf9yiO"
  * @return string
  */
 async function main() {
-  document.getElementById('domainIdField').textContent = "OKK?";
+  document.getElementById('domainIdField').textContent = "OKKK?";
   try {
     // アクセストークンを取得する
     //const accessToken = await getAccessToken();
