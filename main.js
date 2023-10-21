@@ -29,6 +29,8 @@ async function main() {
     }
     const { result } = response.data.response;
     console.log(result);
+
+    document.getElementById('domainIdField').textContent = result;
   } catch (e) {
     throw e;
   }
