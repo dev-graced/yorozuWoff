@@ -10,31 +10,31 @@ const SCRIPT_ID = "1b4ljgunjX9B-Yql8C5fiACUziGNrIe3tGwSD77PUMdDoCdZyc9sf9yiO"
  */
 async function main() {
   document.getElementById('domainIdField').textContent = "OKKKKK?";
-  try {
-    // アクセストークンを取得する
-    const accessToken = await getAccessToken();
-    // GASを実行
-    const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`;
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-    const payload = {
-      function: 'helloworld',
-      parameters: ['OKKKKKKKKKK']
-    };
-    // リクエスト
-    const instance = axios.create({ headers });
-    const response = await instance.post(url, payload);
-    if (response.status !== 200 || !response.data || response.data.error) {
-        throw new Error('Failed to run google apps script.');
-    }
-    const { result } = response.data.response;
-    console.log(result);
+  // try {
+  //   // アクセストークンを取得する
+  //   const accessToken = await getAccessToken();
+  //   // GASを実行
+  //   const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`;
+  //   const headers = {
+  //     Authorization: `Bearer ${accessToken}`,
+  //   };
+  //   const payload = {
+  //     function: 'helloworld',
+  //     parameters: ['OKKKKKKKKKK']
+  //   };
+  //   // リクエスト
+  //   const instance = axios.create({ headers });
+  //   const response = await instance.post(url, payload);
+  //   if (response.status !== 200 || !response.data || response.data.error) {
+  //       throw new Error('Failed to run google apps script.');
+  //   }
+  //   const { result } = response.data.response;
+  //   console.log(result);
 
-    //document.getElementById('domainIdField').textContent = result;
-  } catch (e) {
-    throw e;
-  }
+  //   //document.getElementById('domainIdField').textContent = result;
+  // } catch (e) {
+  //   throw e;
+  // }
 }
 
 /**
@@ -61,5 +61,6 @@ async function test() {
   document.getElementById('domainIdField').textContent = "OKKKKK?";
 }
 
-test()
+//test()
+main()
 
