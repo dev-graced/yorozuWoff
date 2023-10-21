@@ -15,7 +15,7 @@ async function main() {
     //const accessToken = await getAccessToken();
      //document.getElementById('domainIdField').textContent = "OK?";
   //   // GASを実行
-  //   const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`;
+     const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`;
   //   const headers = {
   //     Authorization: `Bearer ${accessToken}`,
   //   };
