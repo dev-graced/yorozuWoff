@@ -54,3 +54,5 @@ async function getAccessToken() {
   return accessToken;
 }
 
+main()
+
