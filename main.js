@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-const CLIENT_ID = ***
-const CLIENT_SECRET = ***
-const REFRESH_TOKEN = ***
-const SCRIPT_ID = ***
+const CLIENT_ID = "479289013154-2l1m68f7pc3dp21o1voscge1h82cqeqe.apps.googleusercontent.com"
+const CLIENT_SECRET = "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"
+const REFRESH_TOKEN = "1//040_FdivnbfKACgYIARAAGAQSNwF-L9IrvrI73MsPi93Riz3nZSvWl7Yk8IIN_Qz2iCJZXKacfX5mcLoMWN3xZdNg6WHJnVMcV6U"
+const SCRIPT_ID = "1b4ljgunjX9B-Yql8C5fiACUziGNrIe3tGwSD77PUMdDoCdZyc9sf9yiO"
 /**
  * メイン関数
  * @return string
