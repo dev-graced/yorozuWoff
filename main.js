@@ -58,7 +58,7 @@ async function getAccessToken() {
 }
 
 async function test() {
-  document.getElementById('domainIdField').textContent = "OKKKKK?";
+  document.getElementById('domainIdField').textContent = "OYYY?";
 }
 
 //test()
