@@ -10,12 +10,12 @@ const SCRIPT_ID = "1b4ljgunjX9B-Yql8C5fiACUziGNrIe3tGwSD77PUMdDoCdZyc9sf9yiO"
  */
 async function main() {
   document.getElementById('domainIdField').textContent = "OKK?";
-  try {
+  //try {
     // アクセストークンを取得する
     //const accessToken = await getAccessToken();
      //document.getElementById('domainIdField').textContent = "OK?";
   //   // GASを実行
-     const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`;
+  //   const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`;
   //   const headers = {
   //     Authorization: `Bearer ${accessToken}`,
   //   };
@@ -35,7 +35,7 @@ async function main() {
   //   //document.getElementById('domainIdField').textContent = result;
   // } catch (e) {
   //   throw e;
-  }
+  //}
 }
 
 /**
