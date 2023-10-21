@@ -61,6 +61,6 @@ async function test() {
   document.getElementById('domainIdField').textContent = "OYYY?";
 }
 
-//test()
-main()
+test()
+//main()
 
