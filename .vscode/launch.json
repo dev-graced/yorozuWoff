@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "localhost に対して Chrome を起動する",
-            "url": "https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/index.html",
+            "url": "https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/",
             "webRoot": "${workspaceFolder}"
         }
     ]
