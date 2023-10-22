@@ -1,3 +1,5 @@
+import { woffId } from './params.js'
+
 const CLIENT_ID = "479289013154-2l1m68f7pc3dp21o1voscge1h82cqeqe.apps.googleusercontent.com"
 const CLIENT_SECRET = "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"
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
@@ -35,7 +37,7 @@ async function main() {
      //console.log(response);
 
      //API の戻り値をテーブルに記入
-     document.getElementById('domainIdField').textContent = text;
+     document.getElementById('apiResField').textContent = text;
 
   } catch (e) {
      throw e;
@@ -89,10 +91,42 @@ function sendPostRequest(url,requestOptions) {
   })
 }
 
-async function test() {
-  document.getElementById('domainIdField').textContent = "OYYY?";
-}
+const getProfile = () => {
+// LINE WORKS のユーザー情報を取得
+  woff.getProfile().then((profile) => {
+    // Success
+    console.log(profile)
+    let lwUserId = profile.userId;
+    document.getElementById('userIdProfileField').textContent = lwUserId;
+  })
+  .catch((err) => {
+    // Error
+    console.log(err)
+    window.alert(err);
+  });
+};
 
-//test()
+// WOFF On load
+window.addEventListener('load', () => {
+  console.log(woffId)
+
+  // Initialize WOFF
+  woff.init({ woffId: woffId })
+      .then(() => {
+          // Success
+          // Button handler
+          //registerButtonHandlers();
+          // Get and show LINE WORKS userId
+          getProfile();
+      })
+      .catch((err) => {
+          // Error
+          window.alert(err);
+          console.error(err)
+      });
+});
+
+// よろず相談API の実行
 main()
+
 
