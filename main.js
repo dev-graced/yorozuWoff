@@ -1,4 +1,4 @@
-import { woffId } from './params.js'
+//import { woffId } from './params.js'
 
 const CLIENT_ID = "479289013154-2l1m68f7pc3dp21o1voscge1h82cqeqe.apps.googleusercontent.com"
 const CLIENT_SECRET = "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"
@@ -7,37 +7,63 @@ const AUTHORIZATION_CODE = '4/0AfJohXkQA7gUkvNjAhHN9OQMA8HYYN9vLF_lEnPj6IPpS4HIm
 const REFRESH_TOKEN = "1//04hTkjHAHV8LbCgYIARAAGAQSNwF-L9IrvfsiVGj-YKMSOic16EMTIgNTsTZvV2_6K3z37x41O-IKSxgeSp_udijrjFvZ3p-Js6Y"
 const TOKEN_URL = "https://accounts.google.com/o/oauth2/token"
 const SCRIPT_ID = "AKfycbwGhfPrq3DeBK60vtPsBa5EIDXX4sGMk4YgH6dSYgyoZD_m0DKxhp4dqStpMYrre7Vo3g"
+const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 async function main() {
   try {
     // アクセストークンを取得する
     let accessTokenRes = await getAccessToken();
     let accessToken = accessTokenRes.access_token;
-    document.getElementById('accessTokenField').textContent = accessToken;
+    //document.getElementById('accessTokenField').textContent = accessToken;
      
-    //// yorozuAPI を叩く
-    // リクエストオプションを設定
-    const headers = {
-      authorization: `Bearer ${accessToken}`
-    };
-    const payload = {
-      function: 'helloworld',
-      parameters: ['こんばんはdesu']
-    };
-    const requestOptions = {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(payload), // 送信するデータをJSON形式に変換
-    };
+    // //// yorozuAPI を叩く
+    // // リクエストオプションを設定
+    // const headers = {
+    //   authorization: `Bearer ${accessToken}`
+    // };
+    // let payload = {
+    //   function: 'helloworld',
+    //   parameters: ['こんばんはdesu']
+    // };
+    // let requestOptions = {
+    //   method: "POST",
+    //   headers: headers,
+    //   body: JSON.stringify(payload), // 送信するデータをJSON形式に変換
+    // };
 
-     // リクエスト
-     const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`;
-     let apiResponse = await sendPostRequest(url,requestOptions);
-     let text = apiResponse.response.result
-     //console.log(response);
+    //  //リクエスト
+    //  let apiResponse = await sendPostRequest(url,requestOptions);
+    //  let text = apiResponse.response.result
 
-     //API の戻り値をテーブルに記入
-     document.getElementById('apiResField').textContent = text;
+    //  //alert(text);
+    //  //console.log(response);
+    //  //API の戻り値をテーブルに記入
+    //  document.getElementById('apiResField').textContent = text;
+
+    //// 質問送信フォーム
+
+    // ボタン要素を取得
+    const sendButton = document.getElementById('send-button');
+    // ボタンがクリックされたときの処理を追加
+    sendButton.addEventListener('click', async function() {
+
+      // テキスト入力フィールドの値を取得
+      let textInput = document.getElementById('text-input').value;
+      document.getElementById('showInputTextField').textContent = textInput;
+
+      //// 質問を送信
+      let apiFunc = { //呼び出す API関数とその引数を設定する
+        function: 'receiveQuery',
+        parameters: [textInput]
+      };
+
+      // リクエスト
+      let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+      //let apiResponse = await sendPostRequest(url,requestOptions);
+      let text = apiResponse.response.result;
+      document.getElementById('apiResField').textContent = text;
+      //alert(text);
+    });
 
   } catch (e) {
      throw e;
@@ -87,44 +113,69 @@ function sendPostRequest(url,requestOptions) {
     .catch(error => {
       result = error;
       console.error("エラー:", error);
+      alert("sendPostRequest エラー:");
     });
   })
 }
 
-const getProfile = () => {
-// LINE WORKS のユーザー情報を取得
-  woff.getProfile().then((profile) => {
-    // Success
-    console.log(profile)
-    let lwUserId = profile.userId;
-    document.getElementById('userIdProfileField').textContent = lwUserId;
+// APIリクエストを送信する関数
+function sendApiRequest(url,accessToken,payload) {
+  return new Promise((resolve) => {
+    
+    //ヘッダーの定義
+    let header = {
+      authorization: `Bearer ${accessToken}`
+    };
+    
+    // リクエストオプションの設定
+    let requestOptions = {
+      method: "POST",
+      headers: header,
+      body: JSON.stringify(payload), // 送信するデータをJSON形式に変換
+    };
+
+    //リクエストの送信
+    let response = sendPostRequest(url,requestOptions);
+    resolve(response);
   })
-  .catch((err) => {
-    // Error
-    console.log(err)
-    window.alert(err);
-  });
-};
+}
+
+// const getProfile = () => {
+// // LINE WORKS のユーザー情報を取得
+//   woff.getProfile().then((profile) => {
+//     // Success
+//     console.log(profile)
+//     let lwUserId = profile.userId;
+//     document.getElementById('userIdProfileField').textContent = lwUserId;
+//   })
+//   .catch((err) => {
+//     // Error
+//     console.log(err)
+//     window.alert(err);
+//   });
+// };
+
+//// プログラム実行
 
 // WOFF On load
-window.addEventListener('load', () => {
-  console.log(woffId)
+// window.addEventListener('load', () => {
+//   console.log(woffId)
 
-  // Initialize WOFF
-  woff.init({ woffId: woffId })
-      .then(() => {
-          // Success
-          // Button handler
-          //registerButtonHandlers();
-          // Get and show LINE WORKS userId
-          getProfile();
-      })
-      .catch((err) => {
-          // Error
-          window.alert(err);
-          console.error(err)
-      });
-});
+//   // Initialize WOFF
+//   woff.init({ woffId: woffId })
+//       .then(() => {
+//           // Success
+//           // Button handler
+//           //registerButtonHandlers();
+//           // Get and show LINE WORKS userId
+//           getProfile();
+//       })
+//       .catch((err) => {
+//           // Error
+//           window.alert(err);
+//           console.error(err)
+//       });
+// });
 
 // よろず相談API の実行
 main()
