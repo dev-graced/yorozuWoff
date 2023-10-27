@@ -157,27 +157,27 @@ function sendApiRequest(url,accessToken,payload) {
 //   });
 // };
 
-//// プログラム実行
+// プログラム実行
 
-// WOFF On load
-// window.addEventListener('load', () => {
-//   console.log(woffId)
+//WOFF On load
+window.addEventListener('load', () => {
+  console.log(woffId)
 
-//   // Initialize WOFF
-//   woff.init({ woffId: woffId })
-//       .then(() => {
-//           // Success
-//           // Button handler
-//           //registerButtonHandlers();
-//           // Get and show LINE WORKS userId
-//           getProfile();
-//       })
-//       .catch((err) => {
-//           // Error
-//           window.alert(err);
-//           console.error(err)
-//       });
-// });
+  // Initialize WOFF
+  woff.init({ woffId: woffId })
+      .then(() => {
+          // Success
+          // Button handler
+          //registerButtonHandlers();
+          // Get and show LINE WORKS userId
+          //getProfile();
+      })
+      .catch((err) => {
+          // Error
+          window.alert(err);
+          console.error(err)
+      });
+});
 
 // よろず相談API の実行
 main()
