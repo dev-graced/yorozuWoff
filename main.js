@@ -169,6 +169,7 @@ window.addEventListener('load', () => {
   // if(!result){
   //   woff.login();
   // }
+  woff.login();
   
 
   // Initialize WOFF
