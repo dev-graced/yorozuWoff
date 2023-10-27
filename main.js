@@ -6,7 +6,8 @@ const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 const AUTHORIZATION_CODE = '4/0AfJohXkQA7gUkvNjAhHN9OQMA8HYYN9vLF_lEnPj6IPpS4HImNMnYrhPFvNXUS3C4lcNBg'; // リダイレクトURIから取得した認証コード
 const REFRESH_TOKEN = "1//04hTkjHAHV8LbCgYIARAAGAQSNwF-L9IrvfsiVGj-YKMSOic16EMTIgNTsTZvV2_6K3z37x41O-IKSxgeSp_udijrjFvZ3p-Js6Y"
 const TOKEN_URL = "https://accounts.google.com/o/oauth2/token"
-const SCRIPT_ID = "AKfycbwGhfPrq3DeBK60vtPsBa5EIDXX4sGMk4YgH6dSYgyoZD_m0DKxhp4dqStpMYrre7Vo3g"
+//const SCRIPT_ID = "AKfycbwGhfPrq3DeBK60vtPsBa5EIDXX4sGMk4YgH6dSYgyoZD_m0DKxhp4dqStpMYrre7Vo3g" //本番用
+const SCRIPT_ID = "AKfycbz2d8acJnBkhwaHrplkaBCAqe4FqMiBong648t6FAAQ" //テスト用
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 async function main() {
@@ -49,12 +50,13 @@ async function main() {
 
       // テキスト入力フィールドの値を取得
       let textInput = document.getElementById('text-input').value;
+      let secretNo = document.getElementById('secretNo').value;
       document.getElementById('showInputTextField').textContent = textInput;
 
       //// 質問を送信
       let apiFunc = { //呼び出す API関数とその引数を設定する
         function: 'receiveQuery',
-        parameters: [textInput]
+        parameters: [textInput,secretNo]
       };
 
       // リクエスト
