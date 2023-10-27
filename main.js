@@ -194,7 +194,8 @@ window.addEventListener('load', () => {
   //   woff.login();
   // }
 
-  // Initialize WOFF
+  // if(woff.isInClient()){
+  // // Initialize WOFF
   woff.init({ woffId: woffId })
       .then(() => {
           // Success
@@ -215,23 +216,30 @@ window.addEventListener('load', () => {
           //   //woff.login();
           // };
 
-          if(woff.isInClient()){
-              alert("OKKKKK");
-              // よろず相談API の実行
-              main();
-          }else{
-            alert("LINE WORKS アプリ以外ではこのページにアクセスできません。");
-            
-            window.location.href = 'https://line.worksmobile.com/jp';
-            //woff.login();
-          };
+          // if(woff.isInClient()){
+          //   alert("利用可能です");
+          //   // よろず相談API の実行
+          //   main();
+          // }else{
+          //   alert("LINE WORKS アプリ以外からはよろず相談が利用できません。");
+          //   //woff.login();
+          //   window.location.href = 'https://line.worksmobile.com/jp';
+          //   //woff.login();
+          // };
 
+          main();
       })
       .catch((err) => {
           // Error
           window.alert(err);
           console.error(err)
       });
+    // }else{
+    //   alert("LINE WORKS アプリ以外からはこのページにアクセスできません。");
+    //   woff.login();
+    //   //window.location.href = 'https://line.worksmobile.com/jp';
+    //   //woff.login();
+    // };
 });
 
 

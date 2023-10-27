@@ -3,48 +3,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WOFF Simple app</title>
+        <title>よろず相談</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <!--
-        <h2>Profile</h2>
-        -->
-        <!-- 質問送信フォーム-->
-        <p>相談内容を入力してください<br>
-        <textarea id="text-input" cols="30" rows="5"></textarea>
+        
+        <h2>よろず相談ホーム</h2>
+        
+        <p>
+        <a href="post.html">相談を投稿する</a>
         </p>
-        <p>暗証番号を決めてください<br>
-        <input type="text" id="secretNo">
+        <p>
+        <a href="index3.html">相談の状況を確認する</a>
         </p>
-        <button id="send-button">送信</button>
-
-        <table>
-            <tr>
-                <th>質問内容</th>
-                <td id="showInputTextField"></td>
-            </tr>
-            <!-- <tr>
-                <th>userId</th>
-                <td id="userIdProfileField"></td>
-            </tr> -->
-            <!-- <tr>
-                <th>access token</th>
-                <td id="accessTokenField"></td>
-            </tr> -->
-            <tr>
-                <th>API response</th>
-                <td id="apiResField"></td>
-            </tr>
-        </table>
-        <!--
-        <h2>SendMessage</h2>
-        <div class="buttonRow">
-            <label for="message">Message text</label>
-            <input type="text" value="text" name="message" id="sendMessageText">
-            <button id="sendMessageButton">Send Message</button>
-        </div>
-        --->
 
         <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"> </script>
         <script type="module" src="main.js"></script>
