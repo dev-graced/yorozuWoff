@@ -1,4 +1,4 @@
-//import { woffId } from './params.js'
+import { woffId } from './params.js'
 
 const CLIENT_ID = "479289013154-2l1m68f7pc3dp21o1voscge1h82cqeqe.apps.googleusercontent.com"
 const CLIENT_SECRET = "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"
@@ -142,26 +142,34 @@ function sendApiRequest(url,accessToken,payload) {
   })
 }
 
-// const getProfile = () => {
-// // LINE WORKS のユーザー情報を取得
-//   woff.getProfile().then((profile) => {
-//     // Success
-//     console.log(profile)
-//     let lwUserId = profile.userId;
-//     document.getElementById('userIdProfileField').textContent = lwUserId;
-//   })
-//   .catch((err) => {
-//     // Error
-//     console.log(err)
-//     window.alert(err);
-//   });
-// };
+const getProfile = () => {
+// LINE WORKS のユーザー情報を取得
+  woff.getProfile().then((profile) => {
+    // Success
+    console.log(profile)
+    let lwUserId = profile.userId;
+    document.getElementById('userIdProfileField').textContent = lwUserId;
+  })
+  .catch((err) => {
+    // Error
+    console.log(err)
+    window.alert(err);
+  });
+};
 
 // プログラム実行
 
 //WOFF On load
 window.addEventListener('load', () => {
   console.log(woffId)
+
+  // 外部ブラウザからのアクセスの場合はLINE WORKS ID でのログインを要求する
+  let result = woff.isInClient();
+  alert("result?",result);
+  // if(!result){
+  //   woff.login();
+  // }
+  
 
   // Initialize WOFF
   woff.init({ woffId: woffId })
@@ -170,7 +178,7 @@ window.addEventListener('load', () => {
           // Button handler
           //registerButtonHandlers();
           // Get and show LINE WORKS userId
-          //getProfile();
+          getProfile();
       })
       .catch((err) => {
           // Error
