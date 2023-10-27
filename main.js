@@ -216,18 +216,18 @@ window.addEventListener('load', () => {
           //   //woff.login();
           // };
 
-          // if(woff.isInClient()){
-          //   alert("利用可能です");
-          //   // よろず相談API の実行
-          //   main();
-          // }else{
-          //   alert("LINE WORKS アプリ以外からはよろず相談が利用できません。");
-          //   //woff.login();
-          //   window.location.href = 'https://line.worksmobile.com/jp';
-          //   //woff.login();
-          // };
+          if(woff.isInClient()){
+            alert("利用可能です");
+            // よろず相談API の実行
+            main();
+          }else{
+            alert("LINE WORKS アプリ以外からはよろず相談が利用できません。");
+            //woff.login();
+            window.location.href = 'https://line.worksmobile.com/jp';
+            //woff.login();
+          };
 
-          main();
+          //main();
       })
       .catch((err) => {
           // Error
