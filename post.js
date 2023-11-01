@@ -1,13 +1,12 @@
 import { woffId } from './params.js'
-
-const CLIENT_ID = "479289013154-2l1m68f7pc3dp21o1voscge1h82cqeqe.apps.googleusercontent.com"
-const CLIENT_SECRET = "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"
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
-const AUTHORIZATION_CODE = '4/0AfJohXkQA7gUkvNjAhHN9OQMA8HYYN9vLF_lEnPj6IPpS4HImNMnYrhPFvNXUS3C4lcNBg'; // リダイレクトURIから取得した認証コード
-const REFRESH_TOKEN = "1//04hTkjHAHV8LbCgYIARAAGAQSNwF-L9IrvfsiVGj-YKMSOic16EMTIgNTsTZvV2_6K3z37x41O-IKSxgeSp_udijrjFvZ3p-Js6Y"
-const TOKEN_URL = "https://accounts.google.com/o/oauth2/token"
+import {CLIENT_ID} from './params.js'
+import {CLIENT_SECRET} from './params.js'
+import {REDIRECT_URI} from './params.js'
+import {AUTHORIZATION_CODE} from './params.js'
+import {REFRESH_TOKEN} from './params.js'
+import {TOKEN_URL} from './params.js'
 //const SCRIPT_ID = "AKfycbwGhfPrq3DeBK60vtPsBa5EIDXX4sGMk4YgH6dSYgyoZD_m0DKxhp4dqStpMYrre7Vo3g" //本番用
-const SCRIPT_ID = "AKfycbz2d8acJnBkhwaHrplkaBCAqe4FqMiBong648t6FAAQ" //テスト用
+import {SCRIPT_ID} from './params.js'
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 async function main() {
@@ -15,34 +14,10 @@ async function main() {
     // アクセストークンを取得する
     let accessTokenRes = await getAccessToken();
     let accessToken = accessTokenRes.access_token;
-    //document.getElementById('accessTokenField').textContent = accessToken;
-     
-    // //// yorozuAPI を叩く
-    // // リクエストオプションを設定
-    // const headers = {
-    //   authorization: `Bearer ${accessToken}`
-    // };
-    // let payload = {
-    //   function: 'helloworld',
-    //   parameters: ['こんばんはdesu']
-    // };
-    // let requestOptions = {
-    //   method: "POST",
-    //   headers: headers,
-    //   body: JSON.stringify(payload), // 送信するデータをJSON形式に変換
-    // };
-
-    //  //リクエスト
-    //  let apiResponse = await sendPostRequest(url,requestOptions);
-    //  let text = apiResponse.response.result
-
-    //  //alert(text);
-    //  //console.log(response);
-    //  //API の戻り値をテーブルに記入
-    //  document.getElementById('apiResField').textContent = text;
+    console.log("accessToken",accessToken);
+    document.getElementById('accessTokenField').textContent = accessToken;
 
     //// 質問送信フォーム
-
     // ボタン要素を取得
     const sendButton = document.getElementById('send-button');
     // ボタンがクリックされたときの処理を追加
@@ -68,7 +43,7 @@ async function main() {
     });
 
   } catch (e) {
-     throw e;
+      throw e;
   } 
 }
 
@@ -97,6 +72,9 @@ async function main() {
     };
 
     let response = sendPostRequest(TOKEN_URL,options);
+    // alert("OKKK");
+    // alert(response);
+    console.log("LKLKLL");
     resolve(response);
   })
  }
@@ -115,7 +93,7 @@ function sendPostRequest(url,requestOptions) {
     .catch(error => {
       result = error;
       console.error("エラー:", error);
-      alert("sendPostRequest エラー:");
+      //alert("sendPostRequest エラー:");
     });
   })
 }
@@ -166,20 +144,20 @@ function sleep(waitSec, callbackFunc) {
 
 }
 
-const getProfile = () => {
-// LINE WORKS のユーザー情報を取得
-  woff.getProfile().then((profile) => {
-    // Success
-    console.log(profile)
-    let lwUserId = profile.userId;
-    document.getElementById('userIdProfileField').textContent = lwUserId;
-  })
-  .catch((err) => {
-    // Error
-    console.log(err)
-    window.alert(err);
-  });
-};
+// const getProfile = () => {
+// // LINE WORKS のユーザー情報を取得
+//   woff.getProfile().then((profile) => {
+//     // Success
+//     console.log(profile)
+//     let lwUserId = profile.userId;
+//     document.getElementById('userIdProfileField').textContent = lwUserId;
+//   })
+//   .catch((err) => {
+//     // Error
+//     console.log(err)
+//     window.alert(err);
+//   });
+// };
 
 // プログラム実行
 
@@ -187,22 +165,12 @@ const getProfile = () => {
 window.addEventListener('load', () => {
   console.log(woffId)
 
-  // 外部ブラウザからのアクセスの場合はLINE WORKS ID でのログインを要求する
-  // if(woff.isInClient();
-  // alert("result?",result);
-  // if(!result){
-  //   woff.login();
-  // }
-
-  // if(woff.isInClient()){
-  // // Initialize WOFF
+  //if(woff.isInClient()){
+  if(woffId){ //woff.isInClient を回避するデバッグ用
+  // Initialize WOFF
   woff.init({ woffId: woffId })
       .then(() => {
-          // Success
-          //woff.login();
-          // Button handler
-          //registerButtonHandlers();
-          // Get and show LINE WORKS userId
+          //// Get and show LINE WORKS userId
           //getProfile();
           //alert("initialized");
 
@@ -216,17 +184,6 @@ window.addEventListener('load', () => {
           //   //woff.login();
           // };
 
-          // if(woff.isInClient()){
-          //   alert("利用可能です");
-          //   // よろず相談API の実行
-          //   main();
-          // }else{
-          //   alert("LINE WORKS アプリ以外からはよろず相談が利用できません。");
-          //   //woff.login();
-          //   window.location.href = 'https://line.worksmobile.com/jp';
-          //   //woff.login();
-          // };
-
           main();
       })
       .catch((err) => {
@@ -234,12 +191,8 @@ window.addEventListener('load', () => {
           window.alert(err);
           console.error(err)
       });
-    // }else{
-    //   alert("LINE WORKS アプリ以外からはこのページにアクセスできません。");
-    //   woff.login();
-    //   //window.location.href = 'https://line.worksmobile.com/jp';
-    //   //woff.login();
-    // };
+    }else{
+      alert("LINE WORKS アプリ以外からはこのページにアクセスできません。");
+      window.location.href = 'https://line.worksmobile.com/jp';
+    };
 });
-
-

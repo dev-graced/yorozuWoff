@@ -54,3 +54,20 @@ footer {
     left: 0;
     right: 0;
 }
+
+table {
+    table-layout: fixed;
+    word-break: break-all;
+}
+
+th {
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+button {
+    margin: 4px;
+}
