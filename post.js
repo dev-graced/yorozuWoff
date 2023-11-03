@@ -30,7 +30,7 @@ async function main() {
         return;
         }
       }
-      document.getElementById('showInputTextField').textContent = textInput;
+      //document.getElementById('showInputTextField').textContent = textInput;
 
        // 送信中のメッセージを表示する
        let sendProgressMessage = "送信中です";
@@ -42,7 +42,7 @@ async function main() {
       .then((accessTokenRes)=>{
         accessToken = accessTokenRes.access_token;
         console.log("accessToken",accessToken);
-        document.getElementById('accessTokenField').textContent = accessToken;
+        //document.getElementById('accessTokenField').textContent = accessToken;
       })
       .catch((error)=>{
         let msg = "エラー: アクセストークンが取得できませんでした";
@@ -65,9 +65,9 @@ async function main() {
       // document.getElementById('accessTokenField').textContent = accessToken;
 
       //// 質問を送信
-      textInput = "こここここｋ";
+      //textInput = "こここここｋ";
       //secretNo = `1234`;
-      secretNo = "1234";
+      //secretNo = "1234";
       let apiFunc = { //呼び出す API関数とその引数を設定する
         function: 'receiveQuery',
         parameters: [textInput,secretNo]
