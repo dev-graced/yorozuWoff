@@ -5,12 +5,6 @@ const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 async function main() {
   try {
-    // アクセストークンを取得する
-    let accessTokenRes = await getAccessToken();
-    let accessToken = accessTokenRes.access_token;
-    console.log("accessToken",accessToken);
-    document.getElementById('accessTokenField').textContent = accessToken;
-
     //// 質問送信フォーム
     // ボタン要素を取得
     const sendButton = document.getElementById('send-button');
@@ -19,8 +13,22 @@ async function main() {
 
       // テキスト入力フィールドの値を取得
       let textInput = document.getElementById('text-input').value;
+      if(!textInput){
+        alert("相談内容を入力してください。");
+        return;
+      }
       let secretNo = document.getElementById('secretNo').value;
       document.getElementById('showInputTextField').textContent = textInput;
+
+       // 送信中のメッセージを表示する
+       let sendProgressMessage = "送信中です";
+       document.getElementById('send-progress').textContent = sendProgressMessage;
+
+      // アクセストークンを取得する
+      let accessTokenRes = await getAccessToken();
+      let accessToken = accessTokenRes.access_token;
+      console.log("accessToken",accessToken);
+      document.getElementById('accessTokenField').textContent = accessToken;
 
       //// 質問を送信
       let apiFunc = { //呼び出す API関数とその引数を設定する
@@ -34,7 +42,28 @@ async function main() {
       let text = apiResponse.response.result;
       document.getElementById('apiResField').textContent = text;
       //alert(text);
+
+      //送信完了のメッセージを表示する
+      sendProgressMessage = "";
+      document.getElementById('send-progress').textContent = sendProgressMessage;
+
     });
+
+    //  //// メッセージスレッドの表示を管理するJavaScriptコード
+    //  const messageThread = document.getElementById("message-thread");
+    //  const messageInput = document.getElementById("message-input");
+    //  const sendButton2 = document.getElementById("send-button-2");
+
+    //  sendButton2.addEventListener("click", () => {
+    //      const messageText = messageInput.value;
+    //      if (messageText) {
+    //          const messageElement = document.createElement("div");
+    //          messageElement.className = "message";
+    //          messageElement.textContent = messageText;
+    //          messageThread.appendChild(messageElement);
+    //          messageInput.value = "";
+    //      }
+    //  });
 
   } catch (e) {
       throw e;
