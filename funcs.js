@@ -4,7 +4,7 @@ import {CLIENT_ID,CLIENT_SECRET,REDIRECT_URI,AUTHORIZATION_CODE,REFRESH_TOKEN,TO
  * refresh_token or authorization_code から google API のアクセストークンを取得する関数
  */
 export async function getAccessToken(){
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve,reject) {
      
      const data = {
        //code: AUTHORIZATION_CODE,
@@ -24,21 +24,30 @@ export async function getAccessToken(){
        body: JSON.stringify(data)
      };
  
-     let response = sendPostRequest(TOKEN_URL,options);
+     //let response = sendPostRequest(TOKEN_URL,options);
+     sendPostRequest(TOKEN_URL,options)
+     .then((response)=>{
+        resolve(response);
+     })
+     .catch((error)=>{
+        reject(error);
+     })
      // alert(response);
      //console.log("LKLKLL");
-     resolve(response);
+     //resolve(response);
    })
   }
  
  // POSTリクエストを送信する関数
  export function sendPostRequest(url,requestOptions) {
-   return new Promise((resolve) => {
+   return new Promise((resolve,reject) => {
      // Fetch APIを使用してPOSTリクエストを送信
      fetch(url,requestOptions)
      .then(response => {
-       if (!response.ok) {
-         throw new Error(`HTTPエラー! ステータスコード: ${response.status}`);
+       if (!response.ok) { 
+        let msg = `HTTPエラー! ステータスコード: ${response.status}`;
+        reject(msg);
+        //throw new Error(msg);
        }
        resolve(response.json());
      })
@@ -67,8 +76,14 @@ export async function getAccessToken(){
      };
  
      //リクエストの送信
-     let response = sendPostRequest(url,requestOptions);
-     resolve(response);
+     //let response = sendPostRequest(url,requestOptions);
+     sendPostRequest(url,requestOptions)
+     .then((response)=>{
+        resolve(response);
+     })
+     .catch((val)=>{
+        console.log("エラー",val);
+     })
    })
  }
  
