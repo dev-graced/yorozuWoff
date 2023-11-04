@@ -168,43 +168,35 @@ async function main() {
 
           //相談ネームの表示
           let messageElement = document.createElement("div");
-          messageElement.className = "queryName";
-          messageElement.innerHTML = "相談ネーム：" + apiResults[0];
+          messageElement.className = "queryInfo";
+          messageElement.innerHTML = "<h3>相談ネーム：" + apiResults[0] + "  /  相談状況：" + apiResults[1] + "</h3>";
           messageThread = messageThread.appendChild(messageElement);
 
-          //相談ステータスの表示
-          messageElement = document.createElement("div");
-          messageElement.className = "queryStatus";
-          messageElement.innerHTML = "相談状況：" + apiResults[1];
-          messageThread = messageThread.appendChild(messageElement);
+          // //相談ステータスの表示
+          // messageElement = document.createElement("div");
+          // messageElement.className = "queryStatus";
+          // messageElement.innerHTML = "相談状況：" + apiResults[1];
+          // messageThread = messageThread.appendChild(messageElement);
 
           // タイトル（相談履歴）の表示
           let title = document.createElement("div");
           title.className = "queryHistoryTitle";
-          title.innerHTML = "相談履歴";
+          title.innerHTML = "<h3>相談履歴</h3>";
           messageThread = messageThread.appendChild(title);
 
           //相談履歴の表示
           let queryHistory = apiResults[2];
           for(let ii=0;ii<queryHistory.length;ii++){
-            //　投稿日時の表示
+            //　投稿日時と投稿内容の表示
             messageElement = document.createElement("div");
-            messageElement.className = "message";
-            //messageElement.innerHTML = queryHistory[ii][0] + ": " + queryHistory[ii][1];
-            messageElement.innerHTML = queryHistory[ii][0];
-            messageThread.appendChild(messageElement);
-
-            // 投稿内容の表示
-            messageElement = document.createElement("div");
-            messageElement.className = "message";
-            messageElement.innerHTML = queryHistory[ii][1];
-            messageElement.innerHTML = queryHistory[ii][0];
+            messageElement.className = "post";
+            messageElement.innerHTML = queryHistory[ii][0] +"<br>" + queryHistory[ii][1];
             messageThread.appendChild(messageElement);
 
             // 投稿への返信の表示
             messageElement = document.createElement("div");
-            messageElement.className = "message";
-            messageElement.innerHTML = "相談への返信" + ": " + queryHistory[ii][2];
+            messageElement.className = "reply";
+            messageElement.innerHTML = "返信" + ": " + queryHistory[ii][2];
             messageThread.appendChild(messageElement);
           }
 
