@@ -187,11 +187,21 @@ async function main() {
           //相談履歴の表示
           let queryHistory = apiResults[2];
           for(let ii=0;ii<queryHistory.length;ii++){
+            //　投稿日時の表示
             messageElement = document.createElement("div");
             messageElement.className = "message";
-            messageElement.innerHTML = queryHistory[ii][0] + ": " + queryHistory[ii][1];
+            //messageElement.innerHTML = queryHistory[ii][0] + ": " + queryHistory[ii][1];
+            messageElement.innerHTML = queryHistory[ii][0];
             messageThread.appendChild(messageElement);
 
+            // 投稿内容の表示
+            messageElement = document.createElement("div");
+            messageElement.className = "message";
+            messageElement.innerHTML = queryHistory[ii][1];
+            messageElement.innerHTML = queryHistory[ii][0];
+            messageThread.appendChild(messageElement);
+
+            // 投稿への返信の表示
             messageElement = document.createElement("div");
             messageElement.className = "message";
             messageElement.innerHTML = "相談への返信" + ": " + queryHistory[ii][2];
