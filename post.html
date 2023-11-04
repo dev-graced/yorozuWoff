@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     <body>
         <header>
             <h1>相談投稿ページ</h1>
-            <style>
+            <!-- <style>
                 /* スタイルを追加 */
                 #message-thread {
                     width: 400px;
@@ -22,7 +22,7 @@
                     padding: 10px;
                     margin: 5px;
                 }
-            </style>
+            </style> -->
         </header>
     
         <main>
@@ -30,10 +30,12 @@
             <p>相談内容を入力してください<br>
             <textarea id="text-input" cols="30" rows="5"></textarea>
             </p>
+
             <p>４桁の暗証番号を決めてください<br>
             <input type="text" id="secretNo">
             </p>
-            <button id="send-button">送信</button><p id="send-progress"></p>
+            <button id="send-button">送信</button>
+            <p id="send-progress"></p>
             <br><br>
 
             <!-- <div>
@@ -62,17 +64,9 @@
             </table> -->
             <p id="apiResField"></p>
             <br>
-            <!--
-            <h2>SendMessage</h2>
-            <div class="buttonRow">
-                <label for="message">Message text</label>
-                <input type="text" value="text" name="message" id="sendMessageText">
-                <button id="sendMessageButton">Send Message</button>
-            </div>
-            --->
 
             <p>
-            <a href="index3.html">相談の状況を確認する</a>
+            <a href="queryInfo.html">相談の状況を確認する</a>
             </p>
             <p>
             <a href="index.html">よろず相談ホームへ</a>

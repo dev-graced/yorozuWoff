@@ -6,21 +6,17 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
   }
-  
-  /* 全体のスタイリング */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
 
 /* ヘッダースタイリング */
 header {
     background-color: #48d1cc;
     color: #fff;
-    text-align: center;
+    /* text-align: center; */
     padding: 20px;
     position: fixed;
     top: 0;
@@ -33,9 +29,9 @@ main {
     padding: 150px 20px 20px 20px;
 }
 
-section {
+/* section {
     margin: 20px 0;
-}
+} */
 
 /* リンクスタイリング */
 a {

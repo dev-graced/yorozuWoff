@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,58 +26,41 @@
         </header>
     
         <main>
-            <!-- 質問送信フォーム-->
-            <p>相談内容を入力してください<br>
-            <textarea id="text-input" cols="30" rows="5"></textarea>
+            <p>相談の履歴や相談内容の検討状況を確認できます。</p>
+
+            <p style="text-align: left;">
+            確認したい相談の「相談ネーム」と「暗証番号」を入力してください。<br>
+            (相談ネームや暗証番号を忘れた場合は、質問した内容と相談ネームまたは暗証番号を記載したメールを grace.homon.dev@gmail.com 高江洲宛で送ってください。
+            その際のやりとりは匿名で構いません。）
             </p>
-            <p>４桁の暗証番号を決めてください<br>
-            <input type="text" id="secretNo">
+
+            <!-- 相談状況問い合わせフォーム-->
+            <p>相談ネーム<br>
+                <input type="text" id="queryInfo-queryName" placeholder="相談ネームを入力">
             </p>
-            <button id="send-button">送信</button><p id="send-progress"></p>
-            <br><br>
-
-            <div>
-                <input type="text" id="message-input" placeholder="メッセージを入力">
-                <button id="send-button-2">送信</button>
-            </div>
-
-            <h1>メッセージスレッド</h1>
-
-             <div id="message-thread">
-                <!-- メッセージを表示するコンテナ -->
-            </div>
-
-            <table>
-                <tr>
-                    <th>質問内容</th>
-                    <td id="showInputTextField"></td>
-                </tr>
-                <tr>
-                    <th>アクセストークン</th>
-                    <td id="accessTokenField"></td>
-                </tr>
-                <tr>
-                    <th>返答</th>
-                    <td id="apiResField"></td>
-                </tr>
-            </table>
+            <p>暗証番号<br>
+                <input type="text" id="queryInfo-secretNo" placeholder="暗証番号（半角数字で4桁）を入力">
+            </p>
+            <button id="queryInfo-sendButton">送信</button><div id="queryInfo-sendProgress"></div>
             <br>
-            <!--
-            <h2>SendMessage</h2>
-            <div class="buttonRow">
-                <label for="message">Message text</label>
-                <input type="text" value="text" name="message" id="sendMessageText">
-                <button id="sendMessageButton">Send Message</button>
-            </div>
-            --->
+
+            <!-- <p id="queryInfo-apiResField"></p> -->
+
+             <div id="queryInfo-messageThread">
+                <!-- <h2>相談履歴</h2> -->
+                <!-- 相談履歴を表示するコンテナ -->
+             </div>
 
             <p>
-            <a href="index3.html">相談の状況を確認する</a>
+            <a href="post.html">相談を投稿する</a>
             </p>
             <p>
             <a href="index.html">よろず相談ホームへ</a>
             </p>
         </main>
+        <footer>
+            &copy; 2023 よろず相談
+        </footer>
 
         <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"> </script>
         <script type="module" src="post.js"></script>
