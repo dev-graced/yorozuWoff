@@ -354,8 +354,8 @@ async function main() {
 window.addEventListener('load', () => {
   console.log(woffId);
 
-  if(woff.isInClient()){
-  //if(woffId){ //woff.isInClient を回避するデバッグ用
+  //if(woff.isInClient()){
+  if(woffId){ //woff.isInClient を回避するデバッグ用
   // Initialize WOFF
   woff.init({ woffId: woffId })
       .then(() => {
@@ -363,17 +363,17 @@ window.addEventListener('load', () => {
           //getProfile();
           //alert("initialized");
 
-          // if(woff.isLoggedIn()){
-          //   alert("OKKKKK");
-          //   // よろず相談API の実行
-          //   main();
-          // }else{
-          //   alert("LINE WORKS にログインしていない状態ではこのページにアクセスできません。");
-          //   window.location.href = 'https://auth.worksmobile.com/login/login?accessUrl=http%3A%2F%2Fjp2-common.worksmobile.com%2Fproxy%2Fmy';
-          //   //woff.login();
-          // };
+          if(woff.isLoggedIn()){
+            alert("OKKKKK");
+            // よろず相談API の実行
+            main();
+          }else{
+            alert("LINE WORKS にログインしていない状態ではこのページにアクセスできません。");
+            window.location.href = 'https://auth.worksmobile.com/login/login?accessUrl=http%3A%2F%2Fjp2-common.worksmobile.com%2Fproxy%2Fmy';
+            //woff.login();
+          };
 
-          main();
+          //main();
       })
       .catch((err) => {
           // Error
@@ -383,6 +383,6 @@ window.addEventListener('load', () => {
       });
     }else{
       alert("LINE WORKS アプリ以外からはこのページにアクセスできません。");
-      window.location.href = 'https://line.worksmobile.com/jp';
+      //window.location.href = 'https://line.worksmobile.com/jp';
     };
 });
