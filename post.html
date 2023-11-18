@@ -26,17 +26,24 @@
         </header>
     
         <main>
-            <!-- 質問送信フォーム-->
-            <p>相談内容を入力してください<br>
-            <textarea id="text-input" cols="30" rows="5"></textarea>
+            <p style="text-align: center;">よろず相談所に相談を送ります。</p>
+            <p>
+                相談内容を入力し、ご自分で決めた４桁の暗証番号を入力して、<br>
+                送信ボタンを押してください。
             </p>
 
-            <p>４桁の暗証番号を決めてください<br>
-            <input type="tel" id="secretNo">
-            </p>
+            <!-- <p style='font-weight: bold; font-size: 20px'>相談ネーム</p> -->
+            <!-- 質問送信フォーム-->
+            <div class="form">相談内容を入力してください<br>
+            <textarea id="text-input" cols="40" rows="10"></textarea>
+            </div>
+
+            <div class="form">暗証番号を決めてください<br>
+            <input type="tel" id="secretNo" placeholder="暗証番号（半角数字で4桁）">
+            </div>
             <button id="send-button">送信</button>
             <p id="send-progress"></p>
-            <br><br>
+            <br>
 
             <!-- <div>
                 <input type="text" id="message-input" placeholder="メッセージを入力">
@@ -63,15 +70,18 @@
                 </tr>
             </table> -->
             <p id="apiResField"></p>
-            <br>
 
-            <p>
+            <div>
             <a href="queryInfo.html">相談の状況を確認する</a>
-            </p>
-            <p>
+            </div>
+            <div>
             <a href="index.html">よろず相談ホームへ</a>
-            </p>
+            </div>
+            <br>
         </main>
+        <footer>
+            &copy; 2023 よろず相談
+        </footer>
 
         <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"> </script>
         <script type="module" src="post.js"></script>

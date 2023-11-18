@@ -87,8 +87,17 @@ async function main() {
         sendProgressMessage = "";
         document.getElementById('send-progress').textContent = sendProgressMessage;
 
+        //送信ボタンが再度押されることがないように非表示にする
+        sendButton.disabled = true;
+
       });
     }
+   
+
+    //  if(addQuerySendButton === null){
+    //    console.log("addQuery-sendButton ID の要素がありません");
+    //    alert("addQuery-sendButton ID の要素がありません")
+    //  }
 
     //// 相談ネームと暗証番号を送信すると、相談履歴と相談ステータスが表示されるフォーム
     // ボタン要素を取得
@@ -159,6 +168,7 @@ async function main() {
         sendProgressMessage = "";
         document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
 
+
         ////相談履歴と相談ステータスの表示
 
         // 表示領域要素の取得
@@ -169,7 +179,8 @@ async function main() {
           //相談ネームの表示
           let messageElement = document.createElement("div");
           messageElement.className = "queryInfo";
-          messageElement.innerHTML = "<h3>相談ネーム：" + apiResults[0] + "  /  相談状況：" + apiResults[1] + "</h3>";
+          //messageElement.innerHTML = "<h3>相談ネーム：" + apiResults[0] + "    /    相談状況：" + apiResults[1] + "</h3>";
+          messageElement.innerHTML = "<p style='font-weight: bold; font-size: 20px'>相談ネーム：" + apiResults[0] + "<br> 相談状況：" + apiResults[1] + "</p>"; 
           messageThread = messageThread.appendChild(messageElement);
 
           // //相談ステータスの表示
@@ -181,7 +192,7 @@ async function main() {
           // タイトル（相談履歴）の表示
           let title = document.createElement("div");
           title.className = "queryHistoryTitle";
-          title.innerHTML = "<h3>相談履歴</h3>";
+          title.innerHTML = "<h3><相談履歴></h3>";
           messageThread = messageThread.appendChild(title);
 
           //相談履歴の表示
@@ -194,9 +205,47 @@ async function main() {
             messageThread.appendChild(messageElement);
 
             // 投稿への返信の表示
+            if(queryHistory[ii][2]){
+              messageElement = document.createElement("div");
+              messageElement.className = "reply";
+              messageElement.innerHTML = "返信" + ": " + queryHistory[ii][2];
+              messageThread.appendChild(messageElement);
+            }
+          }
+
+          // 最後の質問への返信がある場合、追加の質問を投稿するフォームを表示する
+          if(queryHistory[queryHistory.length-1][2]){
+            //// 追加質問投稿フォーム
+            // 説明文
             messageElement = document.createElement("div");
-            messageElement.className = "reply";
-            messageElement.innerHTML = "返信" + ": " + queryHistory[ii][2];
+            messageElement.className = "form";
+            messageElement.innerHTML = "返信に対して追加の質問がある場合は、<br> 質問内容を入力して送信ボタンを押してください。<br>";
+            messageThread.appendChild(messageElement);
+
+            // 入力欄
+            messageElement = document.createElement("textarea");
+            messageElement.id = "addQuery-textInput";
+            messageElement.rows = "10";
+            messageElement.cols = "40";
+            messageThread.appendChild(messageElement);
+
+            messageElement = document.createElement("br");
+            messageThread.appendChild(messageElement);
+
+            // 送信ボタン
+            messageElement = document.createElement("button");
+            messageElement.id = "addQuery-sendButton";
+            messageElement.innerHTML = "送信";
+            messageThread.appendChild(messageElement);
+
+            // 送信状態の表示スペース
+            messageElement = document.createElement("p");
+            messageElement.id = "addQuery-sendProgress";
+            messageThread.appendChild(messageElement);
+          }else{
+            messageElement = document.createElement("p");
+            messageElement.style = 'font-weight: bold; font-size: 20px';
+            messageElement.innerHTML = "よろず相談所から返信が来るまでしばらくお待ち下さい。 <br>（目安は大体１週間です）";
             messageThread.appendChild(messageElement);
           }
 
@@ -207,6 +256,70 @@ async function main() {
           messageThread = messageThread.appendChild(messageElement);
         }
 
+        
+        //// 追加質問送信フォーム
+         // ボタン要素を取得
+        const addQuerySendButton = document.getElementById('addQuery-sendButton');
+        // ボタンがクリックされたときの処理を追加
+        addQuerySendButton.addEventListener('click', async function() {
+
+          // テキスト入力フィールドの値を取得
+          let textInput = document.getElementById('addQuery-textInput').value;
+          if(!textInput){
+            alert("追加の質問内容を入力してください");
+            return;
+          }
+
+          // 送信中のメッセージを表示する
+          let sendProgressMessage = "送信中です";
+          document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+
+          // アクセストークンを取得する
+          let accessToken;
+          await getAccessToken()
+          .then((accessTokenRes)=>{
+            accessToken = accessTokenRes.access_token;
+            console.log("accessToken",accessToken);
+            //document.getElementById('accessTokenField').textContent = accessToken;
+          })
+          .catch((error)=>{
+            let msg = "エラー: アクセストークンが取得できませんでした";
+            alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
+            console.log(msg);
+
+            sendProgressMessage = "送信エラー";
+            document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+
+          });
+
+          // 相談ネームと暗証番号をフォームから取得する
+          let queryName = document.getElementById('queryInfo-queryName').value;
+          //alert(queryName);
+          let secretNo = document.getElementById('queryInfo-secretNo').value;
+          //alert(secretNo);
+
+          //// 質問を送信
+          let apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'receiveAddQuery',
+            parameters: [queryName,secretNo,textInput]
+          };
+
+          // リクエスト
+          let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+          //let apiResponse = await sendPostRequest(url,requestOptions);
+          let text = apiResponse.response.result;
+          //document.getElementById('apiResField').textContent = text;
+          //alert(text);
+
+          //送信完了のメッセージを表示する
+          sendProgressMessage = text;
+          document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+
+          //送信ボタンが再度押されることがないように非表示にする
+          sendButton.disabled = true;
+
+        });
+
       });
     }
   } catch (e) {
@@ -214,6 +327,9 @@ async function main() {
     throw e;
   } 
 }
+
+
+// }
 
 // const getProfile = () => {
 // // LINE WORKS のユーザー情報を取得
