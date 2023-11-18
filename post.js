@@ -201,14 +201,16 @@ async function main() {
             //　投稿日時と投稿内容の表示
             messageElement = document.createElement("div");
             messageElement.className = "post";
-            messageElement.innerHTML = queryHistory[ii][0] +"<br>" + queryHistory[ii][1];
+            messageElement.style = "padding-right: 50px";
+            messageElement.innerHTML = "<b>" + queryHistory[ii][0] +" 投稿</b> <br>" + queryHistory[ii][1];
             messageThread.appendChild(messageElement);
 
             // 投稿への返信の表示
             if(queryHistory[ii][2]){
               messageElement = document.createElement("div");
               messageElement.className = "reply";
-              messageElement.innerHTML = "返信" + ": " + queryHistory[ii][2];
+              messageElement.style = "padding-left: 50px";
+              messageElement.innerHTML = "<b>返信" + ":</b> " + queryHistory[ii][2];
               messageThread.appendChild(messageElement);
             }
           }
