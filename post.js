@@ -241,7 +241,7 @@ async function main() {
             messageThread.appendChild(messageElement);
 
             // 送信状態の表示スペース
-            messageElement = document.createElement("p");
+            messageElement = document.createElement("div");
             messageElement.id = "addQuery-sendProgress";
             messageThread.appendChild(messageElement);
           }else{
@@ -354,8 +354,8 @@ async function main() {
 window.addEventListener('load', () => {
   console.log(woffId);
 
-  if(woff.isInClient()){
-  //if(woffId){ //woff.isInClient を回避するデバッグ用
+  //if(woff.isInClient()){
+  if(woffId){ //woff.isInClient を回避するデバッグ用
   // Initialize WOFF
   woff.init({ woffId: woffId })
       .then(() => {
