@@ -379,7 +379,7 @@ window.addEventListener('load', () => {
           // Error
           alert("エラー");
           window.alert(err);
-          console.error(err)
+          //console.error(err)
       });
     }else{
       alert("LINE WORKS アプリ以外からはこのページにアクセスできません。");
