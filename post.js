@@ -80,15 +80,24 @@ async function main() {
         let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
         //let apiResponse = await sendPostRequest(url,requestOptions);
         let text = apiResponse.response.result;
-        document.getElementById('apiResField').textContent = text;
+
+        // APIからの返答を保存
+        sessionStorage.setItem('apiResponse', text);
+
+        // 送信完了ページへ遷移
+        window.location.href = 'https://dev-graced.github.io/yorozuWoff/post_complete.html';
+        //document.getElementById('apiResField').textContent = text;
         //alert(text);
 
-        //送信完了のメッセージを表示する
-        sendProgressMessage = "";
-        document.getElementById('send-progress').textContent = sendProgressMessage;
+        // 送信完了メッセージを表示
+        document.getElementById('postComplete-messageField').textContent = text;
 
-        //送信ボタンが再度押されることがないように非表示にする
-        sendButton.disabled = true;
+        // //送信完了のメッセージを表示する
+        // sendProgressMessage = "";
+        // document.getElementById('send-progress').textContent = sendProgressMessage;
+
+        // //送信ボタンが再度押されることがないように非表示にする
+        // sendButton.disabled = true;
 
       });
     }
