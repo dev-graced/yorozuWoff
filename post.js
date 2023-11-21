@@ -79,18 +79,15 @@ async function main() {
         // リクエスト
         let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
         //let apiResponse = await sendPostRequest(url,requestOptions);
-        let text = apiResponse.response.result;
+        let resultArray = apiResponse.response.result;
+        let queryName = resultArray[0];
 
-        // APIからの返答を保存
-        sessionStorage.setItem('apiResponse', text);
-
-        // 送信完了ページへ遷移
-        window.location.href = 'https://dev-graced.github.io/yorozuWoff/post_complete.html?data%5b%5d='+text;
+        // 送信完了ページへ遷移(相談ネームと secretNo 付き)
+        //window.location.href = 'https://dev-graced.github.io/yorozuWoff/post_complete.html?e=10';
+        window.location.href 
+        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html?queryName='
+        +queryName+'&secretNo='+secretNo;
         //document.getElementById('apiResField').textContent = text;
-        //alert(text);
-
-        // 送信完了メッセージを表示
-        //document.getElementById('postComplete-messageField').textContent = text;
 
         // //送信完了のメッセージを表示する
         // sendProgressMessage = "";

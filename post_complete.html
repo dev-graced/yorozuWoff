@@ -13,12 +13,36 @@
     
         <main>
             <!-- <p style="text-align: center;">よろず相談所に相談を送ります。</p> -->
-            <h3>相談の投稿が完了しました</h3>
-            <p id="postComplete-messageField"></p>
-            <?php
-                $data=$_GET["data"];
-                echo $data[0];
-            ?>
+            <h3>相談を受け付けました</h3>
+            <div id="postComplete-messageField" style="font-size: large;"></div>
+            <div id="postComplete-queryID" style="color:red; font-size: xx-large;"></div>
+            <div id="postComplete-secretNo" style="color:red; font-size: xx-large"></div>
+            <br><br>
+            <script>
+                let paraPair  = new Array();                         // 行Ａ
+                let paraName  = new Array();
+                let paraValue = new Array();
+    
+                let paramPart = location.search.split("?")[1];
+                let para = paramPart.split("&");                 // 行Ｂ
+                let paraNum = para.length;
+    
+                for (let i = 0; i <paraNum; i++) {                // 行Ｃ
+                    paraPair = para[i].split("=");                   // 行Ｄ
+                    paraName[i]  = decodeURIComponent(paraPair[0]);
+                    paraValue[i] = decodeURIComponent(paraPair[1]);
+                }
+    
+                // 
+                let text = "今後必要になるので、下記を必ずメモしておいてください!!!";
+                let textQueryID = "相談ID： "+paraValue[0];
+                let textSecretNo = "暗証番号：　"+paraValue[1];
+
+                document.getElementById('postComplete-messageField').innerHTML = text;
+                document.getElementById('postComplete-queryID').innerHTML = textQueryID;
+                document.getElementById('postComplete-secretNo').innerHTML = textSecretNo;
+                //alert("testです〜");
+            </script>
             
             <div>
             <a href="queryInfo.html">相談の状況を確認する</a>
