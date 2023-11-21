@@ -78,9 +78,19 @@ div {
     text-align: center;
 }
 
-/* .form {
+.form {
     text-align: center;
-} */
+    width: 200px;
+    height: 30px;
+    font-size:20px;
+}
+
+.sendButton {
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    font-size:20px;
+}
 
 .queryInfo {
     padding-bottom: 30px;

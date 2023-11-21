@@ -13,20 +13,20 @@
         </header> -->
     
         <main>
-            <h3>相談への返信の確認や追加の質問ができます。</h3>
+            <div>相談への返信の確認や追加の質問ができます。</div>
 
             <!-- <p style="text-align: left;">
             確認したい（追加の質問をしたい）相談の「相談ID」と「暗証番号」を入力して、送信ボタンを押してください。
             </p> -->
 
             <!-- 相談状況問い合わせフォーム-->
-            <div class="form">相談ID<br>
-                <input type="text" id="queryInfo-queryName" placeholder="相談IDを入力">
+            <div>相談ID<br>
+                <input type="text" id="queryInfo-queryName" class="form">
             </div>
-            <div class="form">暗証番号<br>
-                <input type="tel" id="queryInfo-secretNo" placeholder="暗証番号（半角数字で4桁）を入力">
+            <div>暗証番号<br>
+                <input type="tel" id="queryInfo-secretNo" class="form">
             </div>
-            <button id="queryInfo-sendButton">送信</button>
+            <button id="queryInfo-sendButton" class="sendButton">送信</button>
             <div id="queryInfo-sendProgress"></div>
             <br>
 
@@ -43,6 +43,7 @@
              <div id="queryInfo-messageThread">
                 <!-- 相談履歴を表示するコンテナ -->
              </div>
+             <br>
              <br>
 
             <div>
