@@ -85,12 +85,12 @@ async function main() {
         sessionStorage.setItem('apiResponse', text);
 
         // 送信完了ページへ遷移
-        window.location.href = 'https://dev-graced.github.io/yorozuWoff/post_complete.html';
+        window.location.href = 'https://dev-graced.github.io/yorozuWoff/post_complete.html?data%5b%5d='+text;
         //document.getElementById('apiResField').textContent = text;
         //alert(text);
 
         // 送信完了メッセージを表示
-        document.getElementById('postComplete-messageField').textContent = text;
+        //document.getElementById('postComplete-messageField').textContent = text;
 
         // //送信完了のメッセージを表示する
         // sendProgressMessage = "";
