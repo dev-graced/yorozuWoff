@@ -98,3 +98,15 @@ div {
     text-align: right;
     padding-bottom: 20px;
 }
+
+#message-thread {
+    width: 400px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.message {
+    border: 1px solid #eee;
+    padding: 10px;
+    margin: 5px;
+}
