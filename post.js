@@ -83,10 +83,10 @@ async function main() {
         let queryName = resultArray[0];
 
         // 送信完了ページへ遷移(相談ネームと secretNo 付き)
-        //window.location.href = 'https://dev-graced.github.io/yorozuWoff/post_complete.html?e=10';
         window.location.href 
-        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html?queryName='
-        +queryName+'&secretNo='+secretNo;
+        = 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
+        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
+        +'?queryName='+queryName+'&secretNo='+secretNo;
         //document.getElementById('apiResField').textContent = text;
 
         // //送信完了のメッセージを表示する
