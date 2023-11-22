@@ -70,7 +70,7 @@ button {
     margin: 4px;
 }
 
-h1 {
+h2 {
     font-size: larger;
 }
 
@@ -156,7 +156,6 @@ div {
 	/* vertical-align: middle; */
 	text-decoration: none;
 	width: 250px;
-	margin: 10px;
 	padding: 10px 10px;
     font-size: 18px;
 	font-weight: bold;
@@ -164,6 +163,8 @@ div {
 	color: #27acd9;
 	border-radius: 100vh;
 	transition: 0.5s;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }
 .linkBtn2:hover {
 	color: #fff;
@@ -172,6 +173,7 @@ div {
 
 .ttl_3d3 {
     font-weight: bold;
+    font-size: 18px;
     border: 3px solid #4c9ac0;
     padding: 0.5em 1em;
     position: relative;
@@ -235,4 +237,59 @@ div {
 .box17 p {
     margin: 0; 
     padding: 0;
+}
+
+/* アコーディオンメニューの三角を + - にする */
+details:not(:last-child) {
+margin-bottom: 20px;
+}
+
+/**
+* list-style: none; ←デフォルト三角削除（Chrome非対応）
+* cursor: pointer; ←カーソルをポインターに
+**/
+details summary {
+list-style: none;
+cursor: pointer;
+width: 320px;
+/* padding: 20px;
+background: #e4e4e4;
+color: #242323;
+font-size: 2rem;
+font-weight: bold; */
+}
+/**
+* Chrome用のデフォルト三角削除
+**/
+details summary::-webkit-details-marker {
+display: none;
+}
+/**
+* Font Awesomeのプラスアイコン使用
+**/
+details summary .plus::after {
+font-family: 'Font Awesome 5 Free';
+content: '\f067';
+padding-left: 10px;
+}
+/**
+* アコーディオンがオープン時はマイナスアイコンに変更
+**/
+details[open] summary .plus::after {
+content: '\f068';
+padding-left: 10px;
+}
+
+/* details p {
+margin: 0;
+padding: 20px;
+} */
+
+.plus {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    min-width: 24px;
+    height: 2px;
+    /* position: relative; */
 }
