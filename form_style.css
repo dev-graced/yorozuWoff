@@ -1,6 +1,7 @@
 /* ページ全体の背景 */
 body {
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
+    background-color: white;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -15,7 +16,7 @@ body {
 
 /* ヘッダースタイリング */
 header {
-    background-color: #48d1cc;
+    /* background-color: #48d1cc; */
     color: #fff;
     /* text-align: center; */
     padding: 20px;
@@ -42,7 +43,7 @@ a {
 
 /* フッタースタイリング */
 footer {
-    background-color: #48d1cc;
+    /* background-color: #48d1cc; */
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -120,4 +121,37 @@ div {
     border: 1px solid #eee;
     padding: 10px;
     margin: 5px;
+}
+
+.linkButton {
+    border-radius: 5px;
+    background-color: lightblue;
+    padding: 10px;
+    text-decoration: none;
+    color:blue;
+    width: 230px;
+    font-size: 18px;
+    /* font-weight: bold; */
+    border: none;
+  }
+
+  .linkBtn2 {
+    background-color: white;
+	display: block;
+	text-align: center;
+	/* vertical-align: middle; */
+	text-decoration: none;
+	width: 250px;
+	margin: 10px;
+	padding: 10px 10px;
+    font-size: 18px;
+	font-weight: bold;
+	border: 2px solid #27acd9;
+	color: #27acd9;
+	border-radius: 100vh;
+	transition: 0.5s;
+}
+.linkBtn2:hover {
+	color: #fff;
+	background: #27acd9;
 }
