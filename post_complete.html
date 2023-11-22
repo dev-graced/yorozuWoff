@@ -15,8 +15,8 @@
             <!-- <p style="text-align: center;">よろず相談所に相談を送ります。</p> -->
             <h3>相談を受け付けました</h3>
             <div id="postComplete-messageField" style="font-size: large;"></div>
-            <div id="postComplete-queryID" style="color:red; font-size: xx-large;"></div>
-            <div id="postComplete-secretNo" style="color:red; font-size: xx-large"></div>
+            <div id="postComplete-queryID" style="color:red; font-size: x-large;"></div>
+            <div id="postComplete-secretNo" style="color:red; font-size: x-large"></div>
             <br><br>
             <script>
                 let paraPair  = new Array();                         // 行Ａ
@@ -35,8 +35,8 @@
     
                 // 
                 let text = "今後必要になるので、下記を必ずメモしておいてください!!!";
-                let textQueryID = "相談ID： "+paraValue[0];
-                let textSecretNo = "暗証番号：　"+paraValue[1];
+                let textQueryID = "相談ID："+paraValue[0];
+                let textSecretNo = "暗証番号："+paraValue[1];
 
                 document.getElementById('postComplete-messageField').innerHTML = text;
                 document.getElementById('postComplete-queryID').innerHTML = textQueryID;
