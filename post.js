@@ -88,14 +88,6 @@ async function main() {
         //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
         +'?queryName='+queryName+'&secretNo='+secretNo;
         //document.getElementById('apiResField').textContent = text;
-
-        // //送信完了のメッセージを表示する
-        // sendProgressMessage = "";
-        // document.getElementById('send-progress').textContent = sendProgressMessage;
-
-        // //送信ボタンが再度押されることがないように非表示にする
-        // sendButton.disabled = true;
-
       });
     }
    
@@ -169,100 +161,117 @@ async function main() {
         let apiResults = apiResponse.response.result;
         //document.getElementById('queryInfo-apiResField').textContent = text;
         //alert(text);
+        let queryId = apiResults[0];
+        let queryStatus = apiResults[1];
+        let queryHistory = apiResults[2];
 
-        //送信完了のメッセージを表示する
-        sendProgressMessage = "";
-        document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
-
-
-        ////相談履歴と相談ステータスの表示
-
-        // 表示領域要素の取得
-        let messageThread = document.getElementById("queryInfo-messageThread");
-
-        if(apiResults[3] === ""){
-
-          //相談ネームの表示
-          let messageElement = document.createElement("div");
-          messageElement.className = "queryInfo";
-          //messageElement.innerHTML = "<h3>相談ネーム：" + apiResults[0] + "    /    相談状況：" + apiResults[1] + "</h3>";
-          messageElement.innerHTML = "<p style='font-weight: bold; font-size: 20px'>相談ネーム：" + apiResults[0] + "<br> 相談状況：" + apiResults[1] + "</p>"; 
-          messageThread = messageThread.appendChild(messageElement);
-
-          // //相談ステータスの表示
-          // messageElement = document.createElement("div");
-          // messageElement.className = "queryStatus";
-          // messageElement.innerHTML = "相談状況：" + apiResults[1];
-          // messageThread = messageThread.appendChild(messageElement);
-
-          // タイトル（相談履歴）の表示
-          let title = document.createElement("div");
-          title.className = "queryHistoryTitle";
-          title.innerHTML = "<h3><相談履歴></h3>";
-          messageThread = messageThread.appendChild(title);
-
-          //相談履歴の表示
-          let queryHistory = apiResults[2];
-          for(let ii=0;ii<queryHistory.length;ii++){
-            //　投稿日時と投稿内容の表示
-            messageElement = document.createElement("div");
-            messageElement.className = "post";
-            messageElement.style = "padding-right: 50px";
-            messageElement.innerHTML = "<b>" + queryHistory[ii][0] +" 投稿</b> <br>" + queryHistory[ii][1];
-            messageThread.appendChild(messageElement);
-
-            // 投稿への返信の表示
-            if(queryHistory[ii][2]){
-              messageElement = document.createElement("div");
-              messageElement.className = "reply";
-              messageElement.style = "padding-left: 50px";
-              messageElement.innerHTML = "<b>返信" + ":</b> " + queryHistory[ii][2];
-              messageThread.appendChild(messageElement);
-            }
-          }
-
-          // 最後の質問への返信がある場合、追加の質問を投稿するフォームを表示する
-          if(queryHistory[queryHistory.length-1][2]){
-            //// 追加質問投稿フォーム
-            // 説明文
-            messageElement = document.createElement("div");
-            messageElement.className = "form";
-            messageElement.innerHTML = "返信に対して追加の質問がある場合は、<br> 質問内容を入力して送信ボタンを押してください。<br>";
-            messageThread.appendChild(messageElement);
-
-            // 入力欄
-            messageElement = document.createElement("textarea");
-            messageElement.id = "addQuery-textInput";
-            messageElement.rows = "10";
-            messageElement.cols = "40";
-            messageThread.appendChild(messageElement);
-
-            messageElement = document.createElement("br");
-            messageThread.appendChild(messageElement);
-
-            // 送信ボタン
-            messageElement = document.createElement("button");
-            messageElement.id = "addQuery-sendButton";
-            messageElement.innerHTML = "送信";
-            messageThread.appendChild(messageElement);
-
-            // 送信状態の表示スペース
-            messageElement = document.createElement("div");
-            messageElement.id = "addQuery-sendProgress";
-            messageThread.appendChild(messageElement);
-          }else{
-            messageElement = document.createElement("p");
-            messageElement.style = 'font-weight: bold; font-size: 20px';
-            messageElement.innerHTML = "よろず相談所から返信が来るまでしばらくお待ち下さい。 <br>（目安は大体１週間です）";
-            messageThread.appendChild(messageElement);
-          }
-
-        }else{ // エラーメッセージの表示
-          let messageElement = document.createElement("div");
-          messageElement.className = "errorMessage";
-          messageElement.innerHTML = apiResults[3];
-          messageThread = messageThread.appendChild(messageElement);
+        // queryHistoryを文字列として整形
+        let textQueryHistory = "";
+        for(let i=0; i<queryHistory.length; i++){
+          textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
+          + queryHistory[i][2] + ";";
         }
+        //alert(textQueryHistory);
+
+        // 送信完了ページへ遷移(相談ネームと secretNo 付き)
+        window.location.href 
+        //= 'https://dev-graced.github.io/yorozuWoff/query_history.html'
+        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
+        +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+
+        // //送信完了のメッセージを表示する
+        // sendProgressMessage = "";
+        // document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
+
+
+        // ////相談履歴と相談ステータスの表示
+
+        // // 表示領域要素の取得
+        // let messageThread = document.getElementById("queryInfo-messageThread");
+
+        // if(apiResults[3] === ""){
+
+        //   //相談ネームの表示
+        //   let messageElement = document.createElement("div");
+        //   messageElement.className = "queryInfo";
+        //   //messageElement.innerHTML = "<h3>相談ネーム：" + apiResults[0] + "    /    相談状況：" + apiResults[1] + "</h3>";
+        //   messageElement.innerHTML = "<p style='font-weight: bold; font-size: 20px'>相談ネーム：" + apiResults[0] + "<br> 相談状況：" + apiResults[1] + "</p>"; 
+        //   messageThread = messageThread.appendChild(messageElement);
+
+        //   // //相談ステータスの表示
+        //   // messageElement = document.createElement("div");
+        //   // messageElement.className = "queryStatus";
+        //   // messageElement.innerHTML = "相談状況：" + apiResults[1];
+        //   // messageThread = messageThread.appendChild(messageElement);
+
+        //   // タイトル（相談履歴）の表示
+        //   let title = document.createElement("div");
+        //   title.className = "queryHistoryTitle";
+        //   title.innerHTML = "<h3><相談履歴></h3>";
+        //   messageThread = messageThread.appendChild(title);
+
+        //   //相談履歴の表示
+        //   let queryHistory = apiResults[2];
+        //   for(let ii=0;ii<queryHistory.length;ii++){
+        //     //　投稿日時と投稿内容の表示
+        //     messageElement = document.createElement("div");
+        //     messageElement.className = "post";
+        //     messageElement.style = "padding-right: 50px";
+        //     messageElement.innerHTML = "<b>" + queryHistory[ii][0] +" 投稿</b> <br>" + queryHistory[ii][1];
+        //     messageThread.appendChild(messageElement);
+
+        //     // 投稿への返信の表示
+        //     if(queryHistory[ii][2]){
+        //       messageElement = document.createElement("div");
+        //       messageElement.className = "reply";
+        //       messageElement.style = "padding-left: 50px";
+        //       messageElement.innerHTML = "<b>返信" + ":</b> " + queryHistory[ii][2];
+        //       messageThread.appendChild(messageElement);
+        //     }
+        //   }
+
+        //   // 最後の質問への返信がある場合、追加の質問を投稿するフォームを表示する
+        //   if(queryHistory[queryHistory.length-1][2]){
+        //     //// 追加質問投稿フォーム
+        //     // 説明文
+        //     messageElement = document.createElement("div");
+        //     messageElement.className = "form";
+        //     messageElement.innerHTML = "返信に対して追加の質問がある場合は、<br> 質問内容を入力して送信ボタンを押してください。<br>";
+        //     messageThread.appendChild(messageElement);
+
+        //     // 入力欄
+        //     messageElement = document.createElement("textarea");
+        //     messageElement.id = "addQuery-textInput";
+        //     messageElement.rows = "10";
+        //     messageElement.cols = "40";
+        //     messageThread.appendChild(messageElement);
+
+        //     messageElement = document.createElement("br");
+        //     messageThread.appendChild(messageElement);
+
+        //     // 送信ボタン
+        //     messageElement = document.createElement("button");
+        //     messageElement.id = "addQuery-sendButton";
+        //     messageElement.innerHTML = "送信";
+        //     messageThread.appendChild(messageElement);
+
+        //     // 送信状態の表示スペース
+        //     messageElement = document.createElement("div");
+        //     messageElement.id = "addQuery-sendProgress";
+        //     messageThread.appendChild(messageElement);
+        //   }else{
+        //     messageElement = document.createElement("p");
+        //     messageElement.style = 'font-weight: bold; font-size: 20px';
+        //     messageElement.innerHTML = "よろず相談所から返信が来るまでしばらくお待ち下さい。 <br>（目安は大体１週間です）";
+        //     messageThread.appendChild(messageElement);
+        //   }
+
+        // }else{ // エラーメッセージの表示
+        //   let messageElement = document.createElement("div");
+        //   messageElement.className = "errorMessage";
+        //   messageElement.innerHTML = apiResults[3];
+        //   messageThread = messageThread.appendChild(messageElement);
+        // }
 
         
         //// 追加質問送信フォーム
