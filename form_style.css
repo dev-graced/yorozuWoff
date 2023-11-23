@@ -293,3 +293,24 @@ padding: 20px;
     height: 2px;
     /* position: relative; */
 }
+
+/* 吹き出しマーク付きの見出し */
+.title_fukidashi {
+    position: relative;/*相対位置*/
+    padding-left: 0em;/*アイコン分のスペース*/
+    margin-bottom: 5px;
+    line-height: 1.4;/*行高*/
+    font-weight: bold;
+}
+
+.title_fukidashi:before {
+font-family: "Font Awesome 5 Free";
+content: "\f075";/*アイコンのユニコード*/
+font-weight: 900;
+/* font-size: 1em; */
+/* position: absolute;
+left: 0;
+top: 0; */
+padding-right:10px;
+color: #5ab9ff; /*アイコン色*/
+}

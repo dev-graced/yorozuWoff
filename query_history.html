@@ -7,11 +7,12 @@
         <title>相談履歴</title>
         <link rel="stylesheet" href="form_style.css">
         <link rel="stylesheet" href="line-like.css">
+        <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <main>
-            <div id="queryID" style="font-size: large;"></div>
-            <div id="queryStatus" style="font-size: large"></div>
+            <div id="queryID" class="title_fukidashi" style="font-size: large;"></div>
+            <!-- <div id="queryStatus" style="font-size: large"></div> -->
             <div id="queryHistory" style="font-size: medium"></div>
 
             <script>
@@ -31,37 +32,57 @@
                     paraValue[i] = decodeURIComponent(paraPair[1]);
                 }
 
-                let queryID = "相談ID："+paraValue[0]; 
+                let queryID = paraValue[0]+"さんの相談履歴"; 
                 let queryStatus = "相談状況："+paraValue[1];
 
                 // 相談履歴を解析
                 let queryHistory = paraValue[2];
                 let queryHistoryArray = queryHistory.split(";");
                 let textQueryHistory = '<div class="line-bc">';
+                let postDate,postDateOld;
                 for(let i=0; i<queryHistoryArray.length; i++){
                     // 各投稿エントリーを解析
                     let queryArray = queryHistoryArray[i].split(",");
 
                     // 投稿エントリーを HTML化
                     if(queryArray[1]){
+                        //　投稿日時を解析
+                        let postDateTime = queryArray[0].split(" ");
+                        let postDateNew = postDateTime[0];
+                        let postTime = postDateTime[1]; 
+
+                        if(postDateOld != postDateNew){
+                            postDate = postDateNew;
+                            postDateOld = postDateNew
+                        }else{
+                            postDate = "";
+                        }
+
+                        textQueryHistory += '<div>' + postDate + '</div>';
                         textQueryHistory += '<div class="mycomment"><div style="text-align: right"><p>' 
                         + queryArray[1] + '</p></div></div>';
-                    }
-                    if(queryArray[2]){
+                        
+                        let replyText;
+                        if(queryArray[2]){
+                            replyText = queryArray[2];
+                        }else{
+                            replyText = "ただいま相談を検討中です。<br>しばらくお待ち下さい（目安は１週間です)。"
+                        }
                         textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
-                        + queryArray[2] + '</p></div></div></div>';
+                            + replyText + '</p></div></div></div>';
                     }
+                    
                 }
                 textQueryHistory += '</div>'
 
                 document.getElementById('queryID').innerHTML = queryID;
-                document.getElementById('queryStatus').innerHTML = queryStatus;
+                // document.getElementById('queryStatus').innerHTML = queryStatus;
                 document.getElementById('queryHistory').innerHTML = textQueryHistory;
             </script>
 
-            <div>ご相談に対しては１週間を目安に返信します。<br>下の「相談への返信を確認する」から返信のご確認をお願いします。</div>
+            <!-- <div>ご相談に対しては１週間を目安に返信します。<br>下の「相談への返信を確認する」から返信のご確認をお願いします。</div> -->
 
-            <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button>
+            <!-- <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button> -->
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
         </main>
         <!-- <footer>
