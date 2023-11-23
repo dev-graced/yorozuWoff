@@ -85,9 +85,11 @@ div {
 
 .form {
     text-align: center;
-    width: 200px;
+    width: 290px;
     height: 30px;
     font-size:18px;
+    background: #F0F8FF;
+    border-color:darkgrey;
 }
 
 .sendButton {
@@ -194,9 +196,10 @@ div {
     position: relative;
     margin: 2em 0;
     padding: 0.5em 1em;
-    border: solid 3px #95ccff;
+    /* border: solid 3px red; */
     border-radius: 8px;
-    background: #FFF;
+    background: white;
+    box-shadow: 0 0 6px 1px #faccbc, 0 0 6px 1px #faccbc inset;/*ふわりとした影*/
 }
 .box26 .box-title {
     position: absolute;
@@ -207,9 +210,18 @@ div {
     line-height: 1;
     font-size: 19px;
     background: #FFF;
-    color: #95ccff;
+    /* color: #95ccff; */
+    color:#eb8360;
     font-weight: bold;
 }
+
+.box-title:before{
+    font-family: "Font Awesome 5 Free";
+    content: "\f071";
+    font-size: 20px;
+    padding-right: 5px;
+}
+
 .box26 p {
     margin: 0; 
     padding: 0;
@@ -314,3 +326,28 @@ top: 0; */
 padding-right:10px;
 color: #5ab9ff; /*アイコン色*/
 }
+
+/* 注意書きボックス */
+.cautionbox{
+    margin: 1em 0;
+    background-color: #ffebee;
+    padding: 1em;
+  }
+  
+  .cautionbox-title{
+    color: #ef5350;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .cautionbox-title:before{
+    font-family: "Font Awesome 5 Free";
+    content: "\f071";
+    font-size: 17px;
+  }
+  
+  .cautionbox p{
+    margin: 0;
+    padding: 0;
+  }

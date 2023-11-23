@@ -1,0 +1,81 @@
+/* フォーカスでボーダーの色が切り替わる */
+.cp_iptxt {
+	position: relative;
+	width: 100%;
+	margin: 0px 0%;
+}
+.cp_input {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 8px 0;
+	padding: 0.3em;
+	transition: 0.3s;
+	border: 1px solid #1b2538;
+	border-radius: 4px;
+	outline: none;
+    text-align: left;
+}
+.cp_input:focus {
+	border: 1px solid #27acd9;
+}
+.cp_input {
+	padding-left: 40px;
+}
+.cp_iptxt i {
+	position: absolute;
+	top: 8px;
+	left: 0;
+	padding: 16px 8px;
+	transition: 0.1s;
+	color: #aaaaaa;
+}
+.cp_input:focus + i {
+	color: #27acd9;
+}
+
+/* ボタン */
+
+/* 012 */
+.button012 a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 240px;
+    padding: 10px 25px 10px 50px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 400;
+    background: #eee;
+    border-radius: 50px;
+    z-index:0;
+    overflow: hidden;
+}
+.button012 a:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f005";
+    line-height: 1;
+    position: absolute;
+    left: 5px;
+    background: #FFF;
+    padding: 12px 11px;
+    border-radius: 60px;
+    z-index: 2;
+}
+.button012 a:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    display: block;
+    background: #a6daeb;
+    transition: .3s;
+    left:0;
+}
+.button012 a:hover:after {
+    width: 100%;
+    z-index: -1;
+}

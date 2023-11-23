@@ -4,8 +4,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-        <title>よろず相談アプリ</title>
+        <title>相談への返信確認ページ</title>
         <link rel="stylesheet" href="form_style.css">
+        <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- <header>
@@ -28,31 +29,26 @@
             </div>
             <button id="queryInfo-sendButton" class="sendButton">送信</button>
             <div id="queryInfo-sendProgress"></div>
-            <br>
 
-            <p style="color:red">
-                相談IDや暗証番号を忘れた方は、<br>
-                　・質問した内容<br>
-                　・相談IDまたは暗証番号 <br>
-                を記載したメールを <a href="mailto:grace.homon.dev@gmail.com">grace.homon.dev@gmail.com</a> 
-                高江洲宛に送ってください。<br>
-                (匿名で構いません)
-            </p>
+            <div class="box26">
+                <span class="box-title">注意</span>
+                <p>
+                    相談IDや暗証番号を忘れた方は、<br>
+                    　・質問した内容<br>
+                    　・相談IDまたは暗証番号 <br>
+                    を記載したメールを <a href="mailto:grace.homon.dev@gmail.com">grace.homon.dev@gmail.com</a> 
+                    高江洲宛に送ってください。<br>
+                    (匿名で構いません)
+                </p>
+            </div>
 
-            <!-- <p id="queryInfo-apiResField"></p> -->
-
-             <div id="queryInfo-messageThread">
-                <!-- 相談履歴を表示するコンテナ -->
-             </div>
-             <br>
-
+             <!-- <div id="queryInfo-messageThread">
+                 相談履歴を表示するコンテナ 
+             </div> -->
 
             <button onclick="location.href='post.html'" class="linkBtn2">新しく相談を投稿する</button>
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
         </main>
-        <!-- <footer>
-            &copy; 2023 よろず相談
-        </footer> -->
 
         <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"> </script>
         <script type="module" src="post.js"></script>

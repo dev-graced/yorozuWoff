@@ -4,42 +4,53 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-        <title>よろず相談アプリ</title>
+        <title>相談投稿ページ</title>
         <link rel="stylesheet" href="form_style.css">
+        <link rel="stylesheet" href="form.css">
+        <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
     </head>
-    <body>
-        <!-- <header>
-            <h1>相談投稿ページ</h1>
-        </header> -->
-    
+    <body></body>
         <main>
             <!-- <p style="text-align: center;">よろず相談所に相談を送ります。</p> -->
             <!-- <h3>ここでよろず相談所に相談を送ることができます</h3> -->
-            <!-- <p>
-                相談内容を入力し、４桁の暗証番号を決めて、
+            <p>
+                相談内容を入力し、暗証番号を決めて、
                 送信ボタンを押してください。
-            </p> -->
+            </p>
 
             <!-- <p style='font-weight: bold; font-size: 20px'>相談ネーム</p> -->
             <!-- 質問送信フォーム-->
-            <div>相談内容を入力してください<br>
-            <textarea id="text-input" cols="25" rows="8" style="font-size: 18px;"></textarea>
+            <div class="cp_iptxt">
+            <textarea id="text-input" cols="25" rows="8" class="cp_input" style="font-size: 16px;" 
+            placeholder="相談内容を入力してください"></textarea>
+            <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
             </div>
 
-            <div>暗証番号を決めてください<br>
-            <input type="tel" id="secretNo" placeholder="半角数字で4桁" class="form">
+            <div class="cp_iptxt">
+                <input type="tel" id="secretNo" class="cp_input" placeholder="暗証番号（半角数字で4桁）">
+                <i class="fa fa-user fa-lg fa-fw" aria-hidden="true" style="font-size: 18px;"></i>
             </div>
-            <button id="send-button" class="sendButton">送信</button>
+
+            <!-- <div>
+            <input type="tel" id="secretNo" placeholder="暗証番号（半角数字で4桁）" class="form">
+            </div> -->
+            <!-- <button id="send-button" class="sendButton">この内容で送信する</button> -->
+            <div class="button012" style="margin-top: 10px;">
+                <a href="#">この内容で送信する</a>
+            </div>
             <p id="send-progress" style="text-align: center;"></p>
-            <br>
 
             <p id="apiResField"></p> 
 
-            <p style="color:red">
-                以前投稿した相談に関する追加の質問は、<br>
-                下の「相談への返信を確認する」からお願いします。
-            </p>
-            <br>
+            <!-- <div class="cautionbox">
+                <div class="cautionbox-title">注意</div> -->
+            <div class="box26">
+                <span class="box-title">注意</span>
+                <p>
+                    以前投稿した相談に関する追加の質問は、<br>
+                    下の「相談への返信を確認する」からお願いします。
+                </p>
+            </div>
 
             <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button>
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
