@@ -1,7 +1,7 @@
 /* ページ全体の背景 */
 body {
-    background-color: #f0f0f0;
-    /* background-color: white; */
+    /* background-color: #f0f0f0; */
+    background-color: white;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
