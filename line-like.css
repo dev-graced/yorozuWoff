@@ -3,7 +3,7 @@
     padding: 20px 10px;
     max-width: 450px;
     /* margin: 15px auto; */
-    width: 270px;
+    width: 280px;
     margin: 0;
     text-align: right;
     font-size: 14px;
@@ -60,14 +60,13 @@
   
   /*以下、③右側の緑コメント*/
   .mycomment {
-    /* margin: 10px 0; */
-    margin: 10px 0 0 auto;
-    max-width: 250px;
+    margin: 10px 0;
+    /* background-color: aquamarine; */
   }
   .mycomment p {
     display: inline-block;
     position: relative; 
-    /* margin: 0 10px 0 0; */
+    margin: 0 10px 0 0;
     padding: 8px;
     max-width: 250px;
     border-radius: 12px;

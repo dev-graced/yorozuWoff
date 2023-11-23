@@ -180,7 +180,7 @@ async function main() {
         +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
 
         // //送信完了のメッセージを表示する
-        // sendProgressMessage = "";
+        // sendPsrogressMessage = "";
         // document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
 
 
