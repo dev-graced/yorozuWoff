@@ -75,7 +75,7 @@
     transition: .3s;
     left:0;
 }
-.button012 a:hover:after {
+/* .button012 a:hover:after {
     width: 100%;
     z-index: -1;
-}
+} */
