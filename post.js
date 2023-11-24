@@ -23,19 +23,19 @@ async function main() {
           alert("相談内容を入力してください");
           return;
         }
-        let secretNo = document.getElementById('secretNo').value;
-        if(!secretNo){
-          alert("４桁の暗証番号を入力してください");
-          return;
-        }else{
-          let regx = /^[0-9]{4}$/;
-          let testInput = regx.test(secretNo);
-          if(!testInput){
-            alert("暗証番号は「半角数字」を４つ入力してください");
-            document.getElementById('secretNo').value = "";
-          return;
-          }
-        }
+        // let secretNo = document.getElementById('secretNo').value;
+        // if(!secretNo){
+        //   alert("４桁の暗証番号を入力してください");
+        //   return;
+        // }else{
+        //   let regx = /^[0-9]{4}$/;
+        //   let testInput = regx.test(secretNo);
+        //   if(!testInput){
+        //     alert("暗証番号は「半角数字」を４つ入力してください");
+        //     document.getElementById('secretNo').value = "";
+        //   return;
+        //   }
+        // }
         //document.getElementById('showInputTextField').textContent = textInput;
 
         // 送信中のメッセージを表示する
@@ -73,7 +73,8 @@ async function main() {
         //// 質問を送信
         let apiFunc = { //呼び出す API関数とその引数を設定する
           function: 'receiveQuery',
-          parameters: [textInput,secretNo]
+          //parameters: [textInput,secretNo]
+          parameters: [textInput]
         };
 
         // リクエスト
@@ -84,9 +85,10 @@ async function main() {
 
         // 送信完了ページへ遷移(相談ネームと secretNo 付き)
         window.location.href 
-        = 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
-        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
-        +'?queryName='+queryName+'&secretNo='+secretNo;
+        //= 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
+        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
+        //+'?queryName='+queryName+'&secretNo='+secretNo;
+        + '?queryName=' + queryName;
         //document.getElementById('apiResField').textContent = text;
       });
     }
@@ -114,19 +116,19 @@ async function main() {
           alert("相談ネームを入力してください");
           return;
         }
-        let secretNo = document.getElementById('queryInfo-secretNo').value;
-        if(!secretNo){
-          alert("４桁の暗証番号を入力してください");
-          return;
-        }else{
-          let regx = /^[0-9]{4}$/;
-          let testInput = regx.test(secretNo);
-          if(!testInput){
-            alert("暗証番号は「半角数字」を４つ入力してください");
-            document.getElementById('secretNo').value = "";
-          return;
-          }
-        }
+        // let secretNo = document.getElementById('queryInfo-secretNo').value;
+        // if(!secretNo){
+        //   alert("４桁の暗証番号を入力してください");
+        //   return;
+        // }else{
+        //   let regx = /^[0-9]{4}$/;
+        //   let testInput = regx.test(secretNo);
+        //   if(!testInput){
+        //     alert("暗証番号は「半角数字」を４つ入力してください");
+        //     document.getElementById('secretNo').value = "";
+        //   return;
+        //   }
+        // }
 
         // 送信中のメッセージを表示する
         let sendProgressMessage = "送信中です";
@@ -152,7 +154,8 @@ async function main() {
 
         let apiFunc = { //呼び出す API関数とその引数を設定する
           function: 'requestQueryInfo',
-          parameters: [queryName,secretNo]
+          // parameters: [queryName,secretNo]
+          parameters: [queryName]
         };
 
         // リクエスト
@@ -175,8 +178,8 @@ async function main() {
 
         // 送信完了ページへ遷移(相談ネームと secretNo 付き)
         window.location.href 
-        = 'https://dev-graced.github.io/yorozuWoff/query_history.html'
-        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
+        //= 'https://dev-graced.github.io/yorozuWoff/query_history.html'
+        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
         +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
 
         // //送信完了のメッセージを表示する

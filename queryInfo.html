@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
         <title>相談への返信確認ページ</title>
         <link rel="stylesheet" href="form_style.css">
+        <link rel="stylesheet" href="form.css">
         <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -14,29 +15,44 @@
         </header> -->
     
         <main>
-            <div>相談への返信の確認や追加の質問ができます。</div>
+            <div class="balloon5">
+                <div class="faceicon">
+                 <img src="yorozu_logo.png" style="width:80px">
+                </div>
+                <div class="chatting">
+                <div class="says">
+                    <p>相談への返信の確認や追加の質問ができます。</p>
+                </div>
+                </div>
+            </div>
+            <!-- <p>相談への返信の確認や追加の質問ができます。</p> -->
 
             <!-- <p style="text-align: left;">
             確認したい（追加の質問をしたい）相談の「相談ID」と「暗証番号」を入力して、送信ボタンを押してください。
             </p> -->
 
             <!-- 相談状況問い合わせフォーム-->
-            <div>相談ID<br>
+            <div class="cp_iptxt">
+                <input type="text" id="queryInfo-queryName" class="cp_input" placeholder="相談IDを入力（必須）">
+                <i class="fa fa-user fa-lg fa-fw" aria-hidden="true" style="font-size: 18px;"></i>
+            </div>
+            <!-- <div>相談ID<br>
                 <input type="text" id="queryInfo-queryName" class="form">
-            </div>
-            <div>暗証番号<br>
+            </div> -->
+            <!-- <div>暗証番号<br>
                 <input type="tel" id="queryInfo-secretNo" class="form">
+            </div> -->
+            <!-- <button id="queryInfo-sendButton" class="sendButton">送信</button> -->
+            <div id="queryInfo-sendButton" class="button012" style="margin-top: 10px;">
+                <a>送信</a>
             </div>
-            <button id="queryInfo-sendButton" class="sendButton">送信</button>
             <div id="queryInfo-sendProgress"></div>
 
             <div class="box26">
                 <span class="box-title">注意</span>
                 <p>
-                    相談IDや暗証番号を忘れた方は、<br>
-                    　・質問した内容<br>
-                    　・相談IDまたは暗証番号 <br>
-                    を記載したメールを <a href="mailto:grace.homon.dev@gmail.com">grace.homon.dev@gmail.com</a> 
+                    相談IDを忘れた方は、<br>
+                    相談した内容を記載したメールを <a href="mailto:grace.homon.dev@gmail.com">grace.homon.dev@gmail.com</a> 
                     高江洲宛に送ってください。<br>
                     (匿名で構いません)
                 </p>

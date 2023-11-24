@@ -12,31 +12,42 @@
     <body></body>
         <main>
             <!-- <p style="text-align: center;">よろず相談所に相談を送ります。</p> -->
-            <!-- <h3>ここでよろず相談所に相談を送ることができます</h3> -->
-            <p>
-                相談内容を入力し、暗証番号を決めて、
-                送信ボタンを押してください。
-            </p>
+            <!-- <h3>相談を送ることができます</h3> -->
+            <!-- <div>
+                相談を送ることができます。
+            </div> -->
+            <!--吹き出しはじまり-->
+            <div class="balloon5">
+                <div class="faceicon">
+                 <img src="yorozu_logo.png" style="width:80px">
+                </div>
+                <div class="chatting">
+                <div class="says">
+                    <p>ここで相談を送ることができます。</p>
+                </div>
+                </div>
+            </div>
+            <!--吹き出し終わり-->
 
             <!-- <p style='font-weight: bold; font-size: 20px'>相談ネーム</p> -->
             <!-- 質問送信フォーム-->
             <div class="cp_iptxt">
             <textarea id="text-input" cols="25" rows="8" class="cp_input" style="font-size: 16px;" 
-            placeholder="相談内容を入力してください"></textarea>
+            placeholder="相談内容を入力して送信ボタンを押してください"></textarea>
             <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
             </div>
 
-            <div class="cp_iptxt">
+            <!-- <div class="cp_iptxt">
                 <input type="tel" id="secretNo" class="cp_input" placeholder="暗証番号（半角数字で4桁）">
                 <i class="fa fa-user fa-lg fa-fw" aria-hidden="true" style="font-size: 18px;"></i>
-            </div>
+            </div> -->
 
             <!-- <div>
             <input type="tel" id="secretNo" placeholder="暗証番号（半角数字で4桁）" class="form">
             </div> -->
             <!-- <button id="send-button" class="sendButton">この内容で送信する</button> -->
             <div id="send-button" class="button012" style="margin-top: 10px;">
-                <a>この内容で送信する</a>
+                <a>送信</a>
             </div>
             <p id="send-progress" style="text-align: center;"></p>
 
@@ -47,7 +58,7 @@
             <div class="box26">
                 <span class="box-title">注意</span>
                 <p>
-                    以前投稿した相談に関する追加の質問は、<br>
+                    以前に投稿した相談に関する追加の質問は、<br>
                     下の「相談への返信を確認する」からお願いします。
                 </p>
             </div>

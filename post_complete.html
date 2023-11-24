@@ -14,37 +14,38 @@
         <main>
             <!-- <p style="text-align: center;">よろず相談所に相談を送ります。</p> -->
             <h3>相談を受け付けました</h3>
-            <div id="postComplete-messageField" style="font-size: large;"></div>
+            
+            <div style="text-align: center;">
             <div id="postComplete-queryID" style="color:red; font-size: x-large;"></div>
-            <div id="postComplete-secretNo" style="color:red; font-size: x-large"></div>
-            <br><br>
+            </div>
+            <div id="postComplete-messageField" style="font-size: large;"></div>
+            <!-- <div id="postComplete-secretNo" style="color:red; font-size: x-large"></div> -->
             <script>
-                let paraPair  = new Array();                         // 行Ａ
+                let paraPair  = new Array();                         
                 let paraName  = new Array();
                 let paraValue = new Array();
     
                 let paramPart = location.search.split("?")[1];
-                let para = paramPart.split("&");                 // 行Ｂ
+                let para = paramPart.split("&");                 
                 let paraNum = para.length;
     
-                for (let i = 0; i <paraNum; i++) {                // 行Ｃ
-                    paraPair = para[i].split("=");                   // 行Ｄ
+                for (let i = 0; i <paraNum; i++) {                
+                    paraPair = para[i].split("=");                   
                     paraName[i]  = decodeURIComponent(paraPair[0]);
                     paraValue[i] = decodeURIComponent(paraPair[1]);
                 }
     
-                // 
-                let text = "今後必要になるので、下記を必ずメモしておいてください!!!";
-                let textQueryID = "相談ID："+paraValue[0];
-                let textSecretNo = "暗証番号："+paraValue[1];
+                let text = "今後必要になるので必ずメモしておいてください!!!";
+                let textQueryID = "相談ID<br>"+paraValue[0];
+                //let textSecretNo = "暗証番号："+paraValue[1];
 
                 document.getElementById('postComplete-messageField').innerHTML = text;
                 document.getElementById('postComplete-queryID').innerHTML = textQueryID;
-                document.getElementById('postComplete-secretNo').innerHTML = textSecretNo;
+                //document.getElementById('postComplete-secretNo').innerHTML = textSecretNo;
                 //alert("testです〜");
             </script>
 
-            <div>ご相談に対しては１週間を目安に返信します。<br>下の「相談への返信を確認する」から返信のご確認をお願いします。</div>
+            <p>ご相談に対しては１週間を目安に返信します。<br>下の「相談への返信を確認する」から返信のご確認をお願いします。</p>
 
             <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button>
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
