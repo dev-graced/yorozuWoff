@@ -85,8 +85,8 @@ async function main() {
 
         // 送信完了ページへ遷移(相談ネームと secretNo 付き)
         window.location.href 
-        //= 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
-        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
+        = 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
+        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
         //+'?queryName='+queryName+'&secretNo='+secretNo;
         + '?queryName=' + queryName;
         //document.getElementById('apiResField').textContent = text;
@@ -178,8 +178,8 @@ async function main() {
 
         // 送信完了ページへ遷移(相談ネームと secretNo 付き)
         window.location.href 
-        //= 'https://dev-graced.github.io/yorozuWoff/query_history.html'
-        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
+        = 'https://dev-graced.github.io/yorozuWoff/query_history.html'
+        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
         +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
 
         // //送信完了のメッセージを表示する
