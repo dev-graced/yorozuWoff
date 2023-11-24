@@ -363,7 +363,7 @@ color: #5ab9ff; /*アイコン色*/
   .balloon5 .faceicon {
     float: left;
     margin-right: -90px;
-    width: 80px;
+    width: 60px;
   }
   
   .balloon5 .faceicon img{
@@ -380,7 +380,7 @@ color: #5ab9ff; /*アイコン色*/
   .says {
     display: inline-block;
     position: relative; 
-    margin: 0px 0 0 100px;
+    margin: 0px 0 0 80px;
     padding: 10px 7px;
     border-radius: 12px;
     background: #d7ebfe;
