@@ -85,8 +85,8 @@ async function main() {
 
         // 送信完了ページへ遷移(相談ネームと secretNo 付き)
         window.location.href 
-        = 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
-        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
+        //= 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
+        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
         //+'?queryName='+queryName+'&secretNo='+secretNo;
         + '?queryName=' + queryName;
         //document.getElementById('apiResField').textContent = text;
@@ -167,20 +167,29 @@ async function main() {
         let queryId = apiResults[0];
         let queryStatus = apiResults[1];
         let queryHistory = apiResults[2];
+        let errorMessage = apiResults[3];
+        //alert(apiResults);
 
-        // queryHistoryを文字列として整形
-        let textQueryHistory = "";
-        for(let i=0; i<queryHistory.length; i++){
-          textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
-          + queryHistory[i][2] + ";";
+        // API リクエストレスポンスのエラーメッセージ処理
+        if(errorMessage){
+          sendProgressMessage = "送信エラー";
+          document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
+          alert(errorMessage);
+        }else{
+          // queryHistoryを文字列として整形
+          let textQueryHistory = "";
+          for(let i=0; i<queryHistory.length; i++){
+            textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
+            + queryHistory[i][2] + ";";
+          }
+          //alert(textQueryHistory);
+
+          // 送信完了ページへ遷移(相談ネームと secretNo 付き)
+          window.location.href 
+          //= 'https://dev-graced.github.io/yorozuWoff/query_history.html'
+          = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
+          +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
         }
-        //alert(textQueryHistory);
-
-        // 送信完了ページへ遷移(相談ネームと secretNo 付き)
-        window.location.href 
-        = 'https://dev-graced.github.io/yorozuWoff/query_history.html'
-        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
-        +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
 
         // //送信完了のメッセージを表示する
         // sendPsrogressMessage = "";

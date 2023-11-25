@@ -80,7 +80,16 @@
                 document.getElementById('queryHistory').innerHTML = textQueryHistory;
             </script>
 
-            <!-- <div>ご相談に対しては１週間を目安に返信します。<br>下の「相談への返信を確認する」から返信のご確認をお願いします。</div> -->
+            <div class="cp_iptxt">
+                <textarea id="text-input" cols="25" rows="8" class="cp_input" style="font-size: 16px;" 
+                placeholder="相談内容を入力して送信ボタンを押してください"></textarea>
+                <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
+            </div>
+
+            <div id="send-button" class="button012" style="margin-top: 10px;">
+                <a>送信</a>
+            </div>
+            <p id="send-progress" style="text-align: center;"></p>
 
             <!-- <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button> -->
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>

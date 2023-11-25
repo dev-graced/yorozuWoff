@@ -13,12 +13,22 @@
     
         <main>
             <!-- <p style="text-align: center;">よろず相談所に相談を送ります。</p> -->
-            <h3>相談を受け付けました</h3>
+            <!-- <h3>相談を受け付けました</h3> -->
+            <div class="balloon5">
+                <div class="faceicon">
+                 <img src="yorozu_logo.png">
+                </div>
+                <div class="chatting">
+                <div class="says">
+                    <p>相談を受け付けました。</p>
+                </div>
+                </div>
+            </div>
             
             <div style="text-align: center;">
             <div id="postComplete-queryID" style="color:red; font-size: x-large;"></div>
             </div>
-            <div id="postComplete-messageField" style="font-size: large;"></div>
+            <p id="postComplete-messageField" style="font-size: large;"></p>
             <!-- <div id="postComplete-secretNo" style="color:red; font-size: x-large"></div> -->
             <script>
                 let paraPair  = new Array();                         
@@ -45,7 +55,8 @@
                 //alert("testです〜");
             </script>
 
-            <p>ご相談に対しては１週間を目安に返信します。<br>下の「相談への返信を確認する」から返信のご確認をお願いします。</p>
+            <p>ご相談に対しては１週間を目安に返信します。<br>
+                返信内容の確認は、下の「相談への返信を確認する」からお願いします。</p>
 
             <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button>
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
