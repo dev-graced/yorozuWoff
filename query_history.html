@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
         <title>相談履歴</title>
         <link rel="stylesheet" href="form_style.css">
+        <link rel="stylesheet" href="form.css">
         <link rel="stylesheet" href="line-like.css">
         <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
     </head>
@@ -15,90 +16,24 @@
             <!-- <div id="queryStatus" style="font-size: large"></div> -->
             <div id="queryHistory" style="font-size: medium"></div>
 
-            <script>
-                let paraPair  = new Array();                       
-                let paraName  = new Array();
-                let paraValue = new Array();
-    
-                // URLから渡された引数を取得
-                let paramPart = location.search.split("?")[1];
-                let para = paramPart.split("&");                 
-                let paraNum = para.length;
-    
-                // 各引数をパラメーター名とパラメーターに分離
-                for (let i = 0; i <paraNum; i++) {               
-                    paraPair = para[i].split("=");                   
-                    paraName[i]  = decodeURIComponent(paraPair[0]);
-                    paraValue[i] = decodeURIComponent(paraPair[1]);
-                }
-
-                let queryID = paraValue[0]+"さんの相談履歴"; 
-                let queryStatus = "相談状況："+paraValue[1];
-
-                // 相談履歴を解析
-                let queryHistory = paraValue[2];
-                let queryHistoryArray = queryHistory.split(";");
-                let textQueryHistory = '<div class="line-bc">';
-                let postDate,postDateOld;
-                for(let i=0; i<queryHistoryArray.length; i++){
-                    // 各投稿エントリーを解析
-                    let queryArray = queryHistoryArray[i].split(",");
-
-                    // 投稿エントリーを HTML化
-                    if(queryArray[1]){
-                        //　投稿日時を解析
-                        let postDateTime = queryArray[0].split(" ");
-                        let postDateNew = postDateTime[0];
-                        let postTime = postDateTime[1]; 
-
-                        if(postDateOld != postDateNew){
-                            postDate = postDateNew;
-                            postDateOld = postDateNew
-                        }else{
-                            postDate = "";
-                        }
-
-                        textQueryHistory += '<div>' + postDate + '</div>';
-                        textQueryHistory += '<div class="mycomment"><div style="text-align: right"><p>' 
-                        + queryArray[1] + '</p></div></div>';
-                        
-                        let replyText;
-                        if(queryArray[2]){
-                            replyText = queryArray[2];
-                        }else{
-                            replyText = "ただいま相談を検討中です。<br>しばらくお待ち下さい（目安は１週間です)。"
-                        }
-                        textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
-                            + replyText + '</p></div></div></div>';
-                    }
-                    
-                }
-                textQueryHistory += '</div>'
-
-                document.getElementById('queryID').innerHTML = queryID;
-                // document.getElementById('queryStatus').innerHTML = queryStatus;
-                document.getElementById('queryHistory').innerHTML = textQueryHistory;
-            </script>
-
-            <div class="cp_iptxt">
-                <textarea id="text-input" cols="25" rows="8" class="cp_input" style="font-size: 16px;" 
-                placeholder="相談内容を入力して送信ボタンを押してください"></textarea>
+            <div class="cp_iptxt" style="margin-top: 0;">
+                <textarea id="addQuery-textInput" cols="25" rows="3" class="cp_input" style="font-size: 16px;margin-top: 0;" 
+                placeholder="メッセージを入力して送信ボタンを押してください"></textarea>
                 <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
             </div>
 
-            <div id="send-button" class="button012" style="margin-top: 10px;">
+            <div id="addQuery-sendButton" class="button012" style="margin-top: 0px;">
                 <a>送信</a>
             </div>
-            <p id="send-progress" style="text-align: center;"></p>
+            <p id="addQuery-sendProgress" style="text-align: center;"></p>
+
 
             <!-- <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button> -->
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
         </main>
-        <!-- <footer>
-            &copy; 2023 よろず相談
-        </footer> -->
 
         <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"> </script>
         <script type="module" src="post.js"></script>
+        <script type="module" src="query_history.js"></script>
     </body>
 </html>

@@ -116,19 +116,6 @@ async function main() {
           alert("相談ネームを入力してください");
           return;
         }
-        // let secretNo = document.getElementById('queryInfo-secretNo').value;
-        // if(!secretNo){
-        //   alert("４桁の暗証番号を入力してください");
-        //   return;
-        // }else{
-        //   let regx = /^[0-9]{4}$/;
-        //   let testInput = regx.test(secretNo);
-        //   if(!testInput){
-        //     alert("暗証番号は「半角数字」を４つ入力してください");
-        //     document.getElementById('secretNo').value = "";
-        //   return;
-        //   }
-        // }
 
         // 送信中のメッセージを表示する
         let sendProgressMessage = "送信中です";
@@ -184,7 +171,7 @@ async function main() {
           }
           //alert(textQueryHistory);
 
-          // 送信完了ページへ遷移(相談ネームと secretNo 付き)
+          // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
           window.location.href 
           //= 'https://dev-graced.github.io/yorozuWoff/query_history.html'
           = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
@@ -286,69 +273,6 @@ async function main() {
         // }
 
         
-        //// 追加質問送信フォーム
-         // ボタン要素を取得
-        const addQuerySendButton = document.getElementById('addQuery-sendButton');
-        // ボタンがクリックされたときの処理を追加
-        addQuerySendButton.addEventListener('click', async function() {
-
-          // テキスト入力フィールドの値を取得
-          let textInput = document.getElementById('addQuery-textInput').value;
-          if(!textInput){
-            alert("追加の質問内容を入力してください");
-            return;
-          }
-
-          // 送信中のメッセージを表示する
-          let sendProgressMessage = "送信中です";
-          document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
-
-          // アクセストークンを取得する
-          let accessToken;
-          await getAccessToken()
-          .then((accessTokenRes)=>{
-            accessToken = accessTokenRes.access_token;
-            console.log("accessToken",accessToken);
-            //document.getElementById('accessTokenField').textContent = accessToken;
-          })
-          .catch((error)=>{
-            let msg = "エラー: アクセストークンが取得できませんでした";
-            alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
-            console.log(msg);
-
-            sendProgressMessage = "送信エラー";
-            document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
-
-          });
-
-          // 相談ネームと暗証番号をフォームから取得する
-          let queryName = document.getElementById('queryInfo-queryName').value;
-          //alert(queryName);
-          let secretNo = document.getElementById('queryInfo-secretNo').value;
-          //alert(secretNo);
-
-          //// 質問を送信
-          let apiFunc = { //呼び出す API関数とその引数を設定する
-            function: 'receiveAddQuery',
-            parameters: [queryName,secretNo,textInput]
-          };
-
-          // リクエスト
-          let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-          //let apiResponse = await sendPostRequest(url,requestOptions);
-          let text = apiResponse.response.result;
-          //document.getElementById('apiResField').textContent = text;
-          //alert(text);
-
-          //送信完了のメッセージを表示する
-          sendProgressMessage = text;
-          document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
-
-          //送信ボタンが再度押されることがないように非表示にする
-          sendButton.disabled = true;
-
-        });
-
       });
     }
   } catch (e) {
