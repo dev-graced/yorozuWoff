@@ -50,17 +50,27 @@
                 }
     
                 let text = "相談IDは必ずメモしておいてください!!!";
-                let textQueryID = "相談ID<br>"+paraValue[0];
+                let textQueryID = "[相談ID]<br>"+paraValue[0];
                 //let textSecretNo = "暗証番号："+paraValue[1];
 
-                document.getElementById('postComplete-messageField').innerHTML = text;
+                // document.getElementById('postComplete-messageField').innerHTML = text;
                 document.getElementById('postComplete-queryID').innerHTML = textQueryID;
                 //document.getElementById('postComplete-secretNo').innerHTML = textSecretNo;
                 //alert("testです〜");
             </script>
 
             <!-- <p>ご相談に対しては１週間を目安に返信します。<br> -->
-            <p>相談に対する返信内容を確認するには、相談IDを入力してログインしてください。</p> -->
+            <!-- <p>相談に対する返信内容を確認するには、相談IDを入力してログインしてください。</p>  -->
+            <div class="balloon5">
+                <div class="faceicon">
+                 <img src="yorozu_logo.png">
+                </div>
+                <div class="chatting">
+                <div class="says">
+                    <p>相談に対する返信内容を確認するには、相談IDを入力してログインしてください。</p>
+                </div>
+                </div>
+            </div>
 
             <div class="cp_iptxt" style="margin-top: 0;">
                 <input type="text" id="queryInfo-queryName" class="cp_input" placeholder="相談IDを入力してログイン">
