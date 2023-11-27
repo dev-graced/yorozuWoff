@@ -131,7 +131,8 @@ div {
 
 /* ボタン style */
 .linkBtn1 {
-    background-color:rgb(245, 235, 223);
+    /* background-color:rgb(245, 235, 223); */
+    background-color: white;
 	display: block;
 	text-align: center;
 	/* vertical-align: middle; */

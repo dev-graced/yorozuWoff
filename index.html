@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="form_style.css">
+    <link rel="stylesheet" href="form.css">
+    <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
     <title>よろず相談ホーム</title>
 </head>
 <body>
@@ -24,14 +26,47 @@
             <img src="yorozu_logo.png" style="width:120px">
         </div>
 
+        <section></section>
         <!-- <p style="text-align: left;">東風会で働く皆さんが日々仕事をしている中で生じた疑問や相談について聞ける窓口です。東風会をよくするための提案も歓迎します。</p> -->
-        <div style="text-align: left;">仕事をしている中で生じた疑問や相談の質問窓口です</div>
-        <div style="font-weight: bold; text-align: left;">東風会をよくするための提案も歓迎します</div>
+        <!-- <div style="text-align: left;">仕事をしている中で生じた疑問や相談の質問窓口です</div>
+        <div style="font-weight: bold; text-align: left;">東風会をよくするための提案も歓迎します</div> -->
+        まずはこちらから↓
+        <button onclick="location.href='guide.html'" class="linkBtn1">よろず相談の説明</button>
+        </section>
+        <br>
+
         <section>
-            <button onclick="location.href='guide.html'" class="linkBtn1">よろず相談の説明</button>
+            相談IDがある方はこちら↓
+             <!-- 相談状況問い合わせフォーム-->
+             <div class="cp_iptxt" style="margin-top: 0;">
+                <input type="text" id="queryInfo-queryName" class="cp_input" placeholder="相談IDを入力してログインする">
+                <i class="fa fa-user fa-lg fa-fw" aria-hidden="true" style="font-size: 18px;"></i>
+            </div>
+            <div id="queryInfo-sendButton" class="button012" style="margin-top:0px;">
+                <a style="max-width:80px;">ログイン</a>
+            </div>
+            <div id="queryInfo-sendProgress"></div>
+        </section>
+        <br>
+
+        <section>
+            新しく相談を始める方はこちら↓
+            <div class="cp_iptxt">
+                <textarea id="text-input" cols="25" rows="5" class="cp_input" style="font-size: 16px;" 
+                placeholder="相談内容を入力して送信ボタンを押してください"></textarea>
+                <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
+            </div>
+
+            <div id="send-button" class="button012" style="margin-top: 0px;">
+                <a>送信</a>
+            </div>
+            <p id="send-progress" style="text-align: center;"></p>
+        </section>
+
+        <!-- <section>
             <button onclick="location.href='post.html'" class="linkBtn2">新しく相談を投稿する</button>
             <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button>
-        </section>
+        </section> -->
             <!-- <a href="https://board.worksmobile.com/main/article/4090000000120591811?t=36844&boardNo=4090000000101693441">
                 FAQページ
             </a> -->
