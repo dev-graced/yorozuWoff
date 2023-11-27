@@ -40,7 +40,8 @@
     padding: 10px;
     max-width: 250px;
     border-radius: 12px;
-    background: #edf1ee;
+    /* background: #edf1ee; */
+    background: white;
   }
   
   .says:after {
@@ -50,7 +51,7 @@
     top: 3px; 
     left: -19px;
     border: 8px solid transparent;
-    border-right: 18px solid #edf1ee;
+    border-right: 18px solid white;
     -webkit-transform: rotate(35deg);
     transform: rotate(35deg);
   }

@@ -31,7 +31,11 @@
         <!-- <div style="text-align: left;">仕事をしている中で生じた疑問や相談の質問窓口です</div>
         <div style="font-weight: bold; text-align: left;">東風会をよくするための提案も歓迎します</div> -->
         <!-- まずはこちらから↓ -->
-        <button onclick="location.href='guide.html'" class="linkBtn1">よろず相談の説明へ</button>
+        <div class="circle-bar">まずはこちらから</div>
+        <!-- <button onclick="location.href='guide.html'" class="linkBtn1">よろず相談とは？</button> -->
+        <div class="button_solid018">
+            <a href="guide.html">よろず相談とは？</a>
+        </div>
         </section>
 
         <section style="margin-bottom: 25px;">
@@ -39,13 +43,13 @@
             <div class="circle-bar">相談IDがある方はこちら</div>
              <!-- 相談状況問い合わせフォーム-->
              <div class="cp_iptxt" style="margin-top: 0;">
-                <input type="text" id="queryInfo-queryName" class="cp_input" placeholder="相談IDを入力してログインする">
+                <input type="text" id="queryInfo-queryName" class="cp_input" placeholder="相談IDを入力してログイン">
                 <i class="fa fa-user fa-lg fa-fw" aria-hidden="true" style="font-size: 18px;"></i>
             </div>
             <div id="queryInfo-sendButton" class="button012" style="margin-top:0px;">
-                <a style="max-width:80px;">ログイン</a>
+                <a id="queryInfo-sendButton-a" style="max-width:120px;">ログイン</a>
             </div>
-            <div id="queryInfo-sendProgress"></div>
+            <!-- <div id="queryInfo-sendProgress"></div> -->
         </section>
 
         <section>
@@ -57,9 +61,9 @@
             </div>
 
             <div id="send-button" class="button012" style="margin-top: 0px;">
-                <a>送信</a>
+                <a id="send-button-a" style="max-width:120px;">送信する</a>
             </div>
-            <p id="send-progress" style="text-align: center;"></p>
+            <!-- <p id="send-progress" style="text-align: center;"></p> -->
         </section>
 
         <!-- <section>

@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>相談投稿完了</title>
         <link rel="stylesheet" href="form_style.css">
+        <link rel="stylesheet" href="form.css">
+    <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
+    <title>よろず相談ホーム</title>
     </head>
     <body>
         <!-- <header>
@@ -45,7 +48,7 @@
                     paraValue[i] = decodeURIComponent(paraPair[1]);
                 }
     
-                let text = "今後必要になるので必ずメモしておいてください!!!";
+                let text = "相談IDは必ずメモしておいてください!!!";
                 let textQueryID = "相談ID<br>"+paraValue[0];
                 //let textSecretNo = "暗証番号："+paraValue[1];
 
@@ -55,11 +58,24 @@
                 //alert("testです〜");
             </script>
 
-            <p>ご相談に対しては１週間を目安に返信します。<br>
-                返信内容の確認は、下の「相談への返信を確認する」からお願いします。</p>
+            <!-- <p>ご相談に対しては１週間を目安に返信します。<br> -->
+                <!-- 返信内容の確認は、下の「相談への返信を確認する」からお願いします。</p> -->
 
-            <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button>
+            <div class="cp_iptxt" style="margin-top: 0;">
+                <input type="text" id="queryInfo-queryName" class="cp_input" placeholder="相談IDを入力してログイン">
+                <i class="fa fa-user fa-lg fa-fw" aria-hidden="true" style="font-size: 18px;"></i>
+            </div>
+            <div id="queryInfo-sendButton" class="button012" style="margin-top:0px;">
+                <a id="queryInfo-sendButton-a" style="max-width:120px;">ログイン</a>
+            </div>
+            <br>
+            <!-- <div id="queryInfo-sendProgress"></div> -->
+
+            <!-- <button onclick="location.href='queryInfo.html'" class="linkBtn2">相談への返信を確認する</button> -->
             <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
+            <!-- <div class="button_solid018">
+                <a href="index.html">よろず相談ホーム</a>
+            </div> -->
         </main>
         <!-- <footer>
             &copy; 2023 よろず相談
