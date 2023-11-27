@@ -47,8 +47,9 @@
     padding: 10px 25px 10px 50px;
     color: #313131;
     transition: 0.3s ease-in-out;
-    font-weight: 400;
+    font-weight: 500;
     background: #eee;
+    /* background:  #a6daeb; */
     border-radius: 50px;
     z-index:0;
     overflow: hidden;

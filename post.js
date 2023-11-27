@@ -113,7 +113,7 @@ async function main() {
         // テキスト入力フィールドの値を取得
         let queryName = document.getElementById('queryInfo-queryName').value;
         if(!queryName){
-          alert("相談ネームを入力してください");
+          alert("相談IDを入力してください");
           return;
         }
 
