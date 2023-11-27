@@ -142,8 +142,8 @@ addQuerySendButton.addEventListener('click', async function() {
 
         // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
         window.location.href 
-        //= 'https://dev-graced.github.io/yorozuWoff/query_history.html'
-        = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
+        = 'https://dev-graced.github.io/yorozuWoff/query_history.html'
+        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
         +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
     }
 });
