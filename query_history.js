@@ -92,9 +92,13 @@ addQuerySendButton.addEventListener('click', async function() {
         return;
     }
 
-    // 送信中のメッセージを表示する
-    let sendProgressMessage = "送信中...";
-    document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;
+    // // 送信中のメッセージを表示する
+    // let sendProgressMessage = "送信中...";
+    // document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;
+
+    //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
+    document.getElementById("addQuery-sendButton").style.display ="none";
+    document.getElementById("addQuery-sendButton2").style.display ="flex";
 
     // アクセストークンを取得する
     let accessToken;

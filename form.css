@@ -44,6 +44,7 @@
     align-items: center;
     margin: 0 auto;
     max-width: 120px;
+    height: 30px;
     padding: 10px 10px 10px 50px;
     color: #313131;
     transition: 0.3s ease-in-out;
@@ -80,3 +81,65 @@
     width: 100%;
     z-index: -1;
 } */
+
+/* ボタン with プログレスバー */
+.button012prog {
+    position: relative;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 170px;
+    height: 30px;
+    /* padding: 0; */
+    padding: 10px 10px 10px 0px;
+    color: #313131;
+    /* transition: 0.3s ease-in-out; */
+    font-weight: 600;
+    background: #eee;
+    /* background:  #a6daeb; */
+    border-radius: 50px;
+    z-index:0;
+    overflow: hidden;
+}
+.button012prog:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f005";
+    line-height: 1;
+    position: absolute;
+    left: 5px;
+    background: #FFF;
+    padding: 12px 11px;
+    border-radius: 60px;
+    z-index: 2;
+}
+/* .button012prog:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    display: block;
+    background: #a6daeb;
+    transition: .3s;
+    left:0;
+} */
+.button012prog .prog-bar{
+    position:absolute;
+    height:120%;
+    background-color:#a6daeb;
+    animation: progress 6s normal linear;
+    animation-fill-mode: forwards;
+    margin: 0px 0px 0px 0px;
+}
+@keyframes progress {
+    0% {width: 0}
+    100% {width: 100%}
+}
+.button012prog .prog-text{
+    position:absolute;
+    height:100%;
+    padding: 50px 10px 10px 60px;
+    z-index: 1;
+}

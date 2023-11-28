@@ -53,8 +53,8 @@ async function main() {
         // document.getElementById('send-button-a').textContent = sendProgressMessage;
 
         //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
-        document.getElementById("send-button-a").style.display ="none";
-        document.getElementById("send-button-a2").style.display ="flex";
+        document.getElementById("send-button").style.display ="none";
+        document.getElementById("send-button2").style.display ="flex";
 
         // アクセストークンを取得する
         let accessToken;
@@ -122,8 +122,8 @@ async function main() {
           return;
         }
         //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
-        document.getElementById("queryInfo-sendButton-a").style.display ="none";
-        document.getElementById("queryInfo-sendButton-a2").style.display ="flex";
+        document.getElementById("queryInfo-sendButton").style.display ="none";
+        document.getElementById("queryInfo-sendButton2").style.display ="flex";
 
         // // 送信中のメッセージを表示する
         // let sendProgressMessage = "ログイン中...";
@@ -167,9 +167,13 @@ async function main() {
 
         // API リクエストレスポンスのエラーメッセージ処理
         if(errorMessage){
-          sendProgressMessage = "送信エラー";
-          document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
+          // sendProgressMessage = "送信エラー";
+          // document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
           alert(errorMessage);
+
+          //　ログインボタンをアクティブにし、代わりにログイン中ボタンを非アクティブにする　
+          document.getElementById("queryInfo-sendButton").style.display ="block";
+          document.getElementById("queryInfo-sendButton2").style.display ="none";
         }else{
           // queryHistoryを文字列として整形
           let textQueryHistory = "";
