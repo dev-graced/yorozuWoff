@@ -1,7 +1,14 @@
-import { woffId, SCRIPT_ID } from './params.js'
+import { woffId, SCRIPT_ID, DEBUG_FLAG } from './params.js'
 import { getAccessToken,sendApiRequest } from './funcs.js'
-
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
+
+// web アプリのホストPCのURL
+let hostUrl;
+if(DEBUG_FLAG == 0){
+    hostUrl = 'https://dev-graced.github.io/yorozuWoff/';
+}else{
+    hostUrl = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/';
+};
 
 async function main() {
   try {
@@ -16,6 +23,9 @@ async function main() {
 
       // ボタンがクリックされたときの処理を追加
       sendButton.addEventListener('click', async function() {
+
+        //　ボタンを disabled にする
+        document.getElementById("send-button").disabled = true;
 
         // テキスト入力フィールドの値を取得
         let textInput = document.getElementById('text-input').value;
@@ -38,9 +48,13 @@ async function main() {
         // }
         //document.getElementById('showInputTextField').textContent = textInput;
 
-        // 送信中のメッセージを表示する
-        let sendProgressMessage = "送信中...";
-        document.getElementById('send-button-a').textContent = sendProgressMessage;
+        // // 送信中のメッセージを表示する
+        // let sendProgressMessage = "送信中...";
+        // document.getElementById('send-button-a').textContent = sendProgressMessage;
+
+        //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
+        document.getElementById("send-button-a").style.display ="none";
+        document.getElementById("send-button-a2").style.display ="flex";
 
         // アクセストークンを取得する
         let accessToken;
@@ -58,13 +72,7 @@ async function main() {
           sendProgressMessage = "送信エラー";
           document.getElementById('send-progress').textContent = sendProgressMessage;
 
-          // //// エラー発生を管理者に LINE WORKS で通知
-          // let apiFunc = { //呼び出す API関数とその引数を設定する
-          //   function: 'sendMsgToAdm',
-          //   parameters: [msg]
-          // };
-          // // リクエスト
-          // sendApiRequest(url,accessToken,apiFunc);
+          // //// エラー発生を管理者にメールで通知 (未作成）
         });
         //let accessToken = accessTokenRes.access_token;
         // console.log("accessToken",accessToken);
@@ -83,12 +91,9 @@ async function main() {
         let resultArray = apiResponse.response.result;
         let queryName = resultArray[0];
 
-        // 送信完了ページへ遷移(相談ネームと secretNo 付き)
+        // 送信完了ページへ遷移(相談ID付き)
         window.location.href 
-        = 'https://dev-graced.github.io/yorozuWoff/post_complete.html'
-        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/post_complete.html'
-        //+'?queryName='+queryName+'&secretNo='+secretNo;
-        + '?queryName=' + queryName;
+        = hostUrl + 'post_complete.html?queryName='+queryName;
         //document.getElementById('apiResField').textContent = text;
       });
     }
@@ -116,10 +121,13 @@ async function main() {
           alert("相談IDを入力してください");
           return;
         }
+        //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
+        document.getElementById("queryInfo-sendButton-a").style.display ="none";
+        document.getElementById("queryInfo-sendButton-a2").style.display ="flex";
 
-        // 送信中のメッセージを表示する
-        let sendProgressMessage = "ログイン中...";
-        document.getElementById('queryInfo-sendButton-a').textContent = sendProgressMessage;
+        // // 送信中のメッセージを表示する
+        // let sendProgressMessage = "ログイン中...";
+        // document.getElementById('queryInfo-sendButton-a').textContent = sendProgressMessage;
 
         // アクセストークンを取得する
         let accessToken;
@@ -173,9 +181,7 @@ async function main() {
 
           // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
           window.location.href 
-          = 'https://dev-graced.github.io/yorozuWoff/query_history.html'
-          //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
-          +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+          = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
         }
 
         // //送信完了のメッセージを表示する
@@ -303,12 +309,23 @@ async function main() {
 
 //WOFF On load
 window.addEventListener('load', () => {
-  console.log(woffId);
+  // console.log(woffId);
 
-  //if(woff.isInClient()){
-  if(woffId){ //woff.isInClient を回避するデバッグ用
-  // Initialize WOFF
-  woff.init({ woffId: woffId })
+  // LINE WORKS アプリからのアクセスか判別するフラグ： true: アプリ内からのアクセス, false: アプリ外からのアクセス
+  let inClientFlag = woff.isInClient();
+  //alert("inClientFlag"+" = "+inClientFlag);
+
+  // debug mode の時はLINE WORKS アプリ外からでもアクセスできるようにする
+  if(DEBUG_FLAG == 1){
+    inClientFlag = true;
+  }
+  //alert("inClientFlag"+" = "+inClientFlag);
+
+  // WOFF の起動
+  if(inClientFlag){
+  //if(woffId){ //woff.isInClient を回避するデバッグ用
+    // Initialize WOFF
+    woff.init({ woffId: woffId })
       .then(() => {
           //// Get and show LINE WORKS userId
           //getProfile();

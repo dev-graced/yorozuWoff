@@ -1,6 +1,14 @@
-import { woffId, SCRIPT_ID } from './params.js'
+import { woffId, SCRIPT_ID, DEBUG_FLAG } from './params.js'
 import { getAccessToken,sendApiRequest } from './funcs.js'
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
+
+// web アプリのホストPCのURL
+let hostUrl;
+if(DEBUG_FLAG == 0){
+    hostUrl = 'https://dev-graced.github.io/yorozuWoff/';
+}else{
+    hostUrl = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/';
+};
 
 let paraPair  = new Array();                       
 let paraName  = new Array();
@@ -142,8 +150,6 @@ addQuerySendButton.addEventListener('click', async function() {
 
         // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
         window.location.href 
-        = 'https://dev-graced.github.io/yorozuWoff/query_history.html'
-        //= 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/query_history.html'
-        +'?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+        = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
     }
 });
