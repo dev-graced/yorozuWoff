@@ -323,6 +323,7 @@ window.addEventListener('load', () => {
   if(DEBUG_FLAG == 1){
     inClientFlag = true;
   }
+  inClientFlag = true; // operation mode でも外部ブラウザでよろずページにアクセスしたいとき
   //alert("inClientFlag"+" = "+inClientFlag);
 
   // WOFF の起動
