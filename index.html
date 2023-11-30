@@ -55,7 +55,7 @@
             </div>
 
             <div style="margin-top: -14px;">
-                <a href="guide.html">相談IDを忘れた</a>
+                <a onclick="forgetIdAlert()">相談IDを忘れた</a>
             </div>
             <!-- <div id="queryInfo-sendProgress"></div> -->
         </section>
@@ -88,5 +88,10 @@
     </main>
     <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"> </script>
     <script type="module" src="post.js"></script>
+    <script>
+        function forgetIdAlert(){
+            alert("相談IDを忘れた場合は、「相談内容」と「相談IDを忘れた」ということを記載して、新しい相談として投稿してください。相談IDを調べて返信します。");
+        }
+    </script>
 </body>
 </html>
