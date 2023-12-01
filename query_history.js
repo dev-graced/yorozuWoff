@@ -10,6 +10,8 @@ if(DEBUG_FLAG == 0){
     hostUrl = 'https://potential-space-sniffle-rq6w7445g66cp7r5-5500.app.github.dev/';
 };
 
+//////////// Main /////////////////////////////
+
 let paraPair  = new Array();                       
 let paraName  = new Array();
 let paraValue = new Array();
@@ -40,6 +42,7 @@ let postDate,postDateOld;
 for(let i=0; i<queryHistoryArray.length; i++){
     // 各投稿エントリーを解析
     let queryArray = queryHistoryArray[i].split(",");
+    //alert(queryArray);
 
     // 投稿エントリーを HTML化
     if(queryArray[1]){
@@ -55,18 +58,35 @@ for(let i=0; i<queryHistoryArray.length; i++){
             postDate = "";
         }
 
+        // 相談内容によって相談の表示方法を変える
+        let queryMain;
+        if(queryArray[1].match(/^＜相談ID忘れ＞/)){
+            queryMain = "＜相談ID忘れ＞<br><br>[忘れた相談IDの相談内容]<br>"+queryArray[1].slice(8);
+        }else{
+            queryMain = queryArray[1];
+        }
+
         textQueryHistory += '<div>' + postDate + '</div>';
         textQueryHistory += '<div class="mycomment"><div style="text-align: right"><p>' 
-        + queryArray[1] + '</p></div></div>';
+        + queryMain + '</p></div></div>';
         
+        // 自動返信メッセージの設定
         let replyText;
         if(queryArray[2]){
             replyText = queryArray[2];
         }else{
-            replyText = "ただいま相談を検討中です。<br>しばらくお待ち下さい（目安は１週間です)。"
+            if(queryArray[1].match(/^＜相談ID忘れ＞/)){
+                replyText = "ただいま相談IDを調べています。<br>しばらくお待ち下さい（目安は２日です）。";
+            }else{
+                replyText = "ただいま相談を検討中です。<br>しばらくお待ち下さい（目安は１週間です)。";
+            }
         }
-        textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
+
+        // queryStatus が 「返信する」ではない場合だけ replyText (自動返信メッセージ)を表示する
+        if(queryStatus != "返信する"){
+            textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
             + replyText + '</p></div></div></div>';
+        }
     }
     
 }
