@@ -98,19 +98,20 @@ document.getElementById('queryID').innerHTML = textQueryID;
 // document.getElementById('queryStatus').innerHTML = queryStatus;
 document.getElementById('queryHistory').innerHTML = textQueryHistory;
 
+
 /////////////////////////////////////////
-//// メッセージ入力フォームのスクリプト
+//// 相談への返信メッセージ入力フォームのスクリプト
 ////////////////////////////////////////
 
-//// 追加質問送信フォーム                // ボタン要素を取得
-const addQuerySendButton = document.getElementById('addQuery-sendButton');
+//// 返信送信フォーム                // ボタン要素を取得
+const replySendButton = document.getElementById('reply-sendButton');
 // ボタンがクリックされたときの処理を追加
-addQuerySendButton.addEventListener('click', async function() {
+replySendButton.addEventListener('click', async function() {
 
     // テキスト入力フィールドの値を取得
-    let textInput = document.getElementById('addQuery-textInput').value;
+    let textInput = document.getElementById('reply-textInput').value;
     if(!textInput){
-        alert("追加の質問内容を入力してください");
+        alert("返信内容を入力してください");
         return;
     }
 
@@ -119,8 +120,8 @@ addQuerySendButton.addEventListener('click', async function() {
     // document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;
 
     //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
-    document.getElementById("addQuery-sendButton").style.display ="none";
-    document.getElementById("addQuery-sendButton2").style.display ="flex";
+    document.getElementById("reply-sendButton").style.display ="none";
+    document.getElementById("reply-sendButton2").style.display ="flex";
 
     // アクセストークンを取得する
     let accessToken;
@@ -133,13 +134,13 @@ addQuerySendButton.addEventListener('click', async function() {
         let msg = "エラー: アクセストークンが取得できませんでした";
         alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
         console.log(msg);
-        sendProgressMessage = "送信エラー";
-        document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+        let sendProgressMessage = "送信エラー";
+        document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
     });
 
-    // 質問を送信
+    // 返信を送信
     let apiFunc = { //呼び出す API関数とその引数を設定する
-        function: 'receiveAddQuery',
+        function: 'receiveReply',
         parameters: [queryID,textInput]
     };
     let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
@@ -163,7 +164,7 @@ addQuerySendButton.addEventListener('click', async function() {
     // API リクエストレスポンスのエラーメッセージ処理
     if(errorMessage){
         sendProgressMessage = "送信エラー";
-        document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+        document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
         alert(errorMessage);
     }else{
         // queryHistoryを文字列として整形
@@ -176,6 +177,6 @@ addQuerySendButton.addEventListener('click', async function() {
 
         // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
         window.location.href 
-        = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+        = hostUrl + 'reply_complete.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
     }
 });
