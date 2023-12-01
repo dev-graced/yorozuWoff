@@ -38,6 +38,24 @@
         </div>
         </section>
 
+        <section>
+            <div class="circle-bar">新しく相談を始める</div>
+            <div class="cp_iptxt">
+                <textarea id="text-input" cols="25" rows="5" class="cp_input" style="font-size: 16px;" 
+                placeholder="相談内容を入力して送信ボタンを押してください"></textarea>
+                <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
+            </div>
+
+            <div id="send-button" class="button012" style="margin-top: 0px;">
+                <a id="send-button-a" style="max-width:120px;">送信する</a>
+            </div>
+            <div id="send-button2" class="button012prog" style="margin-top:0px;display: none;">
+                <div class="prog-text" style="padding-left: 75px;">送信中...</div>
+                <div class="prog-bar"></div>
+            </div>
+            <p id="send-progress" style="text-align: center;"></p>
+        </section>
+
         <section style="margin-bottom: 25px;">
             <!-- 相談IDがある方はこちら↓ -->
             <div class="circle-bar">相談IDがある方はこちら</div>
@@ -59,24 +77,6 @@
                 <a href="forgetID.html">相談IDを忘れた</a>
             </div>
             <div id="queryInfo-sendProgress"></div>
-        </section>
-
-        <section>
-            <div class="circle-bar">新しく相談を始める</div>
-            <div class="cp_iptxt">
-                <textarea id="text-input" cols="25" rows="5" class="cp_input" style="font-size: 16px;" 
-                placeholder="相談内容を入力して送信ボタンを押してください"></textarea>
-                <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
-            </div>
-
-            <div id="send-button" class="button012" style="margin-top: 0px;">
-                <a id="send-button-a" style="max-width:120px;">送信する</a>
-            </div>
-            <div id="send-button2" class="button012prog" style="margin-top:0px;display: none;">
-                <div class="prog-text" style="padding-left: 75px;">送信中...</div>
-                <div class="prog-bar"></div>
-            </div>
-            <p id="send-progress" style="text-align: center;"></p>
         </section>
 
         <!-- <section>
