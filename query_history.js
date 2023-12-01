@@ -216,7 +216,7 @@ replySendButton.addEventListener('click', async function() {
         let msg = "エラー: アクセストークンが取得できませんでした";
         alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
         console.log(msg);
-        sendProgressMessage = "送信エラー";
+        let sendProgressMessage = "送信エラー";
         document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
     });
 
@@ -246,7 +246,7 @@ replySendButton.addEventListener('click', async function() {
     // API リクエストレスポンスのエラーメッセージ処理
     if(errorMessage){
         sendProgressMessage = "送信エラー";
-        document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+        document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
         alert(errorMessage);
     }else{
         // queryHistoryを文字列として整形
