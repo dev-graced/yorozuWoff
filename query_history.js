@@ -177,3 +177,86 @@ addQuerySendButton.addEventListener('click', async function() {
         = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
     }
 });
+
+
+/////////////////////////////////////////
+//// 相談への返信メッセージ入力フォームのスクリプト
+////////////////////////////////////////
+
+//// 返信送信フォーム                // ボタン要素を取得
+const replySendButton = document.getElementById('reply-sendButton');
+// ボタンがクリックされたときの処理を追加
+replySendButton.addEventListener('click', async function() {
+
+    // テキスト入力フィールドの値を取得
+    let textInput = document.getElementById('reply-textInput').value;
+    if(!textInput){
+        alert("返信内容を入力してください");
+        return;
+    }
+
+    // // 送信中のメッセージを表示する
+    // let sendProgressMessage = "送信中...";
+    // document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;
+
+    //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
+    document.getElementById("reply-sendButton").style.display ="none";
+    document.getElementById("reply-sendButton2").style.display ="flex";
+
+    // アクセストークンを取得する
+    let accessToken;
+    await getAccessToken()
+    .then((accessTokenRes)=>{
+        accessToken = accessTokenRes.access_token;
+        //console.log("accessToken",accessToken);
+    })
+    .catch((error)=>{
+        let msg = "エラー: アクセストークンが取得できませんでした";
+        alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
+        console.log(msg);
+        sendProgressMessage = "送信エラー";
+        document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
+    });
+
+    // 返信を送信
+    let apiFunc = { //呼び出す API関数とその引数を設定する
+        function: 'receiveReply',
+        parameters: [queryID,textInput]
+    };
+    let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+    //let text = apiResponse.response.result;
+    //alert(text);
+
+    //// 相談履歴を再表示する
+    apiFunc = { //呼び出す API関数とその引数を設定する
+        function: 'requestQueryInfo',
+        parameters: [queryID]
+    };
+    apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+    let apiResults = apiResponse.response.result;
+
+    let queryId = apiResults[0];
+    let queryStatus = apiResults[1];
+    let queryHistory = apiResults[2];
+    let errorMessage = apiResults[3];
+    //alert(apiResults);
+
+    // API リクエストレスポンスのエラーメッセージ処理
+    if(errorMessage){
+        sendProgressMessage = "送信エラー";
+        document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+        alert(errorMessage);
+    }else{
+        // queryHistoryを文字列として整形
+        let textQueryHistory = "";
+        for(let i=0; i<queryHistory.length; i++){
+            textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
+            + queryHistory[i][2] + ";";
+        }
+       //alert(textQueryHistory);
+
+        // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
+        window.location.href 
+        = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+    }
+});
