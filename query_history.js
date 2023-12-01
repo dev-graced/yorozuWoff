@@ -74,18 +74,20 @@ for(let i=0; i<queryHistoryArray.length; i++){
         let replyText;
         if(queryArray[2]){
             replyText = queryArray[2];
+            textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
+            + replyText + '</p></div></div></div>';
         }else{
             if(queryArray[1].match(/^＜相談ID忘れ＞/)){
                 replyText = "ただいま相談IDを調べています。<br>しばらくお待ち下さい（目安は２日です）。";
             }else{
                 replyText = "ただいま相談を検討中です。<br>しばらくお待ち下さい（目安は１週間です)。";
             }
-        }
 
-        // queryStatus が 「返信する」ではない場合だけ replyText (自動返信メッセージ)を表示する
-        if(queryStatus != "返信する"){
-            textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
-            + replyText + '</p></div></div></div>';
+            // queryStatus が 「返信する」ではない場合だけ replyText (自動返信メッセージ)を表示する
+            if(queryStatus != "返信する"){
+                textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
+                + replyText + '</p></div></div></div>';
+            }
         }
     }
     
