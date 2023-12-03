@@ -1,4 +1,4 @@
-import { woffId, SCRIPT_ID, DEBUG_FLAG } from './params.js'
+import { woffId, SCRIPT_ID, DEBUG_FLAG, ACCESS_FLAG } from './params.js'
 import { getAccessToken,sendApiRequest } from './funcs.js'
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
@@ -319,11 +319,10 @@ window.addEventListener('load', () => {
   let inClientFlag = woff.isInClient();
   //alert("inClientFlag"+" = "+inClientFlag);
 
-  // debug mode の時はLINE WORKS アプリ外からでもアクセスできるようにする
-  if(DEBUG_FLAG == 1){
+  // ACCESS_FLAG = 1 の時はLINE WORKS アプリ外からでもアクセスできるようにする
+  if(ACCESS_FLAG == 1){
     inClientFlag = true;
   }
-  inClientFlag = true; // operation mode でも外部ブラウザでよろずページにアクセスしたいとき
   //alert("inClientFlag"+" = "+inClientFlag);
 
   // WOFF の起動
