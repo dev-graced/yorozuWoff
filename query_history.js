@@ -240,7 +240,7 @@ addQuerySendButton.addEventListener('click', async function() {
     //// アクセストークンを取得する
     let accessTokenResult = await wrap_getAccessToken();
     let accessToken = accessTokenResult[0];
-    alert(accessToken);
+    //alert(accessToken);
 
     // エラーメッセージの表示
     if(accessTokenResult[1]){
