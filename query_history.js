@@ -13,7 +13,7 @@ if(DEBUG_FLAG == 0){
 //////////// Main /////////////////////////////
 
 // デフォルトで相談終了ボタンを非表示にしておく
-document.getElementById("queryFinishButton").style.display ="none";
+//document.getElementById("queryFinishButton").style.display ="none";
 
 //// 相談履歴の解析
 

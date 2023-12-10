@@ -1,5 +1,5 @@
 import { woffId, SCRIPT_ID, DEBUG_FLAG } from './params.js'
-import { getAccessToken,sendApiRequest } from './funcs.js'
+import { wrap_getAccessToken,sendApiRequest } from './funcs.js'
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 // web アプリのホストPCのURL
@@ -126,6 +126,7 @@ replySendButton.addEventListener('click', async function() {
     //// アクセストークンを取得する
     let accessTokenResult = await wrap_getAccessToken();
     let accessToken = accessTokenResult[0];
+    alert(accessToken);
     
     // エラーメッセージの表示
     if(accessTokenResult[1]){
@@ -158,9 +159,11 @@ replySendButton.addEventListener('click', async function() {
 
     // API リクエストレスポンスのエラーメッセージ処理
     if(errorMessage){
-        sendProgressMessage = "送信エラー";
-        document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
-        alert(errorMessage);
+        // sendProgressMessage = "送信エラー";
+        // document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
+        // alert(errorMessage);
+        document.getElementById("reply-sendButton2").style.display ="none";
+        document.getElementById("reply-sendButton3").style.display ="flex";
     }else{
         // queryHistoryを文字列として整形
         let textQueryHistory = "";
