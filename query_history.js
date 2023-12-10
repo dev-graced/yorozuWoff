@@ -88,13 +88,25 @@ for(let i=0; i<queryHistoryArray.length; i++){
             //alert("queryHistoryArrayLength: "+queryHistoryArray.length);
             //一番最後の質問への返信だったら、相談終了確認メッセーじを追加し、lastReplyFlag = 1 にする
             if(i == queryHistoryArray.length-2){
-                // 相談を終了するかの確認メッセージを追加
-                let confirmText = "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。<br><br>" 
-                + "追加の質問がある場合は下から質問を送信してください。";
-                textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
-                + confirmText + '</p></div></div></div>';
 
-                lastReplyFlag = 1;
+                if(queryStatus == "相談終了"){
+                    //相談終了のメッセージを追加
+                    textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
+                    + "相談は終了しました" + '</p></div></div></div>';
+
+                    // 追加質問フォームを非表示にする
+                    document.getElementById("addQuery-form").style.display ="none";
+                    document.getElementById("addQuery-sendButton").style.display ="none";
+
+                }else{
+                    // 相談を終了するかの確認メッセージを追加
+                    let confirmText = "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。<br><br>" 
+                    + "追加の質問がある場合は下から質問を送信してください。";
+                    textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
+                    + confirmText + '</p></div></div></div>';
+
+                    lastReplyFlag = 1;
+                }
             }
 
         }else{
@@ -139,7 +151,7 @@ queryFinishButton.addEventListener('click', async function() {
     document.getElementById("queryFinishButton2").style.display ="flex";
 
     //// アクセストークンを取得する
-    let accessTokenResult = wrap_getAccessToken();
+    let accessTokenResult = await wrap_getAccessToken();
     let accessToken = accessTokenResult[0];
 
     // エラーメッセージの表示
@@ -147,6 +159,57 @@ queryFinishButton.addEventListener('click', async function() {
         document.getElementById("queryFinishButton2").style.display ="none";
         document.getElementById("queryFinishButton3").style.display ="flex";
     };
+
+    //// 相談終了を送信
+    let apiFunc = { //呼び出す API関数とその引数を設定する
+        function: 'finishQuery',
+        parameters: [queryID]
+    };
+
+    let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+    // .then((msg)=>{
+
+        //// 相談履歴を再表示する
+        apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'requestQueryInfo',
+            parameters: [queryID]
+        };
+        apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+        let apiResults = apiResponse.response.result;
+
+        let queryId = apiResults[0];
+        let queryStatus = apiResults[1];
+        let queryHistory = apiResults[2];
+        let errorMessage = apiResults[3];
+        //alert(apiResults);
+
+        // API リクエストレスポンスのエラーメッセージ処理
+        if(errorMessage){
+            // sendProgressMessage = "送信エラー";
+            // document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+            document.getElementById("addQuery-sendButton2").style.display ="none";
+            document.getElementById("addQuery-sendButton3").style.display ="flex";
+            alert(errorMessage);
+        }else{
+            // queryHistoryを文字列として整形
+            let textQueryHistory = "";
+            for(let i=0; i<queryHistory.length; i++){
+                textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
+                + queryHistory[i][2] + ";";
+            }
+        //alert(textQueryHistory);
+
+            // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
+            window.location.href 
+            = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+        }
+    // })
+    // .catch((error)=>{
+    //     document.getElementById("queryFinishButton2").style.display ="none";
+    //     document.getElementById("queryFinishButton3").style.display ="flex";
+    //     alert("API送信エラー");
+    // });
+
 })
 
 
