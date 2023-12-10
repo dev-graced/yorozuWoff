@@ -123,20 +123,15 @@ replySendButton.addEventListener('click', async function() {
     document.getElementById("reply-sendButton").style.display ="none";
     document.getElementById("reply-sendButton2").style.display ="flex";
 
-    // アクセストークンを取得する
-    let accessToken;
-    await getAccessToken()
-    .then((accessTokenRes)=>{
-        accessToken = accessTokenRes.access_token;
-        //console.log("accessToken",accessToken);
-    })
-    .catch((error)=>{
-        let msg = "エラー: アクセストークンが取得できませんでした";
-        alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
-        console.log(msg);
-        let sendProgressMessage = "送信エラー";
-        document.getElementById('reply-sendProgress').textContent = sendProgressMessage;
-    });
+    //// アクセストークンを取得する
+    let accessTokenResult = await wrap_getAccessToken();
+    let accessToken = accessTokenResult[0];
+    
+    // エラーメッセージの表示
+    if(accessTokenResult[1]){
+        document.getElementById("reply-sendButton2").style.display ="none";
+        document.getElementById("reply-sendButton3").style.display ="flex";
+    };
 
     // 返信を送信
     let apiFunc = { //呼び出す API関数とその引数を設定する

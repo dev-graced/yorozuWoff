@@ -1,5 +1,5 @@
 import { woffId, SCRIPT_ID, DEBUG_FLAG } from './params.js'
-import { getAccessToken,sendApiRequest } from './funcs.js'
+import {sendApiRequest,wrap_getAccessToken } from './funcs.js'
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 // web アプリのホストPCのURL
@@ -11,6 +11,11 @@ if(DEBUG_FLAG == 0){
 };
 
 //////////// Main /////////////////////////////
+
+// デフォルトで相談終了ボタンを非表示にしておく
+document.getElementById("queryFinishButton").style.display ="none";
+
+//// 相談履歴の解析
 
 let paraPair  = new Array();                       
 let paraName  = new Array();
@@ -39,6 +44,7 @@ let queryHistory = paraValue[2];
 let queryHistoryArray = queryHistory.split(";");
 let textQueryHistory = '<div class="line-bc">';
 let postDate,postDateOld;
+let lastReplyFlag = 0; // 一番最後の質問に対する返信の有無を表すフラグ　0:返信なし　1:返信あり
 for(let i=0; i<queryHistoryArray.length; i++){
     // 各投稿エントリーを解析
     let queryArray = queryHistoryArray[i].split(",");
@@ -66,6 +72,7 @@ for(let i=0; i<queryHistoryArray.length; i++){
             queryMain = queryArray[1];
         }
 
+        // 相談履歴の設定
         textQueryHistory += '<div>' + postDate + '</div>';
         textQueryHistory += '<div class="mycomment"><div style="text-align: right"><p>' 
         + queryMain + '</p></div></div>';
@@ -73,9 +80,23 @@ for(let i=0; i<queryHistoryArray.length; i++){
         // 自動返信メッセージの設定
         let replyText;
         if(queryArray[2]){
+            //返信メッセージを追加
             replyText = queryArray[2];
             textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
             + replyText + '</p></div></div></div>';
+
+            //alert("queryHistoryArrayLength: "+queryHistoryArray.length);
+            //一番最後の質問への返信だったら、相談終了確認メッセーじを追加し、lastReplyFlag = 1 にする
+            if(i == queryHistoryArray.length-2){
+                // 相談を終了するかの確認メッセージを追加
+                let confirmText = "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。<br><br>" 
+                + "追加の質問がある場合は下から質問を送信してください。";
+                textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
+                + confirmText + '</p></div></div></div>';
+
+                lastReplyFlag = 1;
+            }
+
         }else{
             if(queryArray[1].match(/^＜相談ID忘れ＞/)){
                 replyText = "ただいま相談IDを調べています。<br>しばらくお待ち下さい（目安は２日です）。";
@@ -92,11 +113,42 @@ for(let i=0; i<queryHistoryArray.length; i++){
     }
     
 }
-textQueryHistory += '</div>'
+textQueryHistory += '</div>';
+
+//alert("lastReplyFlag: "+lastReplyFlag);
+
+// lastReplyFlag = 1 なら、相談終了ボタンを表示する
+if(lastReplyFlag == 1){
+    //alert("lastReplyFlag=1");
+    document.getElementById("queryFinishButton").style.display ="flex";
+};
+
 
 document.getElementById('queryID').innerHTML = textQueryID;
 // document.getElementById('queryStatus').innerHTML = queryStatus;
 document.getElementById('queryHistory').innerHTML = textQueryHistory;
+
+
+/////////////////////////////////////////
+//// 相談終了ボタンのスクリプト
+////////////////////////////////////////
+const queryFinishButton = document.getElementById('queryFinishButton');
+queryFinishButton.addEventListener('click', async function() {
+    //　ボタンを押したらプログレスバーを表示する　
+    document.getElementById("queryFinishButton").style.display ="none";
+    document.getElementById("queryFinishButton2").style.display ="flex";
+
+    //// アクセストークンを取得する
+    let accessTokenResult = wrap_getAccessToken();
+    let accessToken = accessTokenResult[0];
+
+    // エラーメッセージの表示
+    if(accessTokenResult[1]){
+        document.getElementById("queryFinishButton2").style.display ="none";
+        document.getElementById("queryFinishButton3").style.display ="flex";
+    };
+})
+
 
 /////////////////////////////////////////
 //// メッセージ入力フォームのスクリプト
@@ -122,26 +174,23 @@ addQuerySendButton.addEventListener('click', async function() {
     document.getElementById("addQuery-sendButton").style.display ="none";
     document.getElementById("addQuery-sendButton2").style.display ="flex";
 
-    // アクセストークンを取得する
-    let accessToken;
-    await getAccessToken()
-    .then((accessTokenRes)=>{
-        accessToken = accessTokenRes.access_token;
-        //console.log("accessToken",accessToken);
-    })
-    .catch((error)=>{
-        let msg = "エラー: アクセストークンが取得できませんでした";
-        alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
-        console.log(msg);
-        sendProgressMessage = "送信エラー";
-        document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
-    });
+    //// アクセストークンを取得する
+    let accessTokenResult = await wrap_getAccessToken();
+    let accessToken = accessTokenResult[0];
+    alert(accessToken);
 
-    // 質問を送信
+    // エラーメッセージの表示
+    if(accessTokenResult[1]){
+        document.getElementById("addQuery-sendButton2").style.display ="none";
+        document.getElementById("addQuery-sendButton3").style.display ="flex";
+    };
+
+    //// 質問を送信
     let apiFunc = { //呼び出す API関数とその引数を設定する
         function: 'receiveAddQuery',
         parameters: [queryID,textInput]
     };
+
     let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
     //let text = apiResponse.response.result;
     //alert(text);
@@ -162,8 +211,10 @@ addQuerySendButton.addEventListener('click', async function() {
 
     // API リクエストレスポンスのエラーメッセージ処理
     if(errorMessage){
-        sendProgressMessage = "送信エラー";
-        document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+        // sendProgressMessage = "送信エラー";
+        // document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+        document.getElementById("addQuery-sendButton2").style.display ="none";
+        document.getElementById("addQuery-sendButton3").style.display ="flex";
         alert(errorMessage);
     }else{
         // queryHistoryを文字列として整形

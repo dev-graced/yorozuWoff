@@ -1,5 +1,5 @@
 import { woffId, SCRIPT_ID, DEBUG_FLAG } from './params.js'
-import { getAccessToken,sendApiRequest } from './funcs.js'
+import { wrap_getAccessToken,sendApiRequest } from './funcs.js'
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 // web アプリのホストPCのURL
@@ -43,24 +43,32 @@ if(forgetIDSendButton === null){
     document.getElementById("forgetID-sendButton").style.display ="none";
     document.getElementById("forgetID-sendButton2").style.display ="flex";
 
-    // アクセストークンを取得する
-    let accessToken;
-    await getAccessToken()
-    .then((accessTokenRes)=>{
-      accessToken = accessTokenRes.access_token;
-      console.log("accessToken",accessToken);
-      //document.getElementById('accessTokenField').textContent = accessToken;
-    })
-    .catch((error)=>{
-      let msg = "エラー: アクセストークンが取得できませんでした";
-      alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
-      console.log(msg);
+    //// アクセストークンを取得する
+    let accessTokenResult = await wrap_getAccessToken();
+    let accessToken = accessTokenResult[0];
+    // エラーメッセージの表示
+    if(accessTokenResult[1]){
+      document.getElementById("forgetID-sendButton2").style.display ="none";
+      document.getElementById("forgetID-sendButton3").style.display ="flex";
+    };
 
-      sendProgressMessage = "送信エラー";
-      document.getElementById('foretID-sendButton2').textContent = sendProgressMessage;
+    // let accessToken;
+    // await getAccessToken()
+    // .then((accessTokenRes)=>{
+    //   accessToken = accessTokenRes.access_token;
+    //   console.log("accessToken",accessToken);
+    //   //document.getElementById('accessTokenField').textContent = accessToken;
+    // })
+    // .catch((error)=>{
+    //   let msg = "エラー: アクセストークンが取得できませんでした";
+    //   alert("トークン取得中にエラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
+    //   console.log(msg);
+
+    //   sendProgressMessage = "送信エラー";
+    //   document.getElementById('foretID-sendButton2').textContent = sendProgressMessage;
     
       // //// エラー発生を管理者にメールで通知 (未作成）
-    });
+    //});
     //let accessToken = accessTokenRes.access_token;
     // console.log("accessToken",accessToken);
     // document.getElementById('accessTokenField').textContent = accessToken;

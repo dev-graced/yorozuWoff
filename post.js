@@ -1,5 +1,5 @@
 import { woffId, SCRIPT_ID, DEBUG_FLAG, ACCESS_FLAG } from './params.js'
-import { getAccessToken,sendApiRequest } from './funcs.js'
+import {sendApiRequest,wrap_getAccessToken } from './funcs.js'
 const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 // web アプリのホストPCのURL
@@ -33,47 +33,24 @@ async function main() {
           alert("相談内容を入力してください");
           return;
         }
-        // let secretNo = document.getElementById('secretNo').value;
-        // if(!secretNo){
-        //   alert("４桁の暗証番号を入力してください");
-        //   return;
-        // }else{
-        //   let regx = /^[0-9]{4}$/;
-        //   let testInput = regx.test(secretNo);
-        //   if(!testInput){
-        //     alert("暗証番号は「半角数字」を４つ入力してください");
-        //     document.getElementById('secretNo').value = "";
-        //   return;
-        //   }
-        // }
-        //document.getElementById('showInputTextField').textContent = textInput;
-
-        // // 送信中のメッセージを表示する
-        // let sendProgressMessage = "送信中...";
-        // document.getElementById('send-button-a').textContent = sendProgressMessage;
 
         //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
         document.getElementById("send-button").style.display ="none";
         document.getElementById("send-button2").style.display ="flex";
 
-        // アクセストークンを取得する
-        let accessToken;
-        await getAccessToken()
-        .then((accessTokenRes)=>{
-          accessToken = accessTokenRes.access_token;
-          console.log("accessToken",accessToken);
-          //document.getElementById('accessTokenField').textContent = accessToken;
-        })
-        .catch((error)=>{
-          let msg = "エラー: アクセストークンが取得できませんでした";
-          alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
-          console.log(msg);
+        //// アクセストークンを取得する
+        let accessTokenResult = await wrap_getAccessToken();
+        let accessToken = accessTokenResult[0];
 
-          sendProgressMessage = "送信エラー";
-          document.getElementById('send-progress').textContent = sendProgressMessage;
+        // エラーメッセージの表示
+        if(accessTokenResult[1]){
+          // document.getElementById('queryInfo-sendButton2').textContent = accessTokenResult[1];
+          document.getElementById("send-button2").style.display ="none";
+          document.getElementById("send-button3").style.display ="flex";
+        };
 
           // //// エラー発生を管理者にメールで通知 (未作成）
-        });
+        //});
         //let accessToken = accessTokenRes.access_token;
         // console.log("accessToken",accessToken);
         // document.getElementById('accessTokenField').textContent = accessToken;
@@ -129,23 +106,32 @@ async function main() {
         // let sendProgressMessage = "ログイン中...";
         // document.getElementById('queryInfo-sendButton-a').textContent = sendProgressMessage;
 
-        // アクセストークンを取得する
-        let accessToken;
-        await getAccessToken()
-        .then((accessTokenRes)=>{
-          accessToken = accessTokenRes.access_token;
-          console.log("accessToken",accessToken);
-          //document.getElementById('accessTokenField').textContent = accessToken;
-        })
-        .catch((error)=>{
-          let msg = "エラー: アクセストークンが取得できませんでした";
-          alert("エラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
-          console.log(msg);
+        //// アクセストークンを取得する
+        let accessTokenResult = await wrap_getAccessToken();
+        let accessToken = accessTokenResult[0];
+        // エラーメッセージの表示
+        if(accessTokenResult[1]){
+          // document.getElementById('queryInfo-sendButton2').textContent = accessTokenResult[1];
+          document.getElementById("queryInfo-sendButton2").style.display ="none";
+          document.getElementById("queryInfo-sendButton3").style.display ="flex";
+        };
 
-          sendProgressMessage = "送信エラー";
-          document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
+        // let accessToken;
+        // await getAccessToken()
+        // .then((accessTokenRes)=>{
+        //   accessToken = accessTokenRes.access_token;
+        //   console.log("accessToken",accessToken);
+        //   //document.getElementById('accessTokenField').textContent = accessToken;
+        // })
+        // .catch((error)=>{
+        //   let msg = "エラー: アクセストークンが取得できませんでした";
+        //   alert("トークン取得中にエラーが発生しました。原因を調査中です。明日以降でまた試してみてください。");
+        //   console.log(msg);
 
-        })
+        //   sendProgressMessage = "送信エラー";
+        //   document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
+
+        // })
 
         let apiFunc = { //呼び出す API関数とその引数を設定する
           function: 'requestQueryInfo',
@@ -187,102 +173,7 @@ async function main() {
           window.location.href 
           = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
         }
-
-        // //送信完了のメッセージを表示する
-        // sendPsrogressMessage = "";
-        // document.getElementById('queryInfo-sendProgress').textContent = sendProgressMessage;
-
-
-        // ////相談履歴と相談ステータスの表示
-
-        // // 表示領域要素の取得
-        // let messageThread = document.getElementById("queryInfo-messageThread");
-
-        // if(apiResults[3] === ""){
-
-        //   //相談ネームの表示
-        //   let messageElement = document.createElement("div");
-        //   messageElement.className = "queryInfo";
-        //   //messageElement.innerHTML = "<h3>相談ネーム：" + apiResults[0] + "    /    相談状況：" + apiResults[1] + "</h3>";
-        //   messageElement.innerHTML = "<p style='font-weight: bold; font-size: 20px'>相談ネーム：" + apiResults[0] + "<br> 相談状況：" + apiResults[1] + "</p>"; 
-        //   messageThread = messageThread.appendChild(messageElement);
-
-        //   // //相談ステータスの表示
-        //   // messageElement = document.createElement("div");
-        //   // messageElement.className = "queryStatus";
-        //   // messageElement.innerHTML = "相談状況：" + apiResults[1];
-        //   // messageThread = messageThread.appendChild(messageElement);
-
-        //   // タイトル（相談履歴）の表示
-        //   let title = document.createElement("div");
-        //   title.className = "queryHistoryTitle";
-        //   title.innerHTML = "<h3><相談履歴></h3>";
-        //   messageThread = messageThread.appendChild(title);
-
-        //   //相談履歴の表示
-        //   let queryHistory = apiResults[2];
-        //   for(let ii=0;ii<queryHistory.length;ii++){
-        //     //　投稿日時と投稿内容の表示
-        //     messageElement = document.createElement("div");
-        //     messageElement.className = "post";
-        //     messageElement.style = "padding-right: 50px";
-        //     messageElement.innerHTML = "<b>" + queryHistory[ii][0] +" 投稿</b> <br>" + queryHistory[ii][1];
-        //     messageThread.appendChild(messageElement);
-
-        //     // 投稿への返信の表示
-        //     if(queryHistory[ii][2]){
-        //       messageElement = document.createElement("div");
-        //       messageElement.className = "reply";
-        //       messageElement.style = "padding-left: 50px";
-        //       messageElement.innerHTML = "<b>返信" + ":</b> " + queryHistory[ii][2];
-        //       messageThread.appendChild(messageElement);
-        //     }
-        //   }
-
-        //   // 最後の質問への返信がある場合、追加の質問を投稿するフォームを表示する
-        //   if(queryHistory[queryHistory.length-1][2]){
-        //     //// 追加質問投稿フォーム
-        //     // 説明文
-        //     messageElement = document.createElement("div");
-        //     messageElement.className = "form";
-        //     messageElement.innerHTML = "返信に対して追加の質問がある場合は、<br> 質問内容を入力して送信ボタンを押してください。<br>";
-        //     messageThread.appendChild(messageElement);
-
-        //     // 入力欄
-        //     messageElement = document.createElement("textarea");
-        //     messageElement.id = "addQuery-textInput";
-        //     messageElement.rows = "10";
-        //     messageElement.cols = "40";
-        //     messageThread.appendChild(messageElement);
-
-        //     messageElement = document.createElement("br");
-        //     messageThread.appendChild(messageElement);
-
-        //     // 送信ボタン
-        //     messageElement = document.createElement("button");
-        //     messageElement.id = "addQuery-sendButton";
-        //     messageElement.innerHTML = "送信";
-        //     messageThread.appendChild(messageElement);
-
-        //     // 送信状態の表示スペース
-        //     messageElement = document.createElement("div");
-        //     messageElement.id = "addQuery-sendProgress";
-        //     messageThread.appendChild(messageElement);
-        //   }else{
-        //     messageElement = document.createElement("p");
-        //     messageElement.style = 'font-weight: bold; font-size: 20px';
-        //     messageElement.innerHTML = "よろず相談所から返信が来るまでしばらくお待ち下さい。 <br>（目安は大体１週間です）";
-        //     messageThread.appendChild(messageElement);
-        //   }
-
-        // }else{ // エラーメッセージの表示
-        //   let messageElement = document.createElement("div");
-        //   messageElement.className = "errorMessage";
-        //   messageElement.innerHTML = apiResults[3];
-        //   messageThread = messageThread.appendChild(messageElement);
-        // }
-
-        
+  
       });
     }
   } catch (e) {
@@ -292,25 +183,7 @@ async function main() {
 }
 
 
-// }
-
-// const getProfile = () => {
-// // LINE WORKS のユーザー情報を取得
-//   woff.getProfile().then((profile) => {
-//     // Success
-//     console.log(profile)
-//     let lwUserId = profile.userId;
-//     document.getElementById('userIdProfileField').textContent = lwUserId;
-//   })
-//   .catch((err) => {
-//     // Error
-//     console.log(err)
-//     window.alert(err);
-//   });
-// };
-
-// プログラム実行
-
+//// プログラム実行
 //WOFF On load
 window.addEventListener('load', () => {
   // console.log(woffId);
