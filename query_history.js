@@ -162,53 +162,61 @@ queryFinishButton.addEventListener('click', async function() {
 
     //// 相談終了を送信
     let apiFunc = { //呼び出す API関数とその引数を設定する
-        function: 'finishQuery',
+        function: 'closeQuery',
         parameters: [queryID]
     };
 
     let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-    // .then((msg)=>{
+    let text = apiResponse.response.result;
 
-        //// 相談履歴を再表示する
-        apiFunc = { //呼び出す API関数とその引数を設定する
-            function: 'requestQueryInfo',
-            parameters: [queryID]
-        };
-        apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-        let apiResults = apiResponse.response.result;
+    if(text){
+        //相談終了ページに遷移
+        window.location.href 
+             = hostUrl + 'close_query.html?queryID='+queryID
+    }else{
+        alert("エラーが発生しました。申し訳ありませんが、明日以降にやり直してみてください。");
+    }
 
-        let queryId = apiResults[0];
-        let queryStatus = apiResults[1];
-        let queryHistory = apiResults[2];
-        let errorMessage = apiResults[3];
-        //alert(apiResults);
+    //     //// 相談履歴を再表示する
+    //     apiFunc = { //呼び出す API関数とその引数を設定する
+    //         function: 'requestQueryInfo',
+    //         parameters: [queryID]
+    //     };
+    //     apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+    //     let apiResults = apiResponse.response.result;
 
-        // API リクエストレスポンスのエラーメッセージ処理
-        if(errorMessage){
-            // sendProgressMessage = "送信エラー";
-            // document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
-            document.getElementById("addQuery-sendButton2").style.display ="none";
-            document.getElementById("addQuery-sendButton3").style.display ="flex";
-            alert(errorMessage);
-        }else{
-            // queryHistoryを文字列として整形
-            let textQueryHistory = "";
-            for(let i=0; i<queryHistory.length; i++){
-                textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
-                + queryHistory[i][2] + ";";
-            }
-        //alert(textQueryHistory);
+    //     let queryId = apiResults[0];
+    //     let queryStatus = apiResults[1];
+    //     let queryHistory = apiResults[2];
+    //     let errorMessage = apiResults[3];
+    //     //alert(apiResults);
 
-            // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
-            window.location.href 
-            = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
-        }
-    // })
-    // .catch((error)=>{
-    //     document.getElementById("queryFinishButton2").style.display ="none";
-    //     document.getElementById("queryFinishButton3").style.display ="flex";
-    //     alert("API送信エラー");
-    // });
+    //     // API リクエストレスポンスのエラーメッセージ処理
+    //     if(errorMessage){
+    //         // sendProgressMessage = "送信エラー";
+    //         // document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+    //         document.getElementById("addQuery-sendButton2").style.display ="none";
+    //         document.getElementById("addQuery-sendButton3").style.display ="flex";
+    //         alert(errorMessage);
+    //     }else{
+    //         // queryHistoryを文字列として整形
+    //         let textQueryHistory = "";
+    //         for(let i=0; i<queryHistory.length; i++){
+    //             textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
+    //             + queryHistory[i][2] + ";";
+    //         }
+    //     //alert(textQueryHistory);
+
+    //         // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
+    //         window.location.href 
+    //         = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+    //     }
+    // // })
+    // // .catch((error)=>{
+    // //     document.getElementById("queryFinishButton2").style.display ="none";
+    // //     document.getElementById("queryFinishButton3").style.display ="flex";
+    // //     alert("API送信エラー");
+    // // });
 
 })
 

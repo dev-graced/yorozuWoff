@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="jp">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>相談終了</title>
+        <link rel="stylesheet" href="form_style.css">
+        <link rel="stylesheet" href="form.css">
+        <script src="https://kit.fontawesome.com/65766dba59.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <main>
+            <!-- <p style="text-align: center;">よろず相談所に相談を送ります。</p> -->
+            <!-- <h3>相談を受け付けました</h3> -->
+            <div class="balloon5">
+                <div class="faceicon">
+                 <img src="yorozu_logo.png">
+                </div>
+                <div class="chatting">
+                <div id="closeQuery-message" class="says">
+                    <p>相談を終了しました。<br><br>
+                    もし、相談してみてよかったなとか、ポジティブな感想があったら、<br>簡単に一言でいいので、下からコメント
+                    してもらえると励みになります。<br><br>
+                    よろしくお願いします!</p>
+                </div>
+                </div>
+            </div>
+            
+            <!-- 感想投稿フォーム -->
+            <div id="closeComment-form" class="cp_iptxt" style="margin-top: 0;">
+                <textarea id="closeComment-textInput" cols="25" rows="3" class="cp_input" style="font-size: 16px;margin-top: 0;" 
+                placeholder="相談してみた感想などを入力して送信ボタンを押してください"></textarea>
+                <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
+            </div>
+
+            <!-- コメント送信ボタン -->
+            <div id="closeComment-sendButton" class="button012" style="margin-top: 0px;">
+                <a id="closeComment-sendButton-a">送信する</a>
+            </div>
+            <div id="closeComment-sendButton2" class="button012prog" style="margin-top:0px;display: none;">
+                <div class="prog-text" style="padding-left: 75px;">送信中...</div>
+                <div class="prog-bar" style="animation: progress 12s normal linear;"></div>
+            </div>
+            <div id="closeComment-sendButton3" class="button012" style="margin-top: 0px;display: none;">
+                <a>送信エラー</a>
+            </div>
+
+            <!-- コメント送信時に表示されるメッセージ
+            <div id="closeComment-message" class="balloon5" style="display:none">
+                <div class="faceicon">
+                 <img src="yorozu_logo.png">
+                </div>
+                <div class="chatting">
+                <div class="says">
+                    <p>コメントを受け付けました。ご利用ありがとうございました！</p>
+                </div>
+                </div>
+            </div> -->
+            <br>
+
+            <!-- ホームページへのリンク -->
+            <button onclick="location.href='index.html'" class="linkBtn2">よろず相談ホーム</button>
+        </main>
+
+        <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"> </script>
+        <script type="module" src="post.js"></script>
+        <script type="module" src="closeQuery.js"></script>
+    </body>
+</html>
