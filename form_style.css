@@ -83,6 +83,11 @@ div {
     text-align: center;
 }
 
+fieldset {
+    -moz-border-radius: 5px; /* for Firefox */
+    -webkit-border-radius: 5px; /* for Chrome */
+}
+
 .form {
     text-align: center;
     width: 290px;

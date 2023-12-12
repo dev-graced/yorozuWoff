@@ -16,7 +16,39 @@
             <!-- <div id="queryStatus" style="font-size: large"></div> -->
             <div id="queryHistory" style="font-size: medium"></div>
 
-            <!-- 相談終了ボタン -->
+            <!-- 追加質問フォーム -->
+            <div id="addQuery-form" class="cp_iptxt" style="margin-top: 0;">
+                <textarea id="addQuery-textInput" cols="25" rows="3" class="cp_input" style="font-size: 16px;margin-top: 0;" 
+                placeholder="追加の質問がある場合は、メッセージを入力して送信ボタンを押してください"></textarea>
+                <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
+            </div>
+
+            <div id="addQuery-sendButton" class="button012" style="margin-top: -6px;">
+                <a id="addQuery-sendButton-a">質問を送信する</a>
+            </div>
+            <div id="addQuery-sendButton2" class="button012prog" style="margin-top:0px;display: none;">
+                <div class="prog-text" style="padding-left: 75px;">送信中...</div>
+                <div class="prog-bar" style="animation: progress 12s normal linear;"></div>
+            </div>
+            <div id="addQuery-sendButton3" class="button012" style="margin-top: 0px;display: none;">
+                <a>送信エラー</a>
+            </div>
+
+            <!-- 相談内容の公開・非公開の設定 -->
+            <fieldset id="koukaiSetting" style="margin-bottom: -20px;font-size: 16px; display:none">
+                <legend>この相談の公開を</legend>
+                <!-- <div style="margin-bottom:5px;margin-left: -19px;"> -->
+                  <input type="radio" id="public" value="public" name="koukai-setting" style="margin-left:40px" checked />
+                  <label for="public" style="margin-right:20px; margin-top:18px">許可する</label>
+                <!-- </div> -->
+                <!-- <div style="margin-bottom:25px;margin-left: 0px;"> -->
+                    <input type="radio" id="private" value="private" name="koukai-setting" />
+                    <label for="private" style="margin-top:18px">許可しない</label>
+                  <!-- </div> -->
+                    <div  style="margin-bottom:60px"></div>
+            </fieldset>
+
+             <!-- 相談終了ボタン -->
             <div id="queryFinishButton" class="button012" style="margin-top: 0px;display: none">
                 <a id="queryFinishButton-a">相談を終了する</a>
             </div>
@@ -25,24 +57,6 @@
                 <div class="prog-bar" style="animation: progress 12s normal linear;"></div>
             </div>
             <div id="queryFinishButton3" class="button012" style="margin-top: 0px;display: none;">
-                <a>送信エラー</a>
-            </div>
-
-            <!-- 追加質問フォーム -->
-            <div id="addQuery-form" class="cp_iptxt" style="margin-top: 0;">
-                <textarea id="addQuery-textInput" cols="25" rows="3" class="cp_input" style="font-size: 16px;margin-top: 0;" 
-                placeholder="追加の質問がある場合は、メッセージを入力して送信ボタンを押してください"></textarea>
-                <i class="fa-solid fa-pen-to-square" style="padding-top: 8px;"></i>
-            </div>
-
-            <div id="addQuery-sendButton" class="button012" style="margin-top: 0px;">
-                <a id="addQuery-sendButton-a">質問を送信する</a>
-            </div>
-            <div id="addQuery-sendButton2" class="button012prog" style="margin-top:0px;display: none;">
-                <div class="prog-text" style="padding-left: 75px;">送信中...</div>
-                <div class="prog-bar" style="animation: progress 12s normal linear;"></div>
-            </div>
-            <div id="addQuery-sendButton3" class="button012" style="margin-top: 0px;display: none;">
                 <a>送信エラー</a>
             </div>
             <br>

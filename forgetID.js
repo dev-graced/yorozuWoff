@@ -26,18 +26,17 @@ if(forgetIDSendButton === null){
   // ボタンがクリックされたときの処理を追加
   forgetIDSendButton.addEventListener('click', async function() {
 
-    let ans = window.confirm("送信します。よろしいですか？");
+    // テキスト入力フィールドの値を取得
+    let textInput = document.getElementById('forgetID-textInput').value;
+    if(!textInput){
+      alert("相談内容を入力してください");
+      return;
+    }
 
+    let ans = window.confirm("送信します。よろしいですか？");
     if(ans){
       ////　ボタンを disabled にする
       // document.getElementById("forgetID-sendButton").disabled = true;
-
-      // テキスト入力フィールドの値を取得
-      let textInput = document.getElementById('forgetID-textInput').value;
-      if(!textInput){
-        alert("相談内容を入力してください");
-        return;
-      }
 
       // フォームに入力された内容の頭に　###相談ID忘れ### のタグを付ける
       textInput = "＜相談ID忘れ＞" + textInput;

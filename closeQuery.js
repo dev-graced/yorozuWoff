@@ -47,37 +47,40 @@ closeCommentSendButton.addEventListener('click', async function() {
         return;
     }
 
-    //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
-    document.getElementById("closeComment-sendButton").style.display ="none";
-    document.getElementById("closeComment-sendButton2").style.display ="flex";
+    let ans = window.confirm("感想コメントを送信します。よろしいですか？");
+    if(ans){
+        //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
+        document.getElementById("closeComment-sendButton").style.display ="none";
+        document.getElementById("closeComment-sendButton2").style.display ="flex";
 
-    //// アクセストークンを取得する
-    let accessTokenResult = await wrap_getAccessToken();
-    let accessToken = accessTokenResult[0];
-    //alert(accessToken);
-    
-    // エラーメッセージの表示
-    if(accessTokenResult[1]){
-        document.getElementById("closeComment-sendButton2").style.display ="none";
-        document.getElementById("closeComment-sendButton3").style.display ="flex";
-    };
+        //// アクセストークンを取得する
+        let accessTokenResult = await wrap_getAccessToken();
+        let accessToken = accessTokenResult[0];
+        //alert(accessToken);
+        
+        // エラーメッセージの表示
+        if(accessTokenResult[1]){
+            document.getElementById("closeComment-sendButton2").style.display ="none";
+            document.getElementById("closeComment-sendButton3").style.display ="flex";
+        };
 
-    // コメントを送信
-    let apiFunc = { //呼び出す API関数とその引数を設定する
-        function: 'receiveCloseComment',
-        parameters: [queryID,textInput]
-    };
-    let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-    let text = apiResponse.response.result;
-    if(text){
-        //コメント受付メッセージを表示
-        document.getElementById("closeQuery-message").innerHTML ="<p>コメントを受け付けました。<br><br>ご利用ありがとうございました！</p>";
+        // コメントを送信
+        let apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'receiveCloseComment',
+            parameters: [queryID,textInput]
+        };
+        let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+        let text = apiResponse.response.result;
+        if(text){
+            //コメント受付メッセージを表示
+            document.getElementById("closeQuery-message").innerHTML ="<p>コメントを送信しました。<br><br>ご利用ありがとうございました！</p>";
 
-        //コメント送信フォームとボタンの非表示
-        document.getElementById("closeComment-sendButton2").style.display ="none";
-        document.getElementById("closeComment-form").style.display ="none";
-    }else{
-        alert("コメント送信時にエラーが発生しました。申し訳ありませんが、コメント投稿なしで相談を終了します。ご利用ありがとうございました！");
+            //コメント送信フォームとボタンの非表示
+            document.getElementById("closeComment-sendButton2").style.display ="none";
+            document.getElementById("closeComment-form").style.display ="none";
+        }else{
+            alert("コメント送信時にエラーが発生しました。申し訳ありませんが、コメント投稿なしで相談を終了します。ご利用ありがとうございました！");
+        }
+        //alert(text);
     }
-    //alert(text);
 });

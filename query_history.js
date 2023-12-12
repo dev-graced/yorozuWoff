@@ -100,8 +100,9 @@ for(let i=0; i<queryHistoryArray.length; i++){
 
                 }else{
                     // 相談を終了するかの確認メッセージを追加
-                    let confirmText = "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。<br><br>" 
-                    + "追加の質問がある場合は下から質問を送信してください。";
+                    // let confirmText = "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。<br><br>" 
+                    // + "追加の質問がある場合は下から質問を送信してください。";
+                    let confirmText = "追加の質問がある場合は下から質問を送信してください。<br><br>" + "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。"
                     textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
                     + confirmText + '</p></div></div></div>';
 
@@ -133,6 +134,7 @@ textQueryHistory += '</div>';
 if(lastReplyFlag == 1){
     //alert("lastReplyFlag=1");
     document.getElementById("queryFinishButton").style.display ="flex";
+    document.getElementById("koukaiSetting").style.display ="flex";
 };
 
 
@@ -147,7 +149,21 @@ document.getElementById('queryHistory').innerHTML = textQueryHistory;
 const queryFinishButton = document.getElementById('queryFinishButton');
 queryFinishButton.addEventListener('click', async function() {
 
-    let result = window.confirm("相談を終了します。よろしいですか？");
+    //公開設定を取得する
+    let element = document.getElementById("public");
+
+    let checkValue;
+    let openFlag;
+    if(element.checked){
+        checkValue = "この相談のスタッフグループへの公開を許可し、";
+        openFlag = 1;
+    }else{
+        checkValue = "この相談はスタッフグループへは非公開とし、";
+        openFlag = 0;
+    }
+
+    // let result = window.confirm("相談の公開を「"+checkValue+"」に設定し、相談を終了します。よろしいですか？");
+    let result = window.confirm(checkValue + "相談を終了します。よろしいですか？");
 
     if(result){
         //　ボタンを押したらプログレスバーを表示する　
@@ -167,7 +183,7 @@ queryFinishButton.addEventListener('click', async function() {
         //// 相談終了を送信
         let apiFunc = { //呼び出す API関数とその引数を設定する
             function: 'closeQuery',
-            parameters: [queryID]
+            parameters: [queryID,openFlag]
         };
 
         let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
@@ -193,16 +209,15 @@ const addQuerySendButton = document.getElementById('addQuery-sendButton');
 // ボタンがクリックされたときの処理を追加
 addQuerySendButton.addEventListener('click', async function() {
 
+    // テキスト入力フィールドの値を取得
+    let textInput = document.getElementById('addQuery-textInput').value;
+    if(!textInput){
+        alert("追加の質問内容を入力してください");
+        return;
+    }
+
     let result = window.confirm("質問を送信します。よろしいですか？");
-
     if(result){
-        // テキスト入力フィールドの値を取得
-        let textInput = document.getElementById('addQuery-textInput').value;
-        if(!textInput){
-            alert("追加の質問内容を入力してください");
-            return;
-        }
-
         // // 送信中のメッセージを表示する
         // let sendProgressMessage = "送信中...";
         // document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;

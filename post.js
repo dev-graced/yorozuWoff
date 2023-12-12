@@ -27,18 +27,17 @@ async function main() {
       // ボタンがクリックされたときの処理を追加
       sendButton.addEventListener('click', async function() {
 
-        let ans = window.confirm("相談を送信します。よろしいですか？");
+        // テキスト入力フィールドの値を取得
+        let textInput = document.getElementById('text-input').value;
+        if(!textInput){
+          alert("相談内容を入力してください");
+          return;
+        }
 
+        let ans = window.confirm("相談を送信します。よろしいですか？");
         if(ans){
           //　ボタンを disabled にする
-          document.getElementById("send-button").disabled = true;
-
-          // テキスト入力フィールドの値を取得
-          let textInput = document.getElementById('text-input').value;
-          if(!textInput){
-            alert("相談内容を入力してください");
-            return;
-          }
+          //document.getElementById("send-button").disabled = true;
 
           //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
           document.getElementById("send-button").style.display ="none";
@@ -85,7 +84,7 @@ async function main() {
     ///////////////////////////////////////////////////////////////////////////
     //// 相談ネームと暗証番号を送信すると、相談履歴と相談ステータスが表示されるフォーム
     ///////////////////////////////////////////////////////////////////////////
-    
+
     // ボタン要素を取得
     const queryInfoSendButton = document.getElementById('queryInfo-sendButton');
 

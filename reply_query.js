@@ -108,16 +108,15 @@ const replySendButton = document.getElementById('reply-sendButton');
 // ボタンがクリックされたときの処理を追加
 replySendButton.addEventListener('click', async function() {
 
+    // テキスト入力フィールドの値を取得
+    let textInput = document.getElementById('reply-textInput').value;
+    if(!textInput){
+        alert("返信内容を入力してください");
+        return;
+    }
+
     let ans = window.confirm("返信を送信します。よろしいですか？");
-
     if(ans){
-        // テキスト入力フィールドの値を取得
-        let textInput = document.getElementById('reply-textInput').value;
-        if(!textInput){
-            alert("返信内容を入力してください");
-            return;
-        }
-
         // // 送信中のメッセージを表示する
         // let sendProgressMessage = "送信中...";
         // document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;
