@@ -13,7 +13,10 @@ if(DEBUG_FLAG == 0){
 async function main() {
   try {
 
-    //// 質問送信フォーム
+    /////////////////////////////////////
+    //// 相談送信フォーム
+    /////////////////////////////////////
+
     // ボタン要素を取得
     const sendButton = document.getElementById('send-button');
 
@@ -24,64 +27,65 @@ async function main() {
       // ボタンがクリックされたときの処理を追加
       sendButton.addEventListener('click', async function() {
 
-        //　ボタンを disabled にする
-        document.getElementById("send-button").disabled = true;
+        let ans = window.confirm("相談を送信します。よろしいですか？");
 
-        // テキスト入力フィールドの値を取得
-        let textInput = document.getElementById('text-input').value;
-        if(!textInput){
-          alert("相談内容を入力してください");
-          return;
+        if(ans){
+          //　ボタンを disabled にする
+          document.getElementById("send-button").disabled = true;
+
+          // テキスト入力フィールドの値を取得
+          let textInput = document.getElementById('text-input').value;
+          if(!textInput){
+            alert("相談内容を入力してください");
+            return;
+          }
+
+          //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
+          document.getElementById("send-button").style.display ="none";
+          document.getElementById("send-button2").style.display ="flex";
+
+          //// アクセストークンを取得する
+          let accessTokenResult = await wrap_getAccessToken();
+          let accessToken = accessTokenResult[0];
+
+          // エラーメッセージの表示
+          if(accessTokenResult[1]){
+            // document.getElementById('queryInfo-sendButton2').textContent = accessTokenResult[1];
+            document.getElementById("send-button2").style.display ="none";
+            document.getElementById("send-button3").style.display ="flex";
+          };
+
+            // //// エラー発生を管理者にメールで通知 (未作成）
+          //});
+          //let accessToken = accessTokenRes.access_token;
+          // console.log("accessToken",accessToken);
+          // document.getElementById('accessTokenField').textContent = accessToken;
+
+          //// 質問を送信
+          let apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'receiveQuery',
+            //parameters: [textInput,secretNo]
+            parameters: [textInput]
+          };
+
+          // リクエスト
+          let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+          //let apiResponse = await sendPostRequest(url,requestOptions);
+          let resultArray = apiResponse.response.result;
+          let queryName = resultArray[0];
+
+          // 送信完了ページへ遷移(相談ID付き)
+          window.location.href 
+          = hostUrl + 'post_complete.html?queryName='+queryName;
+          //document.getElementById('apiResField').textContent = text;
         }
-
-        //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
-        document.getElementById("send-button").style.display ="none";
-        document.getElementById("send-button2").style.display ="flex";
-
-        //// アクセストークンを取得する
-        let accessTokenResult = await wrap_getAccessToken();
-        let accessToken = accessTokenResult[0];
-
-        // エラーメッセージの表示
-        if(accessTokenResult[1]){
-          // document.getElementById('queryInfo-sendButton2').textContent = accessTokenResult[1];
-          document.getElementById("send-button2").style.display ="none";
-          document.getElementById("send-button3").style.display ="flex";
-        };
-
-          // //// エラー発生を管理者にメールで通知 (未作成）
-        //});
-        //let accessToken = accessTokenRes.access_token;
-        // console.log("accessToken",accessToken);
-        // document.getElementById('accessTokenField').textContent = accessToken;
-
-        //// 質問を送信
-        let apiFunc = { //呼び出す API関数とその引数を設定する
-          function: 'receiveQuery',
-          //parameters: [textInput,secretNo]
-          parameters: [textInput]
-        };
-
-        // リクエスト
-        let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-        //let apiResponse = await sendPostRequest(url,requestOptions);
-        let resultArray = apiResponse.response.result;
-        let queryName = resultArray[0];
-
-        // 送信完了ページへ遷移(相談ID付き)
-        window.location.href 
-        = hostUrl + 'post_complete.html?queryName='+queryName;
-        //document.getElementById('apiResField').textContent = text;
       });
     }
    
-
-    //  if(addQuerySendButton === null){
-    //    console.log("addQuery-sendButton ID の要素がありません");
-    //    alert("addQuery-sendButton ID の要素がありません")
-    //  }
-
+    ///////////////////////////////////////////////////////////////////////////
     //// 相談ネームと暗証番号を送信すると、相談履歴と相談ステータスが表示されるフォーム
+    ///////////////////////////////////////////////////////////////////////////
+    
     // ボタン要素を取得
     const queryInfoSendButton = document.getElementById('queryInfo-sendButton');
 

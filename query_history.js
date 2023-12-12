@@ -146,78 +146,41 @@ document.getElementById('queryHistory').innerHTML = textQueryHistory;
 ////////////////////////////////////////
 const queryFinishButton = document.getElementById('queryFinishButton');
 queryFinishButton.addEventListener('click', async function() {
-    //　ボタンを押したらプログレスバーを表示する　
-    document.getElementById("queryFinishButton").style.display ="none";
-    document.getElementById("queryFinishButton2").style.display ="flex";
 
-    //// アクセストークンを取得する
-    let accessTokenResult = await wrap_getAccessToken();
-    let accessToken = accessTokenResult[0];
+    let result = window.confirm("相談を終了します。よろしいですか？");
 
-    // エラーメッセージの表示
-    if(accessTokenResult[1]){
-        document.getElementById("queryFinishButton2").style.display ="none";
-        document.getElementById("queryFinishButton3").style.display ="flex";
-    };
+    if(result){
+        //　ボタンを押したらプログレスバーを表示する　
+        document.getElementById("queryFinishButton").style.display ="none";
+        document.getElementById("queryFinishButton2").style.display ="flex";
 
-    //// 相談終了を送信
-    let apiFunc = { //呼び出す API関数とその引数を設定する
-        function: 'closeQuery',
-        parameters: [queryID]
-    };
+        //// アクセストークンを取得する
+        let accessTokenResult = await wrap_getAccessToken();
+        let accessToken = accessTokenResult[0];
 
-    let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-    let text = apiResponse.response.result;
+        // エラーメッセージの表示
+        if(accessTokenResult[1]){
+            document.getElementById("queryFinishButton2").style.display ="none";
+            document.getElementById("queryFinishButton3").style.display ="flex";
+        };
 
-    if(text){
-        //相談終了ページに遷移
-        window.location.href 
-             = hostUrl + 'close_query.html?queryID='+queryID
-    }else{
-        alert("エラーが発生しました。申し訳ありませんが、明日以降にやり直してみてください。");
+        //// 相談終了を送信
+        let apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'closeQuery',
+            parameters: [queryID]
+        };
+
+        let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+        let text = apiResponse.response.result;
+
+        if(text){
+            //相談終了ページに遷移
+            window.location.href 
+                = hostUrl + 'close_query.html?queryID='+queryID
+        }else{
+            alert("エラーが発生しました。申し訳ありませんが、明日以降にやり直してみてください。");
+        }
     }
-
-    //     //// 相談履歴を再表示する
-    //     apiFunc = { //呼び出す API関数とその引数を設定する
-    //         function: 'requestQueryInfo',
-    //         parameters: [queryID]
-    //     };
-    //     apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-    //     let apiResults = apiResponse.response.result;
-
-    //     let queryId = apiResults[0];
-    //     let queryStatus = apiResults[1];
-    //     let queryHistory = apiResults[2];
-    //     let errorMessage = apiResults[3];
-    //     //alert(apiResults);
-
-    //     // API リクエストレスポンスのエラーメッセージ処理
-    //     if(errorMessage){
-    //         // sendProgressMessage = "送信エラー";
-    //         // document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
-    //         document.getElementById("addQuery-sendButton2").style.display ="none";
-    //         document.getElementById("addQuery-sendButton3").style.display ="flex";
-    //         alert(errorMessage);
-    //     }else{
-    //         // queryHistoryを文字列として整形
-    //         let textQueryHistory = "";
-    //         for(let i=0; i<queryHistory.length; i++){
-    //             textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
-    //             + queryHistory[i][2] + ";";
-    //         }
-    //     //alert(textQueryHistory);
-
-    //         // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
-    //         window.location.href 
-    //         = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
-    //     }
-    // // })
-    // // .catch((error)=>{
-    // //     document.getElementById("queryFinishButton2").style.display ="none";
-    // //     document.getElementById("queryFinishButton3").style.display ="flex";
-    // //     alert("API送信エラー");
-    // // });
-
 })
 
 
@@ -230,74 +193,78 @@ const addQuerySendButton = document.getElementById('addQuery-sendButton');
 // ボタンがクリックされたときの処理を追加
 addQuerySendButton.addEventListener('click', async function() {
 
-    // テキスト入力フィールドの値を取得
-    let textInput = document.getElementById('addQuery-textInput').value;
-    if(!textInput){
-        alert("追加の質問内容を入力してください");
-        return;
-    }
+    let result = window.confirm("質問を送信します。よろしいですか？");
 
-    // // 送信中のメッセージを表示する
-    // let sendProgressMessage = "送信中...";
-    // document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;
-
-    //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
-    document.getElementById("addQuery-sendButton").style.display ="none";
-    document.getElementById("addQuery-sendButton2").style.display ="flex";
-
-    //// アクセストークンを取得する
-    let accessTokenResult = await wrap_getAccessToken();
-    let accessToken = accessTokenResult[0];
-    //alert(accessToken);
-
-    // エラーメッセージの表示
-    if(accessTokenResult[1]){
-        document.getElementById("addQuery-sendButton2").style.display ="none";
-        document.getElementById("addQuery-sendButton3").style.display ="flex";
-    };
-
-    //// 質問を送信
-    let apiFunc = { //呼び出す API関数とその引数を設定する
-        function: 'receiveAddQuery',
-        parameters: [queryID,textInput]
-    };
-
-    let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-    //let text = apiResponse.response.result;
-    //alert(text);
-
-    //// 相談履歴を再表示する
-    apiFunc = { //呼び出す API関数とその引数を設定する
-        function: 'requestQueryInfo',
-        parameters: [queryID]
-    };
-    apiResponse = await sendApiRequest(url,accessToken,apiFunc);
-    let apiResults = apiResponse.response.result;
-
-    let queryId = apiResults[0];
-    let queryStatus = apiResults[1];
-    let queryHistory = apiResults[2];
-    let errorMessage = apiResults[3];
-    //alert(apiResults);
-
-    // API リクエストレスポンスのエラーメッセージ処理
-    if(errorMessage){
-        // sendProgressMessage = "送信エラー";
-        // document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
-        document.getElementById("addQuery-sendButton2").style.display ="none";
-        document.getElementById("addQuery-sendButton3").style.display ="flex";
-        alert(errorMessage);
-    }else{
-        // queryHistoryを文字列として整形
-        let textQueryHistory = "";
-        for(let i=0; i<queryHistory.length; i++){
-            textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
-            + queryHistory[i][2] + ";";
+    if(result){
+        // テキスト入力フィールドの値を取得
+        let textInput = document.getElementById('addQuery-textInput').value;
+        if(!textInput){
+            alert("追加の質問内容を入力してください");
+            return;
         }
-       //alert(textQueryHistory);
 
-        // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
-        window.location.href 
-        = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+        // // 送信中のメッセージを表示する
+        // let sendProgressMessage = "送信中...";
+        // document.getElementById('addQuery-sendButton-a').textContent = sendProgressMessage;
+
+        //　ボタンを 非表示 にし、代わりに非アクティブなボタンを表示する　
+        document.getElementById("addQuery-sendButton").style.display ="none";
+        document.getElementById("addQuery-sendButton2").style.display ="flex";
+
+        //// アクセストークンを取得する
+        let accessTokenResult = await wrap_getAccessToken();
+        let accessToken = accessTokenResult[0];
+        //alert(accessToken);
+
+        // エラーメッセージの表示
+        if(accessTokenResult[1]){
+            document.getElementById("addQuery-sendButton2").style.display ="none";
+            document.getElementById("addQuery-sendButton3").style.display ="flex";
+        };
+
+        //// 質問を送信
+        let apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'receiveAddQuery',
+            parameters: [queryID,textInput]
+        };
+
+        let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+        //let text = apiResponse.response.result;
+        //alert(text);
+
+        //// 相談履歴を再表示する
+        apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'requestQueryInfo',
+            parameters: [queryID]
+        };
+        apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+        let apiResults = apiResponse.response.result;
+
+        let queryId = apiResults[0];
+        let queryStatus = apiResults[1];
+        let queryHistory = apiResults[2];
+        let errorMessage = apiResults[3];
+        //alert(apiResults);
+
+        // API リクエストレスポンスのエラーメッセージ処理
+        if(errorMessage){
+            // sendProgressMessage = "送信エラー";
+            // document.getElementById('addQuery-sendProgress').textContent = sendProgressMessage;
+            document.getElementById("addQuery-sendButton2").style.display ="none";
+            document.getElementById("addQuery-sendButton3").style.display ="flex";
+            alert(errorMessage);
+        }else{
+            // queryHistoryを文字列として整形
+            let textQueryHistory = "";
+            for(let i=0; i<queryHistory.length; i++){
+                textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
+                + queryHistory[i][2] + ";";
+            }
+        //alert(textQueryHistory);
+
+            // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
+            window.location.href 
+            = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
+        }
     }
 });
