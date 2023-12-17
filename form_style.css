@@ -508,3 +508,8 @@ color: #5ab9ff; /*アイコン色*/
     border-radius: 1px;
     transition: 0.3s ease-in-out;
 }
+
+/* 使い方メニュー */
+.tutorial p{
+    margin-bottom: 10px;
+}
