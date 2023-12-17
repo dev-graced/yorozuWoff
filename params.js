@@ -9,7 +9,7 @@ export const TOKEN_URL = "https://accounts.google.com/o/oauth2/token"
 //export const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 // 実運用モードと開発モードの切り替え設定
-export const SCRIPT_ID = "AKfycbwGhfPrq3DeBK60vtPsBa5EIDXX4sGMk4YgH6dSYgyoZD_m0DKxhp4dqStpMYrre7Vo3g" //本番用
-//export const SCRIPT_ID = "AKfycbz2d8acJnBkhwaHrplkaBCAqe4FqMiBong648t6FAAQ" //テスト用
+//export const SCRIPT_ID = "AKfycbwGhfPrq3DeBK60vtPsBa5EIDXX4sGMk4YgH6dSYgyoZD_m0DKxhp4dqStpMYrre7Vo3g" //本番用
+export const SCRIPT_ID = "AKfycbz2d8acJnBkhwaHrplkaBCAqe4FqMiBong648t6FAAQ" //テスト用
 export const DEBUG_FLAG = 0 // 0: operation mode  1: debug mode
 export const ACCESS_FLAG = 1 // 0: access to yorozu app only from LINE WORKS  1: access from web brower is allowed
