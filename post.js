@@ -172,7 +172,16 @@ async function main() {
           }
           //alert(textQueryHistory);
 
-          // 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
+
+          ///// ログイン履歴の記録
+          apiFunc = { //呼び出す API関数とその引数を設定する
+            function: 'recordLoginEvent',
+            parameters: [queryName]
+          };
+          apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+
+
+          ////// 送信完了ページへ遷移(相談ID、相談ステータス、相談履歴付き)
           window.location.href 
           = hostUrl + 'query_history.html?queryID='+queryId+'&queryStatus='+queryStatus+'&queryHistory='+textQueryHistory;
         }
