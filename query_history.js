@@ -143,6 +143,26 @@ document.getElementById('queryID').innerHTML = textQueryID;
 document.getElementById('queryHistory').innerHTML = textQueryHistory;
 
 
+//////////////////////////////////////////
+////////  ログイン履歴の記録
+//////////////////////////////////////////
+
+window.addEventListener('load', async () => {
+    //alert("ログイン履歴の記録");
+
+    let accessTokenResult = await wrap_getAccessToken();
+    let accessToken = accessTokenResult[0];
+
+    let apiFunc = { //呼び出す API関数とその引数を設定する
+        function: 'recordLoginEvent',
+        parameters: [queryID]
+    };
+
+    let apiResponse = await sendApiRequest(url,accessToken,apiFunc);
+    let apiResults = apiResponse.response.result;
+    //alert(apiResults);
+})
+
 /////////////////////////////////////////
 //// 相談終了ボタンのスクリプト
 ////////////////////////////////////////
