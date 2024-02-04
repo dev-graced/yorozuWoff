@@ -102,7 +102,7 @@ for(let i=0; i<queryHistoryArray.length; i++){
                     // 相談を終了するかの確認メッセージを追加
                     // let confirmText = "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。<br><br>" 
                     // + "追加の質問がある場合は下から質問を送信してください。";
-                    let confirmText = "追加の質問がある場合は下から質問を送信してください。<br><br>" + "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。"
+                    let confirmText = "追加のメッセージがある場合は下からメッセージを送信してください。<br><br>" + "これで相談を終了する場合は下の「相談を終了する」ボタンを押してください。"
                     textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
                     + confirmText + '</p></div></div></div>';
 
