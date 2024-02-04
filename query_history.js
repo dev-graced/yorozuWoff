@@ -80,6 +80,9 @@ for(let i=0; i<queryHistoryArray.length; i++){
         // 自動返信メッセージの設定
         let replyText;
         if(queryArray[2]){
+            //よろずからの返信メッセージがあるばあいは、相談を終了する場合の説明アラートを出すようにする
+            alert("!!! お願い !!! <br><br> これ以上メッセージのやりとりが必要ない場合は、下の方にある「相談を終了する」ボタンを押して相談を終了してください。<br>sdお願いします。");
+
             //返信メッセージを追加
             replyText = queryArray[2];
             textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
