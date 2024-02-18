@@ -80,9 +80,6 @@ for(let i=0; i<queryHistoryArray.length; i++){
         // 自動返信メッセージの設定
         let replyText;
         if(queryArray[2]){
-            //よろずからの返信メッセージがあるばあいは、相談を終了する場合の説明アラートを出すようにする
-            alert("!!! お願い !!! \n\nよろずからの返信を確認した後、それ以上のやりとりが必要ない場合は、画面下方にある「相談を終了する」ボタンを押して相談を終了してください。\n\nお願いします。");
-
             //返信メッセージを追加
             replyText = queryArray[2];
             textQueryHistory += '<div class="balloon6"> <div class="faceicon"><img src="yorozu_logo.png" style=""></div><div class="chatting"><div class="says"><p>' 
@@ -133,9 +130,11 @@ textQueryHistory += '</div>';
 
 //alert("lastReplyFlag: "+lastReplyFlag);
 
-// lastReplyFlag = 1 なら、相談終了ボタンを表示する
 if(lastReplyFlag == 1){
-    //alert("lastReplyFlag=1");
+    //相談を終了する場合の説明アラートを出す
+    alert("!!! お願い !!! \n\nよろずからの返信を確認した後、それ以上のやりとりが必要ない場合は、画面下方にある「相談を終了する」ボタンを押して相談を終了してください。\n\nお願いします。");
+
+    //相談終了ボタンを表示
     document.getElementById("queryFinishButton").style.display ="flex";
     document.getElementById("koukaiSetting").style.display ="flex";
 };
