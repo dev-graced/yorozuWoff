@@ -12,8 +12,8 @@ export async function getAccessToken(){
       client_secret: CLIENT_SECRET,
       redirect_uri: REDIRECT_URI,
       refresh_token: REFRESH_TOKEN,
-      //grant_type: 'refresh_token'
-      grant_type: 'authorization_code'
+      grant_type: 'refresh_token'
+      //grant_type: 'authorization_code'
     };
      
     const options = {
