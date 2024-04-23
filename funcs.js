@@ -7,7 +7,7 @@ export async function getAccessToken(){
   return new Promise(function (resolve,reject) {
      
     const data = {
-      code: AUTHORIZATION_CODE,
+      // code: AUTHORIZATION_CODE,
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
       redirect_uri: REDIRECT_URI,
