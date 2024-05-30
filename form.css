@@ -129,7 +129,7 @@
     position:absolute;
     height:120%;
     background-color:#a6daeb;
-    animation: progress 6s normal linear;
+    animation: progress 8s normal linear; /*プログレスバーの秒数*/
     animation-fill-mode: forwards;
     margin: 0px 0px 0px 0px;
 }
