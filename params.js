@@ -5,7 +5,7 @@ export const CLIENT_SECRET = "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"
 export const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 export const AUTHORIZATION_CODE = '4/0AfJohXlNpoH2_0uQnv6pE4eZ2OYUMxxpNITVVKEa4A-MHv6Wab1EbdjIOANb_QlawDQE_w'; // リダイレクトURIから取得した認証コード
 export const REFRESH_TOKEN = "1//047yv9Ra09SR1CgYIARAAGAQSNwF-L9Ir6WIJDBvs7HTcXwCkxk4Qmoc5qd80yqOibkdoA-gIyVZT0OGUlc-1p2u9Yhg6kltjnpQ"; //2024/03/16 更新
-export const TOKEN_URL = "https://accounts.google.com/o/oauth2/token"
+export const TOKEN_URL = "https://accounts.google.com/o/oauth2/token" 
 //export const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
 // 実運用モードと開発モードの切り替え設定
