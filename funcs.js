@@ -30,6 +30,7 @@ export async function getAccessToken(){
       resolve(response);
     })
     .catch((error)=>{
+      alert("トークン取得エラー",error);
       reject(error);
     })
     // alert(response);
