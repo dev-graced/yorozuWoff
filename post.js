@@ -170,8 +170,11 @@ async function main() {
             textQueryHistory += queryHistory[i][0] + "," + queryHistory[i][1] + "," 
             + queryHistory[i][2] + ";";
           }
-          //alert(textQueryHistory);
+          textQueryHistory = textQueryHistory.replace(/\n/g,"<br><br>"); 
 
+          // alert(textQueryHistory);
+          // alert(queryHistory[0][1]);
+          // alert(tqh);
 
           ///// ログイン履歴の記録
           apiFunc = { //呼び出す API関数とその引数を設定する
