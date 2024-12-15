@@ -4,7 +4,7 @@ export const CLIENT_ID = "479289013154-2l1m68f7pc3dp21o1voscge1h82cqeqe.apps.goo
 export const CLIENT_SECRET = "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"
 export const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 export const AUTHORIZATION_CODE = '4/0AfJohXlNpoH2_0uQnv6pE4eZ2OYUMxxpNITVVKEa4A-MHv6Wab1EbdjIOANb_QlawDQE_w'; // リダイレクトURIから取得した認証コード
-export const REFRESH_TOKEN = "1//04_2R9Bw7TI3KCgYIARAAGAQSNwF-L9IrlpJTBQHbRz10Em10Ui5lIsVfbzlTTGx0G5BkOSmrGvR8WydBHdDhQg9LaYv2Bhs9omo"; //2024/03/16 更新
+export const REFRESH_TOKEN = "1//04J9UsgC7TSUQCgYIARAAGAQSNwF-L9IrF2ZkL1Bvfz3ccMBI8uiijqTLDNKKDNFLP38RVT8EVA9_EO0EGObm-XdaGtO9ACp92kg"; //2024/03/16 更新
 export const TOKEN_URL = "https://accounts.google.com/o/oauth2/token" 
 //export const url = `https://script.googleapis.com/v1/scripts/${SCRIPT_ID}:run`
 
